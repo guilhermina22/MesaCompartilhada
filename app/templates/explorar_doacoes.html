@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Explorar Doações - Mesa Compartilhada</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body{
+    background:#f4f8f3;
+    color:#333;
+}
+
+
+/* topo */
+
+header{
+    background:#2e7d32;
+    padding:20px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+
+.perfil{
+    background:white;
+    color:#2e7d32;
+    padding:10px 18px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+
+/* conteúdo */
+
+.container{
+    padding:30px;
+}
+
+
+h1{
+    color:#27652b;
+    margin-bottom:10px;
+}
+
+
+.subtitulo{
+    color:#666;
+    margin-bottom:25px;
+}
+
+
+/* pesquisa */
+
+.pesquisa{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+
+.pesquisa input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+
+.botao{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+
+
+/* cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+
+.card{
+
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 5px 15px #0002;
+}
+
+
+.imagem{
+
+    height:150px;
+    background:#d9ead3;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+}
+
+
+.card h2{
+    margin-top:15px;
+    color:#27652b;
+}
+
+
+.info{
+    margin-top:10px;
+    color:#555;
+    line-height:1.6;
+}
+
+
+.card button{
+
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:none;
+    background:#43a047;
+    color:white;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+
+}
+
+
+.card button:hover{
+    background:#2e7d32;
+}
+
+
+/* menu inferior */
+
+.menu{
+
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    box-shadow:0 -3px 10px #0002;
+
+}
+
+
+.menu a{
+
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+🍃 Mesa Compartilhada
+</div>
+
+<div class="perfil">
+Meu Perfil
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<h1>
+Doações disponíveis
+</h1>
+
+<p class="subtitulo">
+Encontre alimentos próximos a você e ajude a reduzir o desperdício.
+</p>
+
+
+
+<div class="pesquisa">
+
+<input type="text" placeholder="Buscar alimento ou comércio...">
+
+<button class="botao">
+Buscar
+</button>
+
+</div>
+
+
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="imagem">
+🥖
+</div>
+
+<h2>
+Padaria Sabor da Vida
+</h2>
+
+
+<div class="info">
+
+🍞 30 pães disponíveis<br>
+
+📍 Centro<br>
+
+⏰ Retirada até 18h<br>
+
+📅 Hoje
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<div class="imagem">
+🥗
+</div>
+
+
+<h2>
+Restaurante Verde
+</h2>
+
+
+<div class="info">
+
+🥗 Marmitas excedentes<br>
+
+📍 Bairro Jardim<br>
+
+⏰ Retirada até 20h<br>
+
+📅 Hoje
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="imagem">
+🍎
+</div>
+
+
+<h2>
+Mercado Bom Preço
+</h2>
+
+
+<div class="info">
+
+🍎 Frutas e verduras<br>
+
+📍 Avenida Principal<br>
+
+⏰ Retirada até 17h<br>
+
+📅 Hoje
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="menu">
+
+<a href="#">
+🏠 Início
+</a>
+
+<a href="#">
+🔎 Doações
+</a>
+
+<a href="#">
+❤️ Salvos
+</a>
+
+<a href="#">
+👤 Perfil
+</a>
+
+</div>
+
+
+
+</body>
+</html>

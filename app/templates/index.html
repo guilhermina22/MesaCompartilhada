@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa Compartilhada</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            background:#faf8f3;
+            color:#333;
+        }
+
+        header{
+            height:55px;
+            background:white;
+            border-bottom:1px solid #eee;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 30px;
+        }
+
+        .logo{
+            font-size:16px;
+            font-weight:bold;
+            color:#607d68;
+        }
+
+        nav a{
+            text-decoration:none;
+            color:#777;
+            margin:0 15px;
+            font-size:13px;
+        }
+
+        nav a.active{
+            background:#e8f3ea;
+            padding:8px 14px;
+            border-radius:8px;
+            color:#4d7758;
+        }
+
+        .usuario{
+            font-size:13px;
+            color:#777;
+        }
+
+
+        main{
+            width:520px;
+            margin:35px auto;
+        }
+
+
+        h1{
+            font-size:22px;
+            font-weight:500;
+            margin-bottom:5px;
+        }
+
+        .subtitulo{
+            color:#999;
+            font-size:13px;
+            margin-bottom:35px;
+        }
+
+
+        .pesquisa{
+            display:flex;
+            gap:10px;
+            margin-bottom:20px;
+        }
+
+        .pesquisa input{
+            flex:1;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        }
+
+        .filtro{
+            width:130px;
+            background:white;
+            border:1px solid #ddd;
+            border-radius:8px;
+            padding:12px;
+        }
+
+
+        .categorias{
+            display:flex;
+            gap:8px;
+            margin-bottom:15px;
+        }
+
+        .categoria{
+            background:white;
+            border:1px solid #ddd;
+            padding:6px 13px;
+            border-radius:20px;
+            font-size:12px;
+        }
+
+        .categoria:first-child{
+            background:#477d5b;
+            color:white;
+        }
+
+
+        .produtos{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+        }
+
+
+        .card{
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            border:1px solid #eee;
+        }
+
+
+        .imagem{
+            height:110px;
+            background:#ddd;
+        }
+
+        .imagem img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+
+        .conteudo{
+            padding:10px;
+        }
+
+
+        .desconto{
+            position:absolute;
+            background:#ed713d;
+            color:white;
+            padding:4px;
+            font-size:11px;
+        }
+
+
+        .nome{
+            font-size:13px;
+            font-weight:bold;
+        }
+
+        .local{
+            color:#888;
+            font-size:11px;
+            margin:5px 0;
+        }
+
+        .preco{
+            color:#4d8961;
+            font-weight:bold;
+            font-size:14px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🍴 Mesa Compartilhada
+    </div>
+
+
+    <nav>
+        <a class="active" href="#">⌂ Início</a>
+        <a href="#">☁ Conscientização</a>
+        <a href="#">♙ Perfil</a>
+    </nav>
+
+
+    <div class="usuario">
+        🔔 👤 Maria S.
+    </div>
+
+</header>
+
+
+
+<main>
+
+    <h1>Alimentos disponíveis</h1>
+    <p class="subtitulo">
+        Produtos próximos ao vencimento com preços reduzidos perto de você.
+    </p>
+
+
+
+    <div class="pesquisa">
+
+        <input type="text" placeholder="🔍 Buscar produto ou estabelecimento...">
+
+        <div class="filtro">
+            ⚱ Até <b>R$ 20</b>
+        </div>
+
+    </div>
+
+
+
+    <div class="categorias">
+
+        <div class="categoria">Todos</div>
+        <div class="categoria">Padaria</div>
+        <div class="categoria">Frutas</div>
+        <div class="categoria">Verduras</div>
+        <div class="categoria">Laticínios</div>
+        <div class="categoria">Confeitaria</div>
+
+    </div>
+
+
+
+    <div class="produtos">
+
+
+        <div class="card">
+            <div class="imagem">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
+            </div>
+
+            <div class="conteudo">
+                <div class="nome">Pão de Forma Integral</div>
+                <div class="local">◉ Padaria Estrela</div>
+                <div class="preco">R$ 2,50</div>
+            </div>
+        </div>
+
+
+
+        <div class="card">
+            <div class="imagem">
+                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
+            </div>
+
+            <div class="conteudo">
+                <div class="nome">Cesta de Frutas Mistas</div>
+                <div class="local">◉ Hortifruti São João</div>
+                <div class="preco">R$ 8,00</div>
+            </div>
+        </div>
+
+
+
+
+        <div class="card">
+            <div class="imagem">
+                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b">
+            </div>
+
+            <div class="conteudo">
+                <div class="nome">Iogurte Natural 500g</div>
+                <div class="local">◉ Mercado Central</div>
+                <div class="preco">R$ 3,20</div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</main>
+
+
+</body>
+</html>

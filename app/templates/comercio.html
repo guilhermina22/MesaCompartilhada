@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Comércio - Mesa Compartilhada</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:#f4f8f3;
+    color:#333;
+
+}
+
+
+/* cabeçalho */
+
+header{
+
+    background:#2e7d32;
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+
+.usuario{
+
+    background:white;
+    color:#2e7d32;
+    padding:10px 18px;
+    border-radius:25px;
+    font-weight:bold;
+
+}
+
+
+
+/* conteúdo */
+
+
+.container{
+
+    padding:30px;
+
+}
+
+
+
+h1{
+
+    color:#27652b;
+    margin-bottom:8px;
+
+}
+
+
+.subtitulo{
+
+    color:#666;
+    margin-bottom:25px;
+
+}
+
+
+
+/* resumo */
+
+
+.resumo{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+
+}
+
+
+.box{
+
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.box h2{
+
+    color:#2e7d32;
+    font-size:30px;
+
+}
+
+
+.box p{
+
+    color:#666;
+    margin-top:8px;
+
+}
+
+
+
+/* botão */
+
+
+.nova{
+
+    background:#43a047;
+    color:white;
+    border:none;
+    padding:15px 25px;
+    border-radius:15px;
+    font-size:16px;
+    cursor:pointer;
+    margin-bottom:30px;
+
+}
+
+
+.nova:hover{
+
+    background:#2e7d32;
+
+}
+
+
+
+
+/* cards */
+
+
+.titulo{
+
+    color:#27652b;
+    margin-bottom:15px;
+
+}
+
+
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+
+}
+
+
+
+.card{
+
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.imagem{
+
+    height:120px;
+    background:#d9ead3;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+
+}
+
+
+
+.card h3{
+
+    color:#27652b;
+    margin-top:15px;
+
+}
+
+
+
+.info{
+
+    margin-top:10px;
+    color:#666;
+    line-height:1.7;
+
+}
+
+
+
+.status{
+
+    display:inline-block;
+    margin-top:15px;
+    padding:8px 15px;
+    border-radius:20px;
+    background:#e8f5e9;
+    color:#2e7d32;
+    font-weight:bold;
+
+}
+
+
+
+.card button{
+
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    background:#43a047;
+    color:white;
+    border-radius:12px;
+    cursor:pointer;
+
+}
+
+
+
+/* menu inferior */
+
+
+.menu{
+
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    box-shadow:0 -3px 10px #0002;
+
+}
+
+
+
+.menu a{
+
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+🍃 Mesa Compartilhada
+</div>
+
+
+<div class="usuario">
+🏪 Comércio
+</div>
+
+
+</header>
+
+
+
+
+
+<div class="container">
+
+
+<h1>
+Olá, Padaria Sabor da Vida! 👋
+</h1>
+
+
+<p class="subtitulo">
+Gerencie suas doações e ajude a reduzir o desperdício.
+</p>
+
+
+
+
+<div class="resumo">
+
+
+<div class="box">
+
+<h2>
+12
+</h2>
+
+<p>
+Doações realizadas
+</p>
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>
+35
+</h2>
+
+<p>
+Alimentos compartilhados
+</p>
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>
+5
+</h2>
+
+<p>
+Solicitações pendentes
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<button class="nova">
+➕ Nova doação
+</button>
+
+
+
+
+
+
+<h2 class="titulo">
+Minhas doações
+</h2>
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+
+<div class="imagem">
+🥖
+</div>
+
+
+<h3>
+Pães frescos
+</h3>
+
+
+<div class="info">
+
+Quantidade: 30 unidades<br>
+
+Retirada até: 18h<br>
+
+Disponível hoje
+
+</div>
+
+
+<span class="status">
+Ativa
+</span>
+
+
+<button>
+Ver solicitações
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="imagem">
+🥗
+</div>
+
+
+<h3>
+Marmitas
+</h3>
+
+
+<div class="info">
+
+Quantidade: 10 unidades<br>
+
+Retirada até: 20h<br>
+
+Disponível hoje
+
+</div>
+
+
+<span class="status">
+Ativa
+</span>
+
+
+<button>
+Ver solicitações
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="menu">
+
+
+<a href="#">
+🏠 Início
+</a>
+
+
+<a href="#">
+➕ Doar
+</a>
+
+
+<a href="#">
+📦 Doações
+</a>
+
+
+<a href="#">
+👤 Perfil
+</a>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>

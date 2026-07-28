@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Administrador - Mesa Compartilhada</title>
+
+
+<style>
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+body{
+
+    background:#f4f8f3;
+    color:#333;
+
+}
+
+
+
+/* barra lateral */
+
+
+.sidebar{
+
+    position:fixed;
+    width:250px;
+    height:100vh;
+    background:#2e7d32;
+    color:white;
+    padding:25px;
+
+}
+
+
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:40px;
+
+}
+
+
+
+.menu a{
+
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:10px;
+
+}
+
+
+
+.menu a:hover{
+
+    background:#43a047;
+
+}
+
+
+
+
+/* conteúdo */
+
+
+.conteudo{
+
+    margin-left:250px;
+    padding:30px;
+
+}
+
+
+
+header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+
+}
+
+
+
+h1{
+
+    color:#27652b;
+
+}
+
+
+
+.admin{
+
+    background:white;
+    padding:12px 20px;
+    border-radius:25px;
+    color:#2e7d32;
+    font-weight:bold;
+
+}
+
+
+
+/* indicadores */
+
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:35px;
+
+}
+
+
+
+.card{
+
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.card h2{
+
+    font-size:35px;
+    color:#2e7d32;
+
+}
+
+
+
+.card p{
+
+    color:#666;
+    margin-top:10px;
+
+}
+
+
+
+
+
+/* tabela */
+
+
+.titulo{
+
+    color:#27652b;
+    margin-bottom:15px;
+
+}
+
+
+
+.tabela{
+
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 5px 15px #0002;
+    overflow-x:auto;
+
+}
+
+
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+
+
+th{
+
+    text-align:left;
+    padding:15px;
+    color:#2e7d32;
+    border-bottom:2px solid #eee;
+
+}
+
+
+
+td{
+
+    padding:15px;
+    border-bottom:1px solid #eee;
+
+}
+
+
+
+/* status */
+
+
+.status{
+
+    padding:7px 15px;
+    border-radius:20px;
+    background:#e8f5e9;
+    color:#2e7d32;
+    font-weight:bold;
+
+}
+
+
+
+
+button{
+
+    background:#43a047;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#2e7d32;
+
+}
+
+
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<div class="sidebar">
+
+
+<div class="logo">
+
+🍃 Mesa Compartilhada
+
+</div>
+
+
+
+<div class="menu">
+
+
+<a href="#">
+📊 Dashboard
+</a>
+
+
+<a href="#">
+👥 Usuários
+</a>
+
+
+<a href="#">
+🏪 Comércios
+</a>
+
+
+<a href="#">
+🍽️ Doações
+</a>
+
+
+<a href="#">
+⚠️ Denúncias
+</a>
+
+
+<a href="#">
+⚙️ Configurações
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="conteudo">
+
+
+
+<header>
+
+
+<h1>
+Dashboard Administrativo
+</h1>
+
+
+<div class="admin">
+👑 Administrador
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+<h2>
+250
+</h2>
+
+<p>
+Usuários cadastrados
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+45
+</h2>
+
+<p>
+Comércios parceiros
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+680
+</h2>
+
+<p>
+Doações realizadas
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+12
+</h2>
+
+<p>
+Alertas pendentes
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<h2 class="titulo">
+Usuários recentes
+</h2>
+
+
+
+
+<div class="tabela">
+
+
+<table>
+
+
+<tr>
+
+<th>
+Nome
+</th>
+
+<th>
+Tipo
+</th>
+
+<th>
+Data cadastro
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Ação
+</th>
+
+
+</tr>
+
+
+
+
+<tr>
+
+<td>
+Maria Silva
+</td>
+
+<td>
+Consumidor
+</td>
+
+<td>
+28/07/2026
+</td>
+
+<td>
+<span class="status">
+Ativo
+</span>
+</td>
+
+<td>
+
+<button>
+Visualizar
+</button>
+
+</td>
+
+</tr>
+
+
+
+
+
+<tr>
+
+<td>
+Padaria Sabor da Vida
+</td>
+
+<td>
+Comércio
+</td>
+
+<td>
+20/07/2026
+</td>
+
+<td>
+<span class="status">
+Ativo
+</span>
+</td>
+
+<td>
+
+<button>
+Visualizar
+</button>
+
+</td>
+
+</tr>
+
+
+
+
+
+
+<tr>
+
+<td>
+Restaurante Verde
+</td>
+
+<td>
+Comércio
+</td>
+
+<td>
+15/07/2026
+</td>
+
+<td>
+<span class="status">
+Ativo
+</span>
+</td>
+
+<td>
+
+<button>
+Visualizar
+</button>
+
+</td>
+
+</tr>
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>

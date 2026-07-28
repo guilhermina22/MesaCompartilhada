@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cadastrar Doação - Mesa Compartilhada</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:#f4f8f3;
+    color:#333;
+
+}
+
+
+/* topo */
+
+header{
+
+    background:#2e7d32;
+    padding:20px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+
+.perfil{
+
+    background:white;
+    color:#2e7d32;
+    padding:10px 18px;
+    border-radius:25px;
+    font-weight:bold;
+
+}
+
+
+
+/* conteúdo */
+
+.container{
+
+    padding:30px;
+    display:flex;
+    justify-content:center;
+
+}
+
+
+
+.card{
+
+    background:white;
+    width:90%;
+    max-width:650px;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 5px 20px #0002;
+
+}
+
+
+
+h1{
+
+    color:#27652b;
+    margin-bottom:10px;
+
+}
+
+
+
+.subtitulo{
+
+    color:#666;
+    margin-bottom:25px;
+
+}
+
+
+
+/* formulário */
+
+
+label{
+
+    display:block;
+    margin-top:18px;
+    margin-bottom:7px;
+    color:#27652b;
+    font-weight:bold;
+
+}
+
+
+
+input,
+select,
+textarea{
+
+
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+
+}
+
+
+
+textarea{
+
+    height:100px;
+    resize:none;
+
+}
+
+
+
+.linha{
+
+    display:flex;
+    gap:15px;
+
+}
+
+
+.linha div{
+
+    flex:1;
+
+}
+
+
+
+/* upload */
+
+
+.upload{
+
+    background:#f1f8e9;
+    border:2px dashed #81c784;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
+    color:#388e3c;
+    margin-top:10px;
+
+}
+
+
+
+/* botão */
+
+
+button{
+
+    width:100%;
+    margin-top:30px;
+    padding:16px;
+    background:#43a047;
+    color:white;
+    border:none;
+    border-radius:15px;
+    font-size:18px;
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#2e7d32;
+
+}
+
+
+
+/* menu */
+
+.menu{
+
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    box-shadow:0 -3px 10px #0002;
+
+}
+
+
+
+.menu a{
+
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+🍃 Mesa Compartilhada
+</div>
+
+
+<div class="perfil">
+Comércio
+</div>
+
+
+</header>
+
+
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h1>
+Nova doação
+</h1>
+
+
+<p class="subtitulo">
+Cadastre alimentos disponíveis para ajudar sua comunidade.
+</p>
+
+
+
+<form>
+
+
+
+<label>
+Nome do alimento
+</label>
+
+<input type="text" placeholder="Ex: Pães, frutas, marmitas...">
+
+
+
+
+
+<label>
+Categoria
+</label>
+
+
+<select>
+
+<option>
+Selecione uma categoria
+</option>
+
+<option>
+Padaria
+</option>
+
+<option>
+Frutas e verduras
+</option>
+
+<option>
+Refeições prontas
+</option>
+
+<option>
+Outros
+</option>
+
+</select>
+
+
+
+
+
+<div class="linha">
+
+
+<div>
+
+<label>
+Quantidade
+</label>
+
+<input type="number" placeholder="Ex: 20">
+
+</div>
+
+
+
+<div>
+
+<label>
+Validade
+</label>
+
+<input type="date">
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<label>
+Horário para retirada
+</label>
+
+
+<input type="time">
+
+
+
+
+
+<label>
+Foto do alimento
+</label>
+
+
+<div class="upload">
+
+📷<br>
+Clique para adicionar uma imagem
+
+</div>
+
+
+
+
+
+<label>
+Observações
+</label>
+
+
+<textarea placeholder="Ex: Retirar no balcão, levar recipiente..."></textarea>
+
+
+
+
+
+
+<button>
+Publicar doação
+</button>
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="menu">
+
+
+<a href="#">
+🏠 Início
+</a>
+
+
+<a href="#">
+➕ Doar
+</a>
+
+
+<a href="#">
+📦 Doações
+</a>
+
+
+<a href="#">
+👤 Perfil
+</a>
+
+
+</div>
+
+
+
+</body>
+
+</html>

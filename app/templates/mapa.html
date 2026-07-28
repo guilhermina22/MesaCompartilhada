@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mapa de Doações - Mesa Compartilhada</title>
+
+
+<!-- Leaflet - mapa -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+
+<style>
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+body{
+
+    background:#f4f8f3;
+    color:#333;
+
+}
+
+
+
+
+header{
+
+    background:#2e7d32;
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+
+
+.perfil{
+
+    background:white;
+    color:#2e7d32;
+    padding:10px 18px;
+    border-radius:25px;
+    font-weight:bold;
+
+}
+
+
+
+/* conteúdo */
+
+
+.container{
+
+    padding:25px;
+
+}
+
+
+
+h1{
+
+    color:#27652b;
+    margin-bottom:8px;
+
+}
+
+
+
+.subtitulo{
+
+    color:#666;
+    margin-bottom:20px;
+
+}
+
+
+
+/* filtros */
+
+
+.filtros{
+
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+
+}
+
+
+
+.filtro{
+
+    background:white;
+    padding:12px 18px;
+    border-radius:25px;
+    color:#2e7d32;
+    font-weight:bold;
+    box-shadow:0 3px 10px #0002;
+    cursor:pointer;
+
+}
+
+
+
+/* mapa */
+
+
+#map{
+
+    width:100%;
+    height:420px;
+    border-radius:25px;
+    box-shadow:0 5px 20px #0003;
+    margin-bottom:30px;
+
+}
+
+
+
+/* lista */
+
+
+.titulo{
+
+    color:#27652b;
+    margin-bottom:15px;
+
+}
+
+
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+
+}
+
+
+
+.card{
+
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 5px 15px #0002;
+
+}
+
+
+
+.card h2{
+
+    color:#27652b;
+    margin-bottom:10px;
+
+}
+
+
+
+.info{
+
+    color:#666;
+    line-height:1.8;
+
+}
+
+
+
+button{
+
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:none;
+    background:#43a047;
+    color:white;
+    border-radius:12px;
+    font-size:15px;
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#2e7d32;
+
+}
+
+
+
+/* menu */
+
+.menu{
+
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:15px;
+    box-shadow:0 -3px 10px #0002;
+
+}
+
+
+
+.menu a{
+
+    color:#2e7d32;
+    text-decoration:none;
+    font-weight:bold;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+🍃 Mesa Compartilhada
+</div>
+
+
+<div class="perfil">
+📍 Mapa
+</div>
+
+
+</header>
+
+
+
+
+
+
+<div class="container">
+
+
+
+<h1>
+Doações próximas de você 📍
+</h1>
+
+
+<p class="subtitulo">
+Encontre alimentos disponíveis perto da sua localização.
+</p>
+
+
+
+
+<div class="filtros">
+
+
+<div class="filtro">
+📍 Até 1 km
+</div>
+
+
+<div class="filtro">
+📍 Até 5 km
+</div>
+
+
+<div class="filtro">
+🍎 Alimentos
+</div>
+
+
+<div class="filtro">
+🏪 Comércio
+</div>
+
+
+</div>
+
+
+
+
+
+<div id="map"></div>
+
+
+
+
+
+
+
+<h2 class="titulo">
+Comércios próximos
+</h2>
+
+
+
+<div class="cards">
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🥖 Padaria Sabor da Vida
+</h2>
+
+
+<div class="info">
+
+📍 Centro<br>
+
+📏 500 metros de distância<br>
+
+🍞 30 pães disponíveis<br>
+
+⏰ Retirada até 18h
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🥗 Restaurante Verde
+</h2>
+
+
+<div class="info">
+
+📍 Jardim<br>
+
+📏 1,2 km de distância<br>
+
+🥗 Marmitas disponíveis<br>
+
+⏰ Retirada até 20h
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🍎 Mercado Bom Preço
+</h2>
+
+
+<div class="info">
+
+📍 Avenida Principal<br>
+
+📏 2 km de distância<br>
+
+🍎 Frutas e verduras<br>
+
+⏰ Retirada até 17h
+
+</div>
+
+
+<button>
+Ver detalhes
+</button>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="menu">
+
+
+<a href="#">
+🏠 Início
+</a>
+
+
+<a href="#">
+🔎 Doações
+</a>
+
+
+<a href="#">
+🗺️ Mapa
+</a>
+
+
+<a href="#">
+👤 Perfil
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Leaflet JS -->
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+
+<script>
+
+
+// Criando mapa
+
+var map = L.map('map').setView([-21.3665,-46.5235],14);
+
+
+
+// mapa OpenStreetMap
+
+L.tileLayer(
+'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+
+maxZoom:19,
+attribution:'© OpenStreetMap'
+
+}
+
+).addTo(map);
+
+
+
+
+// marcador da localização do usuário
+
+var usuario = L.marker([-21.3665,-46.5235])
+.addTo(map)
+.bindPopup(
+"📍 Você está aqui"
+)
+.openPopup();
+
+
+
+
+
+
+// comércio 1
+
+L.marker([-21.3650,-46.5250])
+.addTo(map)
+.bindPopup(
+"<b>🥖 Padaria Sabor da Vida</b><br>30 pães disponíveis"
+);
+
+
+
+
+// comércio 2
+
+L.marker([-21.3680,-46.5200])
+.addTo(map)
+.bindPopup(
+"<b>🥗 Restaurante Verde</b><br>Marmitas disponíveis"
+);
+
+
+
+
+
+// comércio 3
+
+L.marker([-21.3700,-46.5260])
+.addTo(map)
+.bindPopup(
+"<b>🍎 Mercado Bom Preço</b><br>Frutas disponíveis"
+);
+
+
+
+
+
+// localização real do usuário
+
+if(navigator.geolocation){
+
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+
+let lat = position.coords.latitude;
+
+let lon = position.coords.longitude;
+
+
+
+map.setView([lat,lon],15);
+
+
+
+L.marker([lat,lon])
+.addTo(map)
+.bindPopup(
+"📍 Sua localização atual"
+)
+.openPopup();
+
+
+
+});
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

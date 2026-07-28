@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mesa Compartilhada - Conscientização</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f8f6f1;
+    color:#333;
+}
+
+
+/* NAVBAR */
+
+header{
+    height:55px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    border-bottom:1px solid #ddd;
+}
+
+
+.logo{
+    font-size:15px;
+    font-weight:bold;
+    color:#234d3c;
+}
+
+
+.menu{
+    display:flex;
+    gap:25px;
+    align-items:center;
+    font-size:13px;
+}
+
+
+.menu span{
+    color:#777;
+}
+
+
+.menu .ativo{
+    background:#dceee7;
+    padding:7px 15px;
+    border-radius:8px;
+    color:#2b7258;
+}
+
+
+.usuario{
+    color:#777;
+}
+
+
+
+/* CONTAINER */
+
+.container{
+    width:900px;
+    margin:auto;
+}
+
+
+/* BANNER */
+
+.banner{
+    height:145px;
+    margin-top:0;
+    border-radius:12px;
+    background:
+    linear-gradient(
+    rgba(0,0,0,.35),
+    rgba(0,0,0,.35)
+    ),
+    url("imagem-comida.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:25px;
+    color:white;
+}
+
+
+.banner small{
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+
+.banner h1{
+    font-family:Georgia, serif;
+    font-size:25px;
+    width:450px;
+    margin-top:8px;
+}
+
+
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:22px 0;
+}
+
+
+.card{
+    background:white;
+    height:90px;
+    border-radius:10px;
+    padding:15px;
+    border:1px solid #eee;
+}
+
+
+.card h2{
+    font-size:22px;
+    color:#333;
+}
+
+
+.card p{
+    font-size:11px;
+    color:#777;
+    margin-top:5px;
+}
+
+
+/* CONTEUDO */
+
+.conteudo{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+
+.texto h2{
+    font-family:Georgia, serif;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+
+.texto p{
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+
+
+.frase{
+    border-left:4px solid #4b8f73;
+    padding-left:15px;
+    font-style:italic;
+    font-family:Georgia;
+    font-size:14px;
+}
+
+
+
+/* LATERAL */
+
+.lateral{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+
+.box{
+    background:#e5f2ed;
+    border-radius:12px;
+    padding:18px;
+}
+
+
+.box h3{
+    font-size:14px;
+    color:#2d6953;
+    margin-bottom:10px;
+}
+
+
+.box ul{
+    list-style:none;
+}
+
+
+.box li{
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+
+.box li::before{
+    content:"› ";
+    color:#3b8668;
+}
+
+
+
+.impacto{
+    background:white;
+    border-radius:12px;
+    padding:18px;
+}
+
+
+.impacto h3{
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+
+.impacto p{
+    font-size:12px;
+    color:#777;
+    line-height:1.5;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+🌿 Mesa Compartilhada
+</div>
+
+
+<div class="menu">
+
+<span>⌂ Início</span>
+
+<span class="ativo">
+▣ Conscientização
+</span>
+
+<span class="usuario">
+🔔 Maria S.
+</span>
+
+</div>
+
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="banner">
+
+<small>MESA COMPARTILHADA • CONSCIENTIZAÇÃO</small>
+
+<h1>
+O desperdício de alimentos<br>
+é um problema de todos nós.
+</h1>
+
+</div>
+
+
+
+<div class="cards">
+
+
+<div class="card">
+<h2>46 mi</h2>
+<p>toneladas desperdiçadas por ano no Brasil</p>
+</div>
+
+
+<div class="card">
+<h2>10º</h2>
+<p>lugar entre países que mais desperdiçam no mundo</p>
+</div>
+
+
+<div class="card">
+<h2>30%</h2>
+<p>dos alimentos produzidos globalmente são perdidos</p>
+</div>
+
+
+<div class="card">
+<h2>125 mi</h2>
+<p>brasileiros beneficiados com o combate ao desperdício</p>
+</div>
+
+
+</div>
+
+
+
+
+<div class="conteudo">
+
+
+<div class="texto">
+
+
+<h2>
+O que causa o desperdício?
+</h2>
+
+
+<p>
+No Brasil, uma das principais causas do desperdício alimentar ocorre no nível do varejo e da distribuição. Supermercados, padarias, hortifrutis e restaurantes descartam diariamente grandes quantidades de alimentos próximos da data de vencimento, mesmo que ainda estejam em perfeitas condições de consumo.
+</p>
+
+
+<p>
+Segundo dados da EMBRAPA e da ONU, o Brasil ocupa uma posição preocupante entre os países que mais desperdiçam alimentos no mundo. Paralelamente, milhões de brasileiros enfrentam insegurança alimentar.
+</p>
+
+
+<p>
+A plataforma Mesa Compartilhada nasceu para conectar esses dois lados: estabelecimentos com excedentes e consumidores que buscam alimentos de qualidade por preços justos.
+</p>
+
+
+
+<div class="frase">
+"Reduzir o desperdício de alimentos pela metade até 2030 é uma das metas do Objetivo de Desenvolvimento Sustentável nº 12 da ONU."
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="lateral">
+
+
+<div class="box">
+
+<h3>
+♧ O que você pode fazer
+</h3>
+
+
+<ul>
+
+<li>Planeje suas compras com antecedência</li>
+
+<li>Verifique os itens próximos ao vencimento</li>
+
+<li>Aproveite alimentos próximos ao vencimento</li>
+
+<li>Prefira comprar em quantidade menor</li>
+
+<li>Compartilhe excedentes com vizinhos</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+<div class="impacto">
+
+<h3>
+Impacto ambiental
+</h3>
+
+
+<p>
+O desperdício de alimentos é responsável por aproximadamente 8% das emissões globais de gases de efeito estufa.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+</html>
