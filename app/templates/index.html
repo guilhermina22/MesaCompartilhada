@@ -182,20 +182,23 @@
 
 <header>
 
-    <div class="logo">
+    <a href="{% url 'index' %}" class="logo" style="text-decoration:none;">
         🍴 Mesa Compartilhada
-    </div>
+    </a>
 
 
     <nav>
-        <a class="active" href="#">⌂ Início</a>
-        <a href="#">☁ Conscientização</a>
-        <a href="#">♙ Perfil</a>
+        <a class="active" href="{% url 'index' %}">⌂ Início</a>
+        <a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
+        <a href="{% url 'perfil' %}">♙ Perfil</a>
     </nav>
+    
 
-
-    <div class="usuario">
-        🔔 👤 Maria S.
+   <div class="usuario">
+    🔔
+        <a href="{% url 'perfil' %}" style="text-decoration:none; color:#777;">
+        👤 Maria S.
+        </a>
     </div>
 
 </header>
@@ -238,21 +241,24 @@
 
     <div class="produtos">
 
+        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;">
+            <div class="card">
+             <div class="imagem">
+                 <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
+             </div>
 
-        <div class="card">
-            <div class="imagem">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
+             <div class="conteudo">
+                    <div class="nome">Pão de Forma Integral</div>
+                    <div class="local">◉ Padaria Estrela</div>
+                    <div class="preco">R$ 2,50</div>
+             </div>
             </div>
 
-            <div class="conteudo">
-                <div class="nome">Pão de Forma Integral</div>
-                <div class="local">◉ Padaria Estrela</div>
-                <div class="preco">R$ 2,50</div>
-            </div>
-        </div>
+        </a>
 
 
 
+        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;">
         <div class="card">
             <div class="imagem">
                 <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
@@ -264,10 +270,10 @@
                 <div class="preco">R$ 8,00</div>
             </div>
         </div>
+        </a>
 
 
-
-
+        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;"> 
         <div class="card">
             <div class="imagem">
                 <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b">
@@ -279,7 +285,7 @@
                 <div class="preco">R$ 3,20</div>
             </div>
         </div>
-
+        </a>
 
 
     </div>

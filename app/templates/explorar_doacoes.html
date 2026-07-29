@@ -194,16 +194,15 @@ h1{
 
 <body>
 
-
 <header>
 
-<div class="logo">
+<a href="{% url 'index' %}" class="logo" style="text-decoration:none; color:white;">
 🍃 Mesa Compartilhada
-</div>
+</a>
 
-<div class="perfil">
+<a href="{% url 'perfil' %}" class="perfil" style="text-decoration:none;">
 Meu Perfil
-</div>
+</a>
 
 </header>
 
@@ -220,8 +219,6 @@ Doações disponíveis
 Encontre alimentos próximos a você e ajude a reduzir o desperdício.
 </p>
 
-
-
 <div class="pesquisa">
 
 <input type="text" placeholder="Buscar alimento ou comércio...">
@@ -232,7 +229,17 @@ Buscar
 
 </div>
 
+<div style="margin-bottom:25px;">
 
+<a href="{% url 'mapa' %}" style="text-decoration:none;">
+
+<button class="botao">
+📍 Ver doações no mapa
+</button>
+
+</a>
+
+</div>
 
 
 <div class="cards">
@@ -262,9 +269,11 @@ Padaria Sabor da Vida
 </div>
 
 
-<button>
-Ver detalhes
-</button>
+<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+    <button>
+    Ver detalhes
+    </button>
+</a>
 
 </div>
 
@@ -302,8 +311,6 @@ Ver detalhes
 
 
 </div>
-
-
 
 
 
@@ -346,23 +353,21 @@ Ver detalhes
 </div>
 
 
-
-
 <div class="menu">
 
-<a href="#">
+<a href="{% url 'index' %}">
 🏠 Início
 </a>
 
-<a href="#">
+<a href="{% url 'explorar_doacoes' %}">
 🔎 Doações
 </a>
 
-<a href="#">
-❤️ Salvos
+<a href="{% url 'conscientizacao' %}">
+🌱 Conscientização
 </a>
 
-<a href="#">
+<a href="{% url 'perfil' %}">
 👤 Perfil
 </a>
 

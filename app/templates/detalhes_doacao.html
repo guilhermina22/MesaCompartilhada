@@ -211,12 +211,12 @@ button:hover{
 <header>
 
 
-<div class="logo">
+<a href="{% url 'index' %}" class="logo" style="text-decoration:none; color:white;">
 🍃 Mesa Compartilhada
-</div>
+</a>
 
 
-<a class="voltar" href="#">
+<a class="voltar" href="{% url 'explorar_doacoes' %}">
 ← Voltar
 </a>
 
@@ -292,11 +292,11 @@ Ajude a combater o desperdício e aproveite alimentos que ainda estão próprios
 
 
 
-<button>
-
-Solicitar doação
-
-</button>
+<a href="{% url 'solicitacoes' %}" style="text-decoration:none;">
+    <button>
+        Solicitar doação
+    </button>
+</a>
 
 
 
@@ -313,28 +313,28 @@ Solicitar doação
 <div class="menu">
 
 
-<a href="#">
+<div class="menu">
+
+<a href="{% url 'index' %}">
 🏠 Início
 </a>
 
-
-<a href="#">
+<a href="{% url 'explorar_doacoes' %}">
 🔎 Doações
 </a>
 
-
-<a href="#">
+<a href="{% url 'solicitacoes' %}">
 📦 Solicitações
 </a>
 
-
-<a href="#">
+<a href="{% url 'perfil' %}">
 👤 Perfil
 </a>
 
-
 </div>
 
+
+</div>
 
 
 </body>

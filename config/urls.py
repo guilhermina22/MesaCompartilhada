@@ -10,9 +10,8 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('cadastro/consumidor/', cadastro_consumidor, name='cadastro_consumidor'),
     path('cadastro/comerciante/', cadastro_comerciante, name='cadastro_comerciante'),
-    path('home/', home, name='home'),
     path('perfil/', perfil, name='perfil'),
-    path('produtos/', produtos, name='produtos'),
+    # path('produtos/', produtos, name='produtos'),
     path('conscientizacao/', conscientizacao, name='conscientizacao'),
 
     path('mapa/', mapa, name='mapa'),

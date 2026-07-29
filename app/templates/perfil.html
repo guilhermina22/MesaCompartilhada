@@ -269,33 +269,33 @@ textarea{
 <header>
 
 
-<div class="logo">
-🌿 Mesa Compartilhada
-</div>
+<a href="{% url 'index' %}" class="logo" style="text-decoration:none;">
+    🌿 Mesa Compartilhada
+</a>
 
 
 <div class="menu">
 
-<span>⌂ Início</span>
+    <a href="{% url 'index' %}" style="text-decoration:none;color:#777;">
+     ⌂ Início
+    </a>
 
-<span>▣ Conscientização</span>
+    <a href="{% url 'conscientizacao' %}" style="text-decoration:none;color:#777;">
+    ▣ Conscientização
+    </a>
 
-<span class="ativo">
-♙ Perfil
-</span>
+    <a href="{% url 'perfil' %}" class="ativo" style="text-decoration:none;">
+    ♙ Perfil
+    </a>
 
-
-<span class="usuario">
-🔔 Maria S.
-</span>
-
+    <a href="{% url 'login' %}" class="usuario" style="text-decoration:none;color:#777;">
+    🔔 Maria S.
+    </a>
 
 </div>
 
 
 </header>
-
-
 
 
 <div class="container">
@@ -313,6 +313,27 @@ Gerencie suas informações e foto de perfil.
 
 </div>
 
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+
+    <a href="{% url 'explorar_doacoes' %}" style="text-decoration:none;">
+        <button class="verde">
+    Explorar Doações
+        </button>
+    </a>
+
+    <a href="{% url 'cadastro_doacao' %}" style="text-decoration:none;">
+        <button class="verde">
+    Cadastrar Doação
+        </button>
+    </a>
+
+    <a href="{% url 'solicitacoes' %}" style="text-decoration:none;">
+        <button class="branco">
+    Solicitações
+        </button>
+    </a>
+
+</div>
 
 
 
@@ -330,7 +351,9 @@ Gerencie suas informações e foto de perfil.
 
 <div class="foto">
 
-<img src="foto.png">
+{% load static %}
+
+<img src="{% static 'img/foto.png' %}" alt="Foto do usuário">
 
 </div>
 

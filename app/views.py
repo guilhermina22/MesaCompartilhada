@@ -17,16 +17,16 @@ def cadastro_comerciante(request):
     return render(request, 'cadastro_comerciante.html')
 
 
-def home(request):
-    return render(request, 'home.html')
+# def home(request):
+#     return render(request, 'home.html')
 
 
 def perfil(request):
     return render(request, 'perfil.html')
 
 
-def produtos(request):
-    return render(request, 'produtos.html')
+# def produtos(request):
+#     return render(request, 'produtos.html')
 
 
 def conscientizacao(request):

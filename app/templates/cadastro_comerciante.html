@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mesa Compartilhada - Login</title>
+<title>Cadastro - Comerciante</title>
 
 <style>
 
@@ -58,16 +58,12 @@ body{
 }
 
 .logo h2{
-
     font-family:Georgia,serif;
     font-size:18px;
-
 }
 
 .logo p{
-
     font-size:12px;
-
 }
 
 .frase{
@@ -84,7 +80,9 @@ body{
 .frase h3{
 
     font-family:Georgia,serif;
+
     font-style:italic;
+
     font-size:20px;
 
 }
@@ -107,14 +105,16 @@ body{
 
 .form{
 
-    width:300px;
+    width:320px;
 
 }
 
 .voltar{
 
     text-decoration:none;
+
     color:#287653;
+
     font-size:13px;
 
 }
@@ -122,7 +122,9 @@ body{
 .form h1{
 
     font-family:Georgia,serif;
-    font-size:23px;
+
+    font-size:24px;
+
     margin-top:15px;
 
 }
@@ -130,15 +132,19 @@ body{
 .sub{
 
     font-size:12px;
+
     color:#888;
-    margin:8px 0 25px;
+
+    margin:8px 0 20px;
 
 }
 
 label{
 
     font-size:11px;
+
     display:block;
+
     margin-top:15px;
 
 }
@@ -146,43 +152,58 @@ label{
 input{
 
     width:100%;
+
     height:35px;
+
     border-radius:7px;
+
     border:1px solid #ddd;
+
     background:#eee9e2;
+
     padding:10px;
 
 }
 
-.entrar{
+button{
 
     width:100%;
-    height:36px;
+
+    height:38px;
+
     margin-top:25px;
+
     background:#287653;
+
     color:white;
+
     border:none;
+
     border-radius:7px;
+
     cursor:pointer;
+
     font-size:14px;
 
 }
 
-.cadastro{
+.login{
 
     text-align:center;
+
     font-size:12px;
-    margin-top:25px;
+
+    margin-top:20px;
 
 }
 
-.cadastro a{
+.login a{
 
-    display:block;
-    text-decoration:none;
     color:#287653;
+
+    text-decoration:none;
+
     font-weight:bold;
-    margin-top:8px;
 
 }
 
@@ -194,89 +215,87 @@ input{
 
 <div class="container">
 
-    <!-- Lado esquerdo -->
+<div class="left">
 
-    <div class="left">
+<a href="{% url 'index' %}" class="logo">
 
-        <a href="{% url 'index' %}" class="logo">
+<h2>🍴 Mesa Compartilhada</h2>
 
-            <h2>🍴 Mesa Compartilhada</h2>
+<p>
+Reduzindo o desperdício, ampliando o acesso.
+</p>
 
-            <p>
-                Reduzindo o desperdício, ampliando o acesso.
-            </p>
+</a>
 
-        </a>
+<div class="frase">
 
-        <div class="frase">
+<h3>
+"Transforme alimentos próximos ao vencimento em oportunidades para quem precisa."
+</h3>
 
-            <h3>
-                "No Brasil, milhões de toneladas de alimentos são desperdiçadas todos os anos."
-            </h3>
+<small>
+Mesa Compartilhada
+</small>
 
-            <small>
-                Fonte: ONU / EMBRAPA
-            </small>
+</div>
 
-        </div>
+</div>
 
-    </div>
+<div class="right">
 
-    <!-- Lado direito -->
+<div class="form">
 
-    <div class="right">
+<a href="{% url 'login' %}" class="voltar">
+← Voltar
+</a>
 
-        <div class="form">
+<h1>
+Cadastrar comércio
+</h1>
 
-            <a href="{% url 'index' %}" class="voltar">
-                ← Voltar
-            </a>
+<p class="sub">
+Cadastre seu estabelecimento e anuncie alimentos próximos ao vencimento.
+</p>
 
-            <h1>
-                Bem-vindo de volta
-            </h1>
+<form>
 
-            <p class="sub">
-                Acesse sua conta para continuar.
-            </p>
+<label>Nome do estabelecimento</label>
+<input type="text" placeholder="Ex.: Padaria Central">
 
-            <form>
+<label>CNPJ</label>
+<input type="text" placeholder="00.000.000/0000-00">
 
-                <label>E-mail</label>
+<label>E-mail</label>
+<input type="email" placeholder="contato@empresa.com">
 
-                <input type="email" placeholder="seu@email.com">
+<label>Telefone</label>
+<input type="tel" placeholder="(35) 99999-9999">
 
-                <label>Senha</label>
+<label>Endereço</label>
+<input type="text" placeholder="Rua, número e bairro">
 
-                <input type="password" placeholder="••••••••">
+<label>Senha</label>
+<input type="password" placeholder="••••••••">
 
-                <a href="{% url 'index' %}">
-                    <button type="button" class="entrar">
-                        Entrar
-                    </button>
-                </a>
+<label>Confirmar senha</label>
+<input type="password" placeholder="••••••••">
 
-            </form>
+<button type="submit">
+Cadastrar estabelecimento
+</button>
 
-            <div class="cadastro">
+</form>
 
-                <p>
-                    Não possui uma conta?
-                </p>
+<p class="login">
+Já possui uma conta?
+<a href="{% url 'login' %}">
+Entrar
+</a>
+</p>
 
-                <a href="{% url 'cadastro_consumidor' %}">
-                    Cadastrar como Consumidor
-                </a>
+</div>
 
-                <a href="{% url 'cadastro_comerciante' %}">
-                    Cadastrar como Comerciante
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
