@@ -32,14 +32,6 @@ header{
     border-bottom:1px solid #ddd;
 }
 
-
-.logo{
-    font-size:15px;
-    font-weight:bold;
-    color:#234d3c;
-}
-
-
 .menu{
     display:flex;
     gap:25px;
@@ -47,11 +39,10 @@ header{
     font-size:13px;
 }
 
-
-.menu span{
+.menu a{
     color:#777;
+    text-decoration:none;
 }
-
 
 .menu .ativo{
     background:#dceee7;
@@ -60,11 +51,16 @@ header{
     color:#2b7258;
 }
 
+.logo{
+    font-size:15px;
+    font-weight:bold;
+    color:#234d3c;
+    text-decoration:none;
+}
 
 .usuario{
     color:#777;
 }
-
 
 
 /* CONTAINER */
@@ -251,25 +247,25 @@ header{
 
 <header>
 
-<div class="logo">
+<a href="{% url 'index' %}" class="logo">
 🌿 Mesa Compartilhada
-</div>
-
+</a>
 
 <div class="menu">
 
-<span>⌂ Início</span>
+<a href="{% url 'index' %}">
+⌂ Início
+</a>
 
-<span class="ativo">
+<a href="{% url 'conscientizacao' %}" class="ativo">
 ▣ Conscientização
-</span>
+</a>
 
-<span class="usuario">
+<a href="{% url 'perfil' %}" class="usuario">
 🔔 Maria S.
-</span>
+</a>
 
 </div>
-
 
 </header>
 

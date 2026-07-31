@@ -8,13 +8,9 @@
 
 <title>Mapa de Doações - Mesa Compartilhada</title>
 
-
-<!-- Leaflet - mapa -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
-
 <style>
-
 
 *{
     margin:0;
@@ -23,97 +19,58 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-
-
 body{
-
     background:#f4f8f3;
     color:#333;
-
 }
 
-
-
-
 header{
-
     background:#2e7d32;
     color:white;
     padding:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-
 }
-
-
 
 .logo{
-
     font-size:24px;
     font-weight:bold;
-
+    color:white;
+    text-decoration:none;
 }
 
-
-
 .perfil{
-
     background:white;
     color:#2e7d32;
     padding:10px 18px;
     border-radius:25px;
     font-weight:bold;
-
+    text-decoration:none;
 }
-
-
-
-/* conteúdo */
-
 
 .container{
-
     padding:25px;
-
 }
-
-
 
 h1{
-
     color:#27652b;
     margin-bottom:8px;
-
 }
-
-
 
 .subtitulo{
-
     color:#666;
     margin-bottom:20px;
-
 }
 
-
-
-/* filtros */
-
-
 .filtros{
-
     display:flex;
     gap:12px;
     margin-bottom:20px;
     flex-wrap:wrap;
-
 }
 
-
-
 .filtro{
-
     background:white;
     padding:12px 18px;
     border-radius:25px;
@@ -121,79 +78,45 @@ h1{
     font-weight:bold;
     box-shadow:0 3px 10px #0002;
     cursor:pointer;
-
 }
 
-
-
-/* mapa */
-
-
 #map{
-
     width:100%;
     height:420px;
     border-radius:25px;
     box-shadow:0 5px 20px #0003;
     margin-bottom:30px;
-
 }
-
-
-
-/* lista */
-
 
 .titulo{
-
     color:#27652b;
     margin-bottom:15px;
-
 }
 
-
-
 .cards{
-
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:20px;
-
 }
 
-
-
 .card{
-
     background:white;
     padding:20px;
     border-radius:20px;
     box-shadow:0 5px 15px #0002;
-
 }
-
-
 
 .card h2{
-
     color:#27652b;
     margin-bottom:10px;
-
 }
-
-
 
 .info{
-
     color:#666;
     line-height:1.8;
-
 }
 
-
-
 button{
-
     width:100%;
     margin-top:15px;
     padding:13px;
@@ -203,23 +126,13 @@ button{
     border-radius:12px;
     font-size:15px;
     cursor:pointer;
-
 }
-
-
 
 button:hover{
-
     background:#2e7d32;
-
 }
 
-
-
-/* menu */
-
 .menu{
-
     position:fixed;
     bottom:0;
     width:100%;
@@ -228,123 +141,75 @@ button:hover{
     justify-content:space-around;
     padding:15px;
     box-shadow:0 -3px 10px #0002;
-
 }
 
-
-
 .menu a{
-
     color:#2e7d32;
     text-decoration:none;
     font-weight:bold;
-
 }
-
 
 </style>
 
-
 </head>
-
-
 
 <body>
 
-
-
 <header>
 
-
-<div class="logo">
+<a href="{% url 'index' %}" class="logo">
 🍃 Mesa Compartilhada
-</div>
+</a>
 
-
-<div class="perfil">
+<a href="{% url 'mapa' %}" class="perfil">
 📍 Mapa
-</div>
-
+</a>
 
 </header>
 
-
-
-
-
-
 <div class="container">
-
-
 
 <h1>
 Doações próximas de você 📍
 </h1>
 
-
 <p class="subtitulo">
 Encontre alimentos disponíveis perto da sua localização.
 </p>
 
-
-
-
 <div class="filtros">
-
 
 <div class="filtro">
 📍 Até 1 km
 </div>
 
-
 <div class="filtro">
 📍 Até 5 km
 </div>
-
 
 <div class="filtro">
 🍎 Alimentos
 </div>
 
-
 <div class="filtro">
 🏪 Comércio
 </div>
 
-
 </div>
 
-
-
-
-
 <div id="map"></div>
-
-
-
-
-
-
 
 <h2 class="titulo">
 Comércios próximos
 </h2>
 
-
-
 <div class="cards">
 
-
-
-
-
 <div class="card">
-
 
 <h2>
 🥖 Padaria Sabor da Vida
 </h2>
-
 
 <div class="info">
 
@@ -358,26 +223,19 @@ Comércios próximos
 
 </div>
 
-
-<button>
+<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<button type="button">
 Ver detalhes
 </button>
-
+</a>
 
 </div>
 
-
-
-
-
-
 <div class="card">
-
 
 <h2>
 🥗 Restaurante Verde
 </h2>
-
 
 <div class="info">
 
@@ -391,26 +249,19 @@ Ver detalhes
 
 </div>
 
-
-<button>
+<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<button type="button">
 Ver detalhes
 </button>
-
+</a>
 
 </div>
 
-
-
-
-
-
 <div class="card">
-
 
 <h2>
 🍎 Mercado Bom Preço
 </h2>
-
 
 <div class="info">
 
@@ -424,126 +275,64 @@ Ver detalhes
 
 </div>
 
-
-<button>
+<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<button type="button">
 Ver detalhes
 </button>
-
-
-</div>
-
-
-
+</a>
 
 </div>
 
-
-
 </div>
 
-
-
-
-
+</div>
 
 <div class="menu">
 
-
-<a href="#">
+<a href="{% url 'index' %}">
 🏠 Início
 </a>
 
-
-<a href="#">
+<a href="{% url 'explorar_doacoes' %}">
 🔎 Doações
 </a>
 
-
-<a href="#">
+<a href="{% url 'mapa' %}">
 🗺️ Mapa
 </a>
 
-
-<a href="#">
+<a href="{% url 'perfil' %}">
 👤 Perfil
 </a>
 
-
 </div>
-
-
-
-
-
-
-
-<!-- Leaflet JS -->
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-
-
 <script>
 
-
-// Criando mapa
-
 var map = L.map('map').setView([-21.3665,-46.5235],14);
-
-
-
-// mapa OpenStreetMap
 
 L.tileLayer(
 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
-
 maxZoom:19,
 attribution:'© OpenStreetMap'
-
 }
-
 ).addTo(map);
-
-
-
-
-// marcador da localização do usuário
 
 var usuario = L.marker([-21.3665,-46.5235])
 .addTo(map)
-.bindPopup(
-"📍 Você está aqui"
-)
+.bindPopup("📍 Você está aqui")
 .openPopup();
-
-
-
-
-
-
-// comércio 1
 
 L.marker([-21.3650,-46.5250])
 .addTo(map)
-.bindPopup(
-"<b>🥖 Padaria Sabor da Vida</b><br>30 pães disponíveis"
-);
-
-
-
-
-// comércio 2
+.bindPopup("<b>🥖 Padaria Sabor da Vida</b><br>30 pães disponíveis");
 
 L.marker([-21.3680,-46.5200])
 .addTo(map)
-.bindPopup(
-"<b>🥗 Restaurante Verde</b><br>Marmitas disponíveis"
-);
-
-
-
-
+.bindPopup("<b>🥗 Restaurante Verde</b><br>Marmitas disponíveis");
 
 // comércio 3
 
@@ -555,25 +344,17 @@ L.marker([-21.3700,-46.5260])
 
 
 
-
-
 // localização real do usuário
 
 if(navigator.geolocation){
 
-
 navigator.geolocation.getCurrentPosition(function(position){
-
 
 let lat = position.coords.latitude;
 
 let lon = position.coords.longitude;
 
-
-
 map.setView([lat,lon],15);
-
-
 
 L.marker([lat,lon])
 .addTo(map)
@@ -582,17 +363,11 @@ L.marker([lat,lon])
 )
 .openPopup();
 
-
-
 });
-
 
 }
 
-
 </script>
-
-
 
 </body>
 
