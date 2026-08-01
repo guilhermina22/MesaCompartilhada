@@ -73,7 +73,7 @@ class Produto(models.Model):
     )
     quantidade = models.IntegerField(verbose_name="Quantidade")
     dataValidade = models.DateField(verbose_name="Data de validade")
-    imagem = models.CharField(max_length=255, verbose_name="Imagem")
+    imagem = models.ImageField(upload_to='produtos/',blank=True,null=True)
     status = models.CharField(max_length=30, verbose_name="Status")
     qtdEstoque = models.IntegerField(verbose_name="Quantidade em estoque")
 

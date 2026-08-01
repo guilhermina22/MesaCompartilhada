@@ -96,23 +96,33 @@
 
 
         .categorias{
-            display:flex;
-            gap:8px;
-            margin-bottom:15px;
-        }
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+    flex-wrap:wrap;
+}
 
-        .categoria{
-            background:white;
-            border:1px solid #ddd;
-            padding:6px 13px;
-            border-radius:20px;
-            font-size:12px;
-        }
+.categoria{
+    background:white;
+    border:1px solid #ddd;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    text-decoration:none;
+    color:#333;
+    display:inline-block;
+    transition:0.2s;
+}
 
-        .categoria:first-child{
-            background:#477d5b;
-            color:white;
-        }
+.categoria:hover{
+    background:#477d5b;
+    color:white;
+}
+
+.categoria.ativa{
+    background:#477d5b;
+    color:white;
+}
 
 
         .produtos{
@@ -196,10 +206,10 @@
 
    <div class="usuario">
     🔔
-        <a href="{% url 'perfil' %}" style="text-decoration:none; color:#777;">
-        👤 Maria S.
-        </a>
-    </div>
+    <a href="{% url 'login' %}" style="text-decoration:none; color:#777;">
+        👤 Entrar
+    </a>
+</div>
 
 </header>
 
@@ -214,32 +224,122 @@
 
 
 
-    <div class="pesquisa">
+    <form class="pesquisa" method="GET">
 
-        <input type="text" placeholder="🔍 Buscar produto ou estabelecimento...">
+    <input
+        type="text"
+        name="busca"
+        value="{{ busca }}"
+        placeholder="🔍 Buscar produto ou estabelecimento..."
+    >
 
-        <div class="filtro">
-            ⚱ Até <b>R$ 20</b>
-        </div>
+    <select name="preco" class="filtro">
 
-    </div>
+    <option value="">Todos os preços</option>
+
+    <option value="10" {% if preco == "10" %}selected{% endif %}>
+        Até R$ 10
+    </option>
+
+    <option value="20" {% if preco == "20" %}selected{% endif %}>
+        Até R$ 20
+    </option>
+
+    <option value="30" {% if preco == "30" %}selected{% endif %}>
+        Até R$ 30
+    </option>
+
+    <option value="50" {% if preco == "50" %}selected{% endif %}>
+        Até R$ 50
+    </option>
+
+</select>
+
+    <button class="filtro" type="submit">
+        Buscar
+    </button>
+
+</form>
 
 
 
     <div class="categorias">
 
-        <div class="categoria">Todos</div>
-        <div class="categoria">Padaria</div>
-        <div class="categoria">Frutas</div>
-        <div class="categoria">Verduras</div>
-        <div class="categoria">Laticínios</div>
-        <div class="categoria">Confeitaria</div>
+        <div class="categorias">
+
+<a href="{% url 'index' %}" class="categoria">
+    Todos
+</a>
+
+<a href="{% url 'index' %}?categoria=Padaria" class="categoria">
+    Padaria
+</a>
+
+<a href="{% url 'index' %}?categoria=Frutas" class="categoria">
+    Frutas
+</a>
+
+<a href="{% url 'index' %}?categoria=Verduras" class="categoria">
+    Verduras
+</a>
+
+<a href="{% url 'index' %}?categoria=Laticínios" class="categoria">
+    Laticínios
+</a>
+
+<a href="{% url 'index' %}?categoria=Confeitaria" class="categoria">
+    Confeitaria
+</a>
+
+</div>
 
     </div>
 
 
+<div class="produtos">
 
-    <div class="produtos">
+{% for produto in produtos %}
+
+<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;color:inherit;">
+
+    <div class="card">
+
+        <div class="imagem">
+            {% if produto.imagem %}
+                <img src="{{ produto.imagem.url }}">
+            {% else %}
+                <img src="https://via.placeholder.com/300x200?text=Sem+Imagem">
+            {% endif %}
+        </div>
+
+        <div class="conteudo">
+
+            <div class="nome">
+                {{ produto.nome }}
+            </div>
+
+            <div class="local">
+                ◉ {{ produto.estabelecimento.usuario.nome }}
+            </div>
+
+            <div class="preco">
+                R$ {{ produto.precoOriginal }}
+            </div>
+
+        </div>
+
+    </div>
+
+</a>
+
+{% empty %}
+
+<p>Nenhum produto encontrado.</p>
+
+{% endfor %}
+
+</div>
+    {% comment %} <div class="produtos">
 
         <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;">
             <div class="card">
@@ -288,7 +388,7 @@
         </a>
 
 
-    </div>
+    </div> {% endcomment %}
 
 
 </main>

@@ -1,4 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -25,41 +27,67 @@ body{
 header{
     height:55px;
     background:white;
+    border-bottom:1px solid #eee;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 35px;
-    border-bottom:1px solid #ddd;
-}
-
-.menu{
-    display:flex;
-    gap:25px;
-    align-items:center;
-    font-size:13px;
-}
-
-.menu a{
-    color:#777;
-    text-decoration:none;
-}
-
-.menu .ativo{
-    background:#dceee7;
-    padding:7px 15px;
-    border-radius:8px;
-    color:#2b7258;
+    padding:0 30px;
 }
 
 .logo{
-    font-size:15px;
+    font-size:16px;
     font-weight:bold;
-    color:#234d3c;
+    color:#607d68;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+}
+
+nav a{
     text-decoration:none;
+    color:#777;
+    margin:0 15px;
+    font-size:13px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:#4d7758;
+}
+
+nav a.active{
+    background:#e8f3ea;
+    padding:8px 14px;
+    border-radius:8px;
+    color:#4d7758;
 }
 
 .usuario{
+    font-size:13px;
     color:#777;
+}
+
+@media(max-width:768px){
+
+header{
+    padding:0 15px;
+}
+
+.logo{
+    font-size:14px;
+}
+
+nav a{
+    margin:0 8px;
+    font-size:12px;
+}
+
+.usuario{
+    font-size:12px;
+}
+
 }
 
 
@@ -77,12 +105,13 @@ header{
     height:145px;
     margin-top:0;
     border-radius:12px;
+
     background:
     linear-gradient(
-    rgba(0,0,0,.35),
-    rgba(0,0,0,.35)
+        rgba(0,0,0,.35),
+        rgba(0,0,0,.35)
     ),
-    url("imagem-comida.jpg");
+    url("{% static 'images/conscientizacao.png' %}");
 
     background-size:cover;
     background-position:center;
@@ -247,28 +276,31 @@ header{
 
 <header>
 
-<a href="{% url 'index' %}" class="logo">
-🌿 Mesa Compartilhada
-</a>
+    <div class="logo">
+        🍴 Mesa Compartilhada
+    </div>
 
-<div class="menu">
+    <nav>
 
-<a href="{% url 'index' %}">
-⌂ Início
-</a>
+        <a href="{% url 'index' %}" >
+            ⌂ Início
+        </a>
 
-<a href="{% url 'conscientizacao' %}" class="ativo">
-▣ Conscientização
-</a>
+        <a href="{% url 'conscientizacao' %}" class="active" >
+            ☁ Conscientização
+        </a>
 
-<a href="{% url 'perfil' %}" class="usuario">
-🔔 Maria S.
-</a>
+        <a href="{% url 'perfil' %}">
+            ♙ Perfil
+        </a>
 
-</div>
+    </nav>
+
+    <div class="usuario">
+        🔔 👤 Maria S.
+    </div>
 
 </header>
-
 
 
 <div class="container">

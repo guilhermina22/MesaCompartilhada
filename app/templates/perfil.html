@@ -28,43 +28,68 @@ body{
 header{
     height:55px;
     background:white;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #eee;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:0 35px;
+    justify-content:space-between;
+    padding:0 30px;
 }
-
 
 .logo{
-    color:#244d3d;
-    font-size:14px;
+    font-size:16px;
     font-weight:bold;
+    color:#607d68;
 }
 
-
-.menu{
+nav{
     display:flex;
     align-items:center;
-    gap:22px;
-    font-size:12px;
+}
+
+nav a{
+    text-decoration:none;
     color:#777;
+    margin:0 15px;
+    font-size:13px;
+    transition:.2s;
 }
 
+nav a:hover{
+    color:#4d7758;
+}
 
-.ativo{
-    background:#dceee7;
-    padding:7px 15px;
+nav a.active{
+    background:#e8f3ea;
+    padding:8px 14px;
     border-radius:8px;
-    color:#287257;
+    color:#4d7758;
 }
-
 
 .usuario{
+    font-size:13px;
     color:#777;
 }
 
+@media(max-width:768px){
 
+header{
+    padding:0 15px;
+}
+
+.logo{
+    font-size:14px;
+}
+
+nav a{
+    margin:0 8px;
+    font-size:12px;
+}
+
+.usuario{
+    font-size:12px;
+}
+
+}
 
 /* CONTAINER */
 
@@ -265,37 +290,34 @@ textarea{
 
 <body>
 
-
 <header>
 
+    <div class="logo">
+        🍴 Mesa Compartilhada
+    </div>
 
-<a href="{% url 'index' %}" class="logo" style="text-decoration:none;">
-    🌿 Mesa Compartilhada
-</a>
+    <nav>
 
+        <a href="{% url 'index' %}" >
+            ⌂ Início
+        </a>
 
-<div class="menu">
+        <a href="{% url 'conscientizacao' %}">
+            ☁ Conscientização
+        </a>
 
-    <a href="{% url 'index' %}" style="text-decoration:none;color:#777;">
-     ⌂ Início
-    </a>
+        <a href="{% url 'perfil' %}" class="active">
+            ♙ Perfil
+        </a>
 
-    <a href="{% url 'conscientizacao' %}" style="text-decoration:none;color:#777;">
-    ▣ Conscientização
-    </a>
+    </nav>
 
-    <a href="{% url 'perfil' %}" class="ativo" style="text-decoration:none;">
-    ♙ Perfil
-    </a>
-
-    <a href="{% url 'login' %}" class="usuario" style="text-decoration:none;color:#777;">
-    🔔 Maria S.
-    </a>
-
-</div>
-
+    <div class="usuario">
+        🔔 👤 Maria S.
+    </div>
 
 </header>
+
 
 
 <div class="container">

@@ -25,29 +25,70 @@ body{
 /* topo */
 
 header{
-    background:#2e7d32;
-    padding:20px;
-    color:white;
+    height:55px;
+    background:white;
+    border-bottom:1px solid #eee;
     display:flex;
+    align-items:center;
     justify-content:space-between;
+    padding:0 30px;
+}
+
+.logo{
+    font-size:16px;
+    font-weight:bold;
+    color:#607d68;
+}
+
+nav{
+    display:flex;
     align-items:center;
 }
 
+nav a{
+    text-decoration:none;
+    color:#777;
+    margin:0 15px;
+    font-size:13px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:#4d7758;
+}
+
+nav a.active{
+    background:#e8f3ea;
+    padding:8px 14px;
+    border-radius:8px;
+    color:#4d7758;
+}
+
+.usuario{
+    font-size:13px;
+    color:#777;
+}
+
+@media(max-width:768px){
+
+header{
+    padding:0 15px;
+}
 
 .logo{
-    font-size:24px;
-    font-weight:bold;
+    font-size:14px;
 }
 
-
-.perfil{
-    background:white;
-    color:#2e7d32;
-    padding:10px 18px;
-    border-radius:25px;
-    cursor:pointer;
+nav a{
+    margin:0 8px;
+    font-size:12px;
 }
 
+.usuario{
+    font-size:12px;
+}
+
+}
 
 /* conteúdo */
 
@@ -196,14 +237,9 @@ h1{
 
 <header>
 
-<a href="{% url 'index' %}" class="logo" style="text-decoration:none; color:white;">
-🍃 Mesa Compartilhada
-</a>
-
-<a href="{% url 'perfil' %}" class="perfil" style="text-decoration:none;">
-Meu Perfil
-</a>
-
+<a href="{% url 'index' %}" class="active">⌂ Início</a>
+<a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
+<a href="{% url 'perfil' %}">♙ Perfil</a>
 </header>
 
 
