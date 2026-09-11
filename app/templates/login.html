@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,7 +28,8 @@ body{
     height:100vh;
 }
 
-/* LADO ESQUERDO */
+
+/* ================= LADO ESQUERDO ================= */
 
 .left{
     width:50%;
@@ -53,41 +55,37 @@ body{
 }
 
 .logo h2{
-
     font-family:Georgia,serif;
     font-size:18px;
-
 }
 
 .logo p{
-
     font-size:12px;
-
 }
 
 .frase{
-
     position:absolute;
 
     bottom:45px;
     left:35px;
 
     width:390px;
-
 }
 
 .frase h3{
-
     font-family:Georgia,serif;
     font-style:italic;
     font-size:20px;
-
 }
 
-/* LADO DIREITO */
+.frase small{
+    font-size:10px;
+}
+
+
+/* ================= LADO DIREITO ================= */
 
 .right{
-
     width:50%;
 
     background:#faf7f2;
@@ -95,89 +93,142 @@ body{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
-
 }
 
 .form{
-
     width:300px;
-
 }
 
 .voltar{
-
     text-decoration:none;
     color:#287653;
     font-size:13px;
-
 }
 
 .form h1{
-
     font-family:Georgia,serif;
     font-size:23px;
     margin-top:15px;
-
 }
 
 .sub{
-
     font-size:12px;
     color:#888;
     margin:8px 0 25px;
-
 }
 
-label{
 
+/* ================= FORMULÁRIO ================= */
+
+label{
     font-size:11px;
     display:block;
     margin-top:15px;
-
+    margin-bottom:5px;
 }
 
 input{
-
     width:100%;
     height:35px;
+
     border-radius:7px;
+
     border:1px solid #ddd;
+
     background:#eee9e2;
+
     padding:10px;
 
+    outline:none;
 }
+
+input:focus{
+    border-color:#287653;
+}
+
 
 .entrar{
-
     width:100%;
-    height:36px;
-    margin-top:25px;
-    background:#287653;
-    color:white;
-    border:none;
-    border-radius:7px;
-    cursor:pointer;
-    font-size:14px;
 
+    height:36px;
+
+    margin-top:25px;
+
+    background:#287653;
+
+    color:white;
+
+    border:none;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-size:14px;
 }
 
-.cadastro{
+.entrar:hover{
+    background:#206247;
+}
+
+
+/* ================= ERRO ================= */
+
+.erro{
+    color:#c0392b;
+
+    font-size:11px;
+
+    margin-top:10px;
 
     text-align:center;
-    font-size:12px;
-    margin-top:25px;
+}
 
+
+/* ================= CADASTRO ================= */
+
+.cadastro{
+    text-align:center;
+
+    font-size:12px;
+
+    margin-top:25px;
 }
 
 .cadastro a{
-
     display:block;
+
     text-decoration:none;
+
     color:#287653;
+
     font-weight:bold;
+
     margin-top:8px;
+}
+
+.cadastro a:hover{
+    text-decoration:underline;
+}
+
+
+/* ================= RESPONSIVO ================= */
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .left{
+        display:none;
+    }
+
+    .right{
+        width:100%;
+        height:100vh;
+    }
 
 }
 
@@ -185,23 +236,29 @@ input{
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-    <!-- Lado esquerdo -->
+
+    <!-- ================= LADO ESQUERDO ================= -->
 
     <div class="left">
 
         <a href="{% url 'index' %}" class="logo">
 
-            <h2>🍴 Mesa Compartilhada</h2>
+            <h2>
+                🍴 Mesa Compartilhada
+            </h2>
 
             <p>
                 Reduzindo o desperdício, ampliando o acesso.
             </p>
 
         </a>
+
 
         <div class="frase">
 
@@ -217,41 +274,87 @@ input{
 
     </div>
 
-    <!-- Lado direito -->
+
+
+    <!-- ================= LADO DIREITO ================= -->
 
     <div class="right">
 
         <div class="form">
 
+
             <a href="{% url 'index' %}" class="voltar">
                 ← Voltar
             </a>
+
 
             <h1>
                 Bem-vindo de volta
             </h1>
 
+
             <p class="sub">
                 Acesse sua conta para continuar.
             </p>
 
-            <form>
 
-                <label>E-mail</label>
+            <!-- ================= LOGIN ================= -->
 
-                <input type="email" placeholder="seu@email.com">
+            <form
+                method="POST"
+                action="{% url 'login' %}"
+            >
 
-                <label>Senha</label>
+                {% csrf_token %}
 
-                <input type="password" placeholder="••••••••">
 
-                <a href="{% url 'index' %}">
-                    <button type="button" class="entrar">
-                        Entrar
-                    </button>
-                </a>
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="seu@email.com"
+                    required
+                >
+
+
+                <label for="senha">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="••••••••"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="entrar"
+                >
+                    Entrar
+                </button>
+
+
+                {% if erro %}
+
+                    <p class="erro">
+                        {{ erro }}
+                    </p>
+
+                {% endif %}
 
             </form>
+
+
+
+            <!-- ================= CADASTRO ================= -->
 
             <div class="cadastro">
 
@@ -259,9 +362,11 @@ input{
                     Não possui uma conta?
                 </p>
 
+
                 <a href="{% url 'cadastro_consumidor' %}">
                     Cadastrar como Consumidor
                 </a>
+
 
                 <a href="{% url 'cadastro_comerciante' %}">
                     Cadastrar como Comerciante
@@ -269,11 +374,14 @@ input{
 
             </div>
 
+
         </div>
 
     </div>
 
+
 </div>
+
 
 </body>
 

@@ -24,6 +24,17 @@ class CadastroComercianteForm(forms.ModelForm):
         label="Senha"
     )
 
+    class Meta:
+        model = Usuario
+        fields = [
+            "nome",
+            "email",
+            "senha",
+            "telefone",
+        ]
+
+
+class EstabelecimentoForm(forms.ModelForm):
     descricao = forms.CharField(
         label="Descrição"
     )
@@ -33,12 +44,10 @@ class CadastroComercianteForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Usuario
+        model = Estabelecimento
         fields = [
-            "nome",
-            "email",
-            "senha",
-            "telefone",
+            "descricao",
+            "endereco",
         ]
 
 

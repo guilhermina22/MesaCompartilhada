@@ -3,184 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mesa Compartilhada</title>
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
-        body{
-            background:#faf8f3;
-            color:#333;
+        body {
+            background: #faf8f3;
+            color: #333;
         }
 
-        header{
-            height:55px;
-            background:white;
-            border-bottom:1px solid #eee;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:0 30px;
+        /* ================= HEADER ================= */
+
+        header {
+            height: 55px;
+            background: white;
+            border-bottom: 1px solid #eee;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
         }
 
-        .logo{
-            font-size:16px;
-            font-weight:bold;
-            color:#607d68;
+        .logo {
+            font-size: 16px;
+            font-weight: bold;
+            color: #607d68;
+            text-decoration: none;
         }
 
-        nav a{
-            text-decoration:none;
-            color:#777;
-            margin:0 15px;
-            font-size:13px;
+        nav {
+            display: flex;
+            align-items: center;
         }
 
-        nav a.active{
-            background:#e8f3ea;
-            padding:8px 14px;
-            border-radius:8px;
-            color:#4d7758;
+        nav a {
+            text-decoration: none;
+            color: #777;
+            margin: 0 15px;
+            font-size: 13px;
         }
 
-        .usuario{
-            font-size:13px;
-            color:#777;
+        nav a:hover {
+            color: #4d7758;
         }
 
-
-        main{
-            width:520px;
-            margin:35px auto;
+        nav a.active {
+            background: #e8f3ea;
+            padding: 8px 14px;
+            border-radius: 8px;
+            color: #4d7758;
         }
 
-
-        h1{
-            font-size:22px;
-            font-weight:500;
-            margin-bottom:5px;
+        .usuario {
+            font-size: 13px;
+            color: #777;
         }
 
-        .subtitulo{
-            color:#999;
-            font-size:13px;
-            margin-bottom:35px;
-        }
-
-
-        .pesquisa{
-            display:flex;
-            gap:10px;
-            margin-bottom:20px;
-        }
-
-        .pesquisa input{
-            flex:1;
-            padding:12px;
-            border:1px solid #ddd;
-            border-radius:8px;
-        }
-
-        .filtro{
-            width:130px;
-            background:white;
-            border:1px solid #ddd;
-            border-radius:8px;
-            padding:12px;
+        .usuario a {
+            text-decoration: none;
+            color: #777;
         }
 
 
-        .categorias{
-    display:flex;
-    gap:8px;
-    margin-bottom:15px;
-    flex-wrap:wrap;
-}
+        /* ================= CONTEÚDO ================= */
 
-.categoria{
-    background:white;
-    border:1px solid #ddd;
-    padding:6px 13px;
-    border-radius:20px;
-    font-size:12px;
-    text-decoration:none;
-    color:#333;
-    display:inline-block;
-    transition:0.2s;
-}
+        main {
+            width: 800px;
+            max-width: calc(100% - 40px);
+            margin: 35px auto;
+        }
 
-.categoria:hover{
-    background:#477d5b;
-    color:white;
-}
+        h1 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
 
-.categoria.ativa{
-    background:#477d5b;
-    color:white;
-}
-
-
-        .produtos{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:15px;
+        .subtitulo {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 35px;
         }
 
 
-        .card{
-            background:white;
-            border-radius:10px;
-            overflow:hidden;
-            border:1px solid #eee;
+        /* ================= PESQUISA ================= */
+
+        .pesquisa {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pesquisa input {
+            flex: 1;
+            padding: 12px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 14px;
+            outline: none;
+        }
+
+        .pesquisa input:focus {
+            border-color: #477d5b;
+        }
+
+        .filtro {
+            width: 130px;
+
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            padding: 12px;
+
+            font-size: 14px;
+        }
+
+        button.filtro {
+            cursor: pointer;
+        }
+
+        button.filtro:hover {
+            background: #477d5b;
+            color: white;
         }
 
 
-        .imagem{
-            height:110px;
-            background:#ddd;
+        /* ================= CATEGORIAS ================= */
+
+        .categorias {
+            display: flex;
+            gap: 8px;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
         }
 
-        .imagem img{
-            width:100%;
-            height:100%;
-            object-fit:cover;
+        .categoria {
+            background: white;
+
+            border: 1px solid #ddd;
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            text-decoration: none;
+
+            color: #333;
+
+            display: inline-block;
+
+            transition: 0.2s;
+        }
+
+        .categoria:hover {
+            background: #477d5b;
+            color: white;
+        }
+
+        .categoria.ativa {
+            background: #477d5b;
+            color: white;
         }
 
 
-        .conteudo{
-            padding:10px;
+        /* ================= PRODUTOS ================= */
+
+        .produtos {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
         }
 
 
-        .desconto{
-            position:absolute;
-            background:#ed713d;
-            color:white;
-            padding:4px;
-            font-size:11px;
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            border: 1px solid #eee;
+
+            transition: 0.2s;
+
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
 
-        .nome{
-            font-size:13px;
-            font-weight:bold;
+        /* ================= IMAGEM ================= */
+
+        .imagem {
+            width: 100%;
+            height: 160px;
+
+            background: #eee;
+
+            overflow: hidden;
         }
 
-        .local{
-            color:#888;
-            font-size:11px;
-            margin:5px 0;
+        .imagem img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
         }
 
-        .preco{
-            color:#4d8961;
-            font-weight:bold;
-            font-size:14px;
+        .sem-imagem {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #999;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= CONTEÚDO ================= */
+
+        .conteudo {
+            padding: 12px;
+        }
+
+        .nome {
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #333;
+
+            margin-bottom: 5px;
+        }
+
+        .descricao {
+            color: #777;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+
+            margin: 6px 0;
+        }
+
+        .local {
+            color: #888;
+
+            font-size: 11px;
+
+            margin: 6px 0;
+        }
+
+        .preco {
+            color: #4d8961;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            margin-top: 8px;
+        }
+
+
+        /* ================= SEM PRODUTOS ================= */
+
+        .nenhum-produto {
+            grid-column: 1 / -1;
+
+            color: #555;
+
+            font-size: 17px;
+
+            padding: 30px 0;
+        }
+
+
+        /* ================= RESPONSIVO ================= */
+
+        @media (max-width: 700px) {
+
+            main {
+                width: 100%;
+            }
+
+            .produtos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pesquisa {
+                flex-wrap: wrap;
+            }
+
+            .pesquisa input {
+                width: 100%;
+                flex: none;
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            .produtos {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 0 15px;
+            }
+
+            nav a {
+                margin: 0 5px;
+            }
+
+            .usuario {
+                display: none;
+            }
+
         }
 
     </style>
@@ -189,210 +357,263 @@
 
 <body>
 
+<!-- ================= HEADER ================= -->
 
 <header>
 
-    <a href="{% url 'index' %}" class="logo" style="text-decoration:none;">
+    <a href="{% url 'index' %}" class="logo">
         🍴 Mesa Compartilhada
     </a>
 
-
     <nav>
-        <a class="active" href="{% url 'index' %}">⌂ Início</a>
-        <a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
-        <a href="{% url 'perfil' %}">♙ Perfil</a>
-    </nav>
-    
 
-   <div class="usuario">
-    🔔
-    <a href="{% url 'login' %}" style="text-decoration:none; color:#777;">
-        👤 Entrar
-    </a>
-</div>
+        <a
+            class="active"
+            href="{% url 'index' %}"
+        >
+            ⌂ Início
+        </a>
+
+        <a href="{% url 'conscientizacao' %}">
+            ☁ Conscientização
+        </a>
+
+        <a href="{% url 'perfil' %}">
+            ♙ Perfil
+        </a>
+
+    </nav>
+
+    <div class="usuario">
+
+        🔔
+
+        <a href="{% url 'login' %}">
+            👤 Entrar
+        </a>
+
+    </div>
 
 </header>
 
 
+<!-- ================= CONTEÚDO ================= -->
 
 <main>
 
-    <h1>Alimentos disponíveis</h1>
+    <h1>
+        Alimentos disponíveis
+    </h1>
+
     <p class="subtitulo">
         Produtos próximos ao vencimento com preços reduzidos perto de você.
     </p>
 
 
+    <!-- ================= PESQUISA ================= -->
 
-    <form class="pesquisa" method="GET">
-
-    <input
-        type="text"
-        name="busca"
-        value="{{ busca }}"
-        placeholder="🔍 Buscar produto ou estabelecimento..."
+    <form
+        class="pesquisa"
+        method="GET"
+        action="{% url 'index' %}"
     >
 
-    <select name="preco" class="filtro">
-
-    <option value="">Todos os preços</option>
-
-    <option value="10" {% if preco == "10" %}selected{% endif %}>
-        Até R$ 10
-    </option>
-
-    <option value="20" {% if preco == "20" %}selected{% endif %}>
-        Até R$ 20
-    </option>
-
-    <option value="30" {% if preco == "30" %}selected{% endif %}>
-        Até R$ 30
-    </option>
-
-    <option value="50" {% if preco == "50" %}selected{% endif %}>
-        Até R$ 50
-    </option>
-
-</select>
-
-    <button class="filtro" type="submit">
-        Buscar
-    </button>
-
-</form>
+        <input
+            type="text"
+            name="busca"
+            value="{{ busca }}"
+            placeholder="🔍 Buscar produto ou estabelecimento..."
+        >
 
 
+        <select
+            name="preco"
+            class="filtro"
+        >
+
+            <option value="">
+                Todos os preços
+            </option>
+
+            <option
+                value="10"
+                {% if preco == "10" %}selected{% endif %}
+            >
+                Até R$ 10
+            </option>
+
+            <option
+                value="20"
+                {% if preco == "20" %}selected{% endif %}
+            >
+                Até R$ 20
+            </option>
+
+            <option
+                value="30"
+                {% if preco == "30" %}selected{% endif %}
+            >
+                Até R$ 30
+            </option>
+
+            <option
+                value="50"
+                {% if preco == "50" %}selected{% endif %}
+            >
+                Até R$ 50
+            </option>
+
+        </select>
+
+
+        <button
+            class="filtro"
+            type="submit"
+        >
+            Buscar
+        </button>
+
+    </form>
+
+
+    <!-- ================= CATEGORIAS ================= -->
 
     <div class="categorias">
 
-        <div class="categorias">
+        <a
+            href="{% url 'index' %}"
+            class="categoria {% if not categoria %}ativa{% endif %}"
+        >
+            Todos
+        </a>
 
-<a href="{% url 'index' %}" class="categoria">
-    Todos
-</a>
 
-<a href="{% url 'index' %}?categoria=Padaria" class="categoria">
-    Padaria
-</a>
+        <a
+            href="{% url 'index' %}?categoria=Padaria"
+            class="categoria {% if categoria == 'Padaria' %}ativa{% endif %}"
+        >
+            Padaria
+        </a>
 
-<a href="{% url 'index' %}?categoria=Frutas" class="categoria">
-    Frutas
-</a>
 
-<a href="{% url 'index' %}?categoria=Verduras" class="categoria">
-    Verduras
-</a>
+        <a
+            href="{% url 'index' %}?categoria=Frutas"
+            class="categoria {% if categoria == 'Frutas' %}ativa{% endif %}"
+        >
+            Frutas
+        </a>
 
-<a href="{% url 'index' %}?categoria=Laticínios" class="categoria">
-    Laticínios
-</a>
 
-<a href="{% url 'index' %}?categoria=Confeitaria" class="categoria">
-    Confeitaria
-</a>
+        <a
+            href="{% url 'index' %}?categoria=Verduras"
+            class="categoria {% if categoria == 'Verduras' %}ativa{% endif %}"
+        >
+            Verduras
+        </a>
 
-</div>
+
+        <a
+            href="{% url 'index' %}?categoria=Laticínios"
+            class="categoria {% if categoria == 'Laticínios' %}ativa{% endif %}"
+        >
+            Laticínios
+        </a>
+
+
+        <a
+            href="{% url 'index' %}?categoria=Confeitaria"
+            class="categoria {% if categoria == 'Confeitaria' %}ativa{% endif %}"
+        >
+            Confeitaria
+        </a>
 
     </div>
 
 
-<div class="produtos">
+    <!-- ================= PRODUTOS ================= -->
 
-{% for produto in produtos %}
+    <div class="produtos">
 
-<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;color:inherit;">
+        {% for produto in produtos %}
 
-    <div class="card">
+            <a
+                href="{% url 'detalhes_doacao' %}"
+                style="text-decoration:none; color:inherit;"
+            >
 
-        <div class="imagem">
-            {% if produto.imagem %}
-                <img src="{{ produto.imagem.url }}">
-            {% else %}
-                <img src="https://via.placeholder.com/300x200?text=Sem+Imagem">
-            {% endif %}
-        </div>
+                <div class="card">
 
-        <div class="conteudo">
 
-            <div class="nome">
-                {{ produto.nome }}
-            </div>
+                    <!-- IMAGEM -->
 
-            <div class="local">
-                ◉ {{ produto.estabelecimento.usuario.nome }}
-            </div>
+                    <div class="imagem">
 
-            <div class="preco">
-                R$ {{ produto.precoOriginal }}
-            </div>
+                        {% if produto.imagem %}
 
-        </div>
+                            <img
+                                src="{{ produto.imagem.url }}"
+                                alt="{{ produto.nome }}"
+                            >
+
+                        {% else %}
+
+                            <div class="sem-imagem">
+                                📷 Sem imagem
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- INFORMAÇÕES -->
+
+                    <div class="conteudo">
+
+                        <div class="nome">
+                            {{ produto.nome }}
+                        </div>
+
+
+                        {% if produto.descricao %}
+
+                            <div class="descricao">
+                                {{ produto.descricao }}
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if produto.estabelecimento %}
+
+                            <div class="local">
+                                ◉ {{ produto.estabelecimento.usuario.nome }}
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="preco">
+                            R$ {{ produto.precoOriginal }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        {% empty %}
+
+            <p class="nenhum-produto">
+                Nenhum produto encontrado.
+            </p>
+
+        {% endfor %}
 
     </div>
-
-</a>
-
-{% empty %}
-
-<p>Nenhum produto encontrado.</p>
-
-{% endfor %}
-
-</div>
-    {% comment %} <div class="produtos">
-
-        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;">
-            <div class="card">
-             <div class="imagem">
-                 <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff">
-             </div>
-
-             <div class="conteudo">
-                    <div class="nome">Pão de Forma Integral</div>
-                    <div class="local">◉ Padaria Estrela</div>
-                    <div class="preco">R$ 2,50</div>
-             </div>
-            </div>
-
-        </a>
-
-
-
-        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;">
-        <div class="card">
-            <div class="imagem">
-                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
-            </div>
-
-            <div class="conteudo">
-                <div class="nome">Cesta de Frutas Mistas</div>
-                <div class="local">◉ Hortifruti São João</div>
-                <div class="preco">R$ 8,00</div>
-            </div>
-        </div>
-        </a>
-
-
-        <a href="{% url 'detalhes_doacao' %}" style="text-decoration:none; color:inherit;"> 
-        <div class="card">
-            <div class="imagem">
-                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b">
-            </div>
-
-            <div class="conteudo">
-                <div class="nome">Iogurte Natural 500g</div>
-                <div class="local">◉ Mercado Central</div>
-                <div class="preco">R$ 3,20</div>
-            </div>
-        </div>
-        </a>
-
-
-    </div> {% endcomment %}
-
 
 </main>
-
 
 </body>
 </html>

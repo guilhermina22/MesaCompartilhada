@@ -1,76 +1,174 @@
-# from django.contrib import admin
-# from django.urls import path
-# from app.views import *
-
-
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-
-#     path('', index, name='index'),
-#     path('login/', login, name='login'),
-#     path('cadastro/consumidor/', cadastro_consumidor, name='cadastro_consumidor'),
-#     path('cadastro/comerciante/', cadastro_comerciante, name='cadastro_comerciante'),
-#     path('perfil/', perfil, name='perfil'),
-#     # path('produtos/', produtos, name='produtos'),
-#     path('conscientizacao/', conscientizacao, name='conscientizacao'),
-
-#     path('mapa/', mapa, name='mapa'),
-#     path('detalhes_doacao/', detalhes_doacao, name='detalhes_doacao'),
-#         path('explorar_doacoes/', explorar_doacoes, name='explorar_doacoes'),
-#     path('cadastro_doacao/', cadastro_doacao, name='cadastro_doacao'),
-#     path('comercio/', comercio, name='comercio'),
-#     path('solicitacoes/', solicitacoes, name='solicitacoes'),
-#     path('administrador/', admin_dashboard, name='administrador'),
-# ]
-
-
-
-
-
-
-
-
-
-
-
 from django.contrib import admin
 from django.urls import path
-from app.views import *
-
-from django.contrib import admin
-from django.urls import path
-from app.views import *
-
 from django.conf import settings
 from django.conf.urls.static import static
 
+from app.views import (
+    index,
+    login,
+    cadastro_consumidor,
+    cadastro_comerciante,
+    perfil,
+    conscientizacao,
+    mapa,
+    explorar_doacoes,
+    detalhes_doacao,
+    cadastro_doacao,
+    comercio,
+    solicitacoes,
+    admin_dashboard,
+)
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
-    path('', index, name='index'),
-    path('login/', login, name='login'),
+    # =========================
+    # ADMIN DO DJANGO
+    # =========================
 
-    path('cadastro/consumidor/', cadastro_consumidor, name='cadastro_consumidor'),
-    path('cadastro/comerciante/', cadastro_comerciante, name='cadastro_comerciante'),
+    path(
+        "admin/",
+        admin.site.urls
+    ),
 
-    path('perfil/', perfil, name='perfil'),
-    path('conscientizacao/', conscientizacao, name='conscientizacao'),
 
-    path('mapa/', mapa, name='mapa'),
-    path('explorar_doacoes/', explorar_doacoes, name='explorar_doacoes'),
-    path('detalhes_doacao/', detalhes_doacao, name='detalhes_doacao'),
-    path('cadastro_doacao/', cadastro_doacao, name='cadastro_doacao'),
+    # =========================
+    # PÁGINA INICIAL
+    # =========================
 
-    path('comercio/', comercio, name='comercio'),
-    path('solicitacoes/', solicitacoes, name='solicitacoes'),
+    path(
+        "",
+        index,
+        name="index"
+    ),
 
-    path('administrador/', admin_dashboard, name='administrador'),
+
+    # =========================
+    # LOGIN
+    # =========================
+
+    path(
+        "login/",
+        login,
+        name="login"
+    ),
+
+
+    # =========================
+    # CADASTROS
+    # =========================
+
+    path(
+        "cadastro/consumidor/",
+        cadastro_consumidor,
+        name="cadastro_consumidor"
+    ),
+
+    path(
+        "cadastro/comerciante/",
+        cadastro_comerciante,
+        name="cadastro_comerciante"
+    ),
+
+
+    # =========================
+    # PERFIL
+    # =========================
+
+    path(
+        "perfil/",
+        perfil,
+        name="perfil"
+    ),
+
+
+    # =========================
+    # CONSCIENTIZAÇÃO
+    # =========================
+
+    path(
+        "conscientizacao/",
+        conscientizacao,
+        name="conscientizacao"
+    ),
+
+
+    # =========================
+    # MAPA
+    # =========================
+
+    path(
+        "mapa/",
+        mapa,
+        name="mapa"
+    ),
+
+
+    # =========================
+    # DOAÇÕES
+    # =========================
+
+    path(
+        "explorar_doacoes/",
+        explorar_doacoes,
+        name="explorar_doacoes"
+    ),
+
+    path(
+        "detalhes_doacao/",
+        detalhes_doacao,
+        name="detalhes_doacao"
+    ),
+
+    path(
+        "cadastro_doacao/",
+        cadastro_doacao,
+        name="cadastro_doacao"
+    ),
+
+
+    # =========================
+    # COMÉRCIO
+    # =========================
+
+    path(
+        "comercio/",
+        comercio,
+        name="comercio"
+    ),
+
+
+    # =========================
+    # SOLICITAÇÕES
+    # =========================
+
+    path(
+        "solicitacoes/",
+        solicitacoes,
+        name="solicitacoes"
+    ),
+
+
+    # =========================
+    # ADMINISTRADOR
+    # =========================
+
+    path(
+        "administrador/",
+        admin_dashboard,
+        name="administrador"
+    ),
+
 ]
 
 
+# =========================
+# ARQUIVOS DE MÍDIA
+# =========================
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )

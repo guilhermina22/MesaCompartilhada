@@ -1,7 +1,10 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,22 +19,23 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-
 body{
     background:#f8f6f1;
     color:#333;
 }
 
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 
 header{
     height:55px;
     background:white;
     border-bottom:1px solid #eee;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:0 30px;
 }
 
@@ -39,6 +43,7 @@ header{
     font-size:16px;
     font-weight:bold;
     color:#607d68;
+    text-decoration:none;
 }
 
 nav{
@@ -70,78 +75,53 @@ nav a.active{
     color:#777;
 }
 
-@media(max-width:768px){
 
-header{
-    padding:0 15px;
-}
-
-.logo{
-    font-size:14px;
-}
-
-nav a{
-    margin:0 8px;
-    font-size:12px;
-}
-
-.usuario{
-    font-size:12px;
-}
-
-}
-
-/* CONTAINER */
+/* ================= CONTAINER ================= */
 
 .container{
-    width:325px;
-    margin:0 auto;
+    width:500px;
+    max-width:calc(100% - 30px);
+    margin:35px auto;
 }
 
 
+/* ================= TITULO ================= */
 
 .titulo{
-    margin-top:0px;
-    margin-bottom:18px;
+    margin-bottom:25px;
 }
-
 
 .titulo h1{
     font-family:Georgia, serif;
-    font-size:22px;
+    font-size:26px;
     font-weight:normal;
+    margin-bottom:5px;
 }
 
-
 .titulo p{
-    font-size:11px;
+    font-size:13px;
     color:#888;
 }
 
 
-
-
-
-/* CARDS */
+/* ================= CARDS ================= */
 
 .card{
     background:white;
     border-radius:10px;
     border:1px solid #e6e6e6;
-    padding:15px;
-    margin-bottom:12px;
-}
-
-
-
-/* FOTO */
-
-.card h3{
-    font-size:12px;
-    color:#355e4e;
+    padding:20px;
     margin-bottom:15px;
 }
 
+.card h3{
+    font-size:14px;
+    color:#355e4e;
+    margin-bottom:18px;
+}
+
+
+/* ================= FOTO ================= */
 
 .perfil{
     display:flex;
@@ -149,15 +129,14 @@ nav a{
     gap:15px;
 }
 
-
 .foto{
-    width:45px;
-    height:45px;
+    width:70px;
+    height:70px;
     border-radius:50%;
-    background:#ddd;
+    background:#eee;
     overflow:hidden;
+    flex-shrink:0;
 }
-
 
 .foto img{
     width:100%;
@@ -165,39 +144,60 @@ nav a{
     object-fit:cover;
 }
 
-
-.info h4{
-    font-size:12px;
+.foto-vazia{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#999;
+    font-size:25px;
 }
 
 
+/* ================= INFORMAÇÕES DA FOTO ================= */
+
+.info{
+    flex:1;
+}
+
+.info h4{
+    font-size:15px;
+    color:#333;
+}
+
 .info p{
-    font-size:9px;
+    font-size:11px;
     color:#777;
     margin-top:5px;
 }
 
 
+/* ================= BOTÕES ================= */
 
 .botoes{
+    display:flex;
+    gap:7px;
     margin-top:10px;
 }
-
 
 button{
     border:none;
     border-radius:6px;
-    padding:6px 12px;
-    font-size:10px;
+    padding:8px 12px;
+    font-size:11px;
     cursor:pointer;
+    transition:.2s;
 }
 
-
 .verde{
-    background:#43836a;
+    background:#39785e;
     color:white;
 }
 
+.verde:hover{
+    background:#30664f;
+}
 
 .branco{
     background:white;
@@ -205,83 +205,154 @@ button{
     color:#777;
 }
 
-
-
-
-/* DADOS */
-
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.branco:hover{
+    background:#f5f5f5;
 }
 
 
-.editar{
-    border:1px solid #ddd;
-    background:white;
-    padding:5px 10px;
-    border-radius:6px;
-    font-size:10px;
+/* ================= INPUT DE FOTO ================= */
+
+#inputFoto{
+    display:none;
 }
 
 
+/* ================= DADOS ================= */
 
-label{
-    font-size:9px;
-    color:#777;
+.dado{
+    margin-bottom:14px;
+}
+
+.dado label{
     display:block;
-    margin-top:12px;
+    font-size:11px;
+    color:#777;
     margin-bottom:5px;
 }
 
-
 .input{
-    height:25px;
+    width:100%;
+    min-height:35px;
+
     background:#f6f4f1;
+
+    border:1px solid transparent;
     border-radius:6px;
-    padding:7px 10px;
-    font-size:10px;
+
+    padding:9px 10px;
+
+    font-size:12px;
     color:#555;
 }
 
-
-
-
-
-/* BIO */
-
-textarea{
-    width:100%;
-    height:60px;
-    resize:none;
-    background:#eeeae4;
-    border:1px solid #ddd;
-    border-radius:6px;
-    padding:10px;
-    font-size:10px;
+.input:focus{
+    outline:none;
+    border:1px solid #39785e;
+    background:white;
 }
 
 
+/* ================= MODO EDIÇÃO ================= */
+
+.campo-editavel{
+    display:none;
+}
+
+.editando .campo-normal{
+    display:none;
+}
+
+.editando .campo-editavel{
+    display:block;
+}
+
+.editando .botoes-edicao{
+    display:flex;
+}
+
+.botoes-edicao{
+    display:none;
+    gap:8px;
+    margin-top:10px;
+}
+
+
+/* ================= BIOGRAFIA ================= */
+
+textarea{
+    width:100%;
+    height:90px;
+
+    resize:none;
+
+    background:#f6f4f1;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    padding:10px;
+
+    font-size:12px;
+
+    color:#555;
+}
+
+textarea:focus{
+    outline:none;
+    border-color:#39785e;
+    background:white;
+}
+
 .contador{
     text-align:right;
-    font-size:9px;
+    font-size:10px;
     color:#999;
     margin-top:5px;
 }
 
 
+/* ================= MENSAGEM ================= */
 
-.salvar{
-    width:100%;
-    margin-top:8px;
-    background:#39785e;
-    color:white;
-    font-size:11px;
-    padding:8px;
+.mensagem{
+    display:none;
+
+    background:#e8f3ea;
+    color:#39785e;
+
+    border-radius:7px;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    font-size:12px;
+
+    text-align:center;
 }
 
 
+/* ================= RESPONSIVO ================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:0 15px;
+    }
+
+    nav a{
+        margin:0 5px;
+    }
+
+    .usuario{
+        display:none;
+    }
+
+    .container{
+        width:100%;
+    }
+
+}
 
 </style>
 
@@ -290,15 +361,19 @@ textarea{
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
 <header>
 
-    <div class="logo">
+    <a href="{% url 'index' %}" class="logo">
         🍴 Mesa Compartilhada
-    </div>
+    </a>
+
 
     <nav>
 
-        <a href="{% url 'index' %}" >
+        <a href="{% url 'index' %}">
             ⌂ Início
         </a>
 
@@ -312,220 +387,621 @@ textarea{
 
     </nav>
 
+
     <div class="usuario">
-        🔔 👤 Maria S.
+
+        🔔
+
+        👤 <span id="nomeNavbar">
+            {{ usuario.nome }}
+        </span>
+
     </div>
 
 </header>
 
 
 
+<!-- ================= PERFIL ================= -->
+
 <div class="container">
 
 
-<div class="titulo">
+    <div class="titulo">
 
-<h1>
-Meu perfil
-</h1>
+        <h1>
+            Meu perfil
+        </h1>
 
-<p>
-Gerencie suas informações e foto de perfil.
-</p>
+        <p>
+            Gerencie suas informações e foto de perfil.
+        </p>
 
-</div>
+    </div>
 
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
 
-    <a href="{% url 'explorar_doacoes' %}" style="text-decoration:none;">
-        <button class="verde">
-    Explorar Doações
+    <!-- MENSAGEM -->
+
+    <div class="mensagem" id="mensagem">
+        Alterações salvas com sucesso!
+    </div>
+
+
+
+    <!-- ================= FOTO ================= -->
+
+    <div class="card">
+
+        <h3>
+            ▣ Foto de perfil
+        </h3>
+
+
+        <div class="perfil">
+
+
+            <div class="foto" id="fotoContainer">
+
+                {% if usuario.foto_perfil %}
+
+                    <img
+                        id="fotoPerfil"
+                        src="{{ usuario.foto_perfil.url }}"
+                        alt="Foto de {{ usuario.nome }}"
+                    >
+
+                {% else %}
+
+                    <div
+                        class="foto-vazia"
+                        id="fotoVazia"
+                    >
+                        👤
+                    </div>
+
+                    <img
+                        id="fotoPerfil"
+                        style="display:none;"
+                        alt="Foto de perfil"
+                    >
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="info">
+
+                <h4 id="nomeFoto">
+
+                    {{ usuario.nome }}
+
+                </h4>
+
+
+                <p id="textoFoto">
+
+                    {% if usuario.foto_perfil %}
+                        Foto de perfil cadastrada.
+                    {% else %}
+                        Nenhuma foto de perfil cadastrada.
+                    {% endif %}
+
+                </p>
+
+
+                <div class="botoes">
+
+                    <button
+                        type="button"
+                        class="verde"
+                        onclick="abrirSeletorFoto()"
+                    >
+                        📷 Alterar foto
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="branco"
+                        onclick="removerFoto()"
+                    >
+                        🗑 Remover
+                    </button>
+
+                </div>
+
+
+                <input
+                    type="file"
+                    id="inputFoto"
+                    accept="image/png,image/jpeg,image/gif"
+                    onchange="alterarFoto(event)"
+                >
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= DADOS PESSOAIS ================= -->
+
+    <div class="card" id="cardDados">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:18px;
+        ">
+
+            <h3 style="margin-bottom:0;">
+                ♙ Dados pessoais
+            </h3>
+
+
+            <button
+                type="button"
+                class="branco"
+                id="botaoEditar"
+                onclick="editarDados()"
+            >
+                ✎ Editar
+            </button>
+
+        </div>
+
+
+        <!-- NOME -->
+
+        <div class="dado">
+
+            <label>
+                Nome completo
+            </label>
+
+
+            <div class="input campo-normal" id="nomeNormal">
+
+                {{ usuario.nome }}
+
+            </div>
+
+
+            <input
+                class="input campo-editavel"
+                type="text"
+                id="nomeEdit"
+                value="{{ usuario.nome }}"
+            >
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="dado">
+
+            <label>
+                E-mail
+            </label>
+
+
+            <div class="input campo-normal" id="emailNormal">
+
+                {{ usuario.email }}
+
+            </div>
+
+
+            <input
+                class="input campo-editavel"
+                type="email"
+                id="emailEdit"
+                value="{{ usuario.email }}"
+            >
+
+        </div>
+
+
+
+        <!-- TELEFONE -->
+
+        <div class="dado">
+
+            <label>
+                Telefone
+            </label>
+
+
+            <div class="input campo-normal" id="telefoneNormal">
+
+                {{ usuario.telefone }}
+
+            </div>
+
+
+            <input
+                class="input campo-editavel"
+                type="text"
+                id="telefoneEdit"
+                value="{{ usuario.telefone }}"
+            >
+
+        </div>
+
+
+
+        <!-- CIDADE -->
+
+        <div class="dado">
+
+            <label>
+                Cidade
+            </label>
+
+
+            <div class="input campo-normal" id="cidadeNormal">
+
+                {% if usuario.cidade %}
+                    {{ usuario.cidade }}
+                {% else %}
+                    Não informado
+                {% endif %}
+
+            </div>
+
+
+            <input
+                class="input campo-editavel"
+                type="text"
+                id="cidadeEdit"
+                value="{{ usuario.cidade|default:'' }}"
+                placeholder="Digite sua cidade"
+            >
+
+        </div>
+
+
+
+        <!-- BOTÕES DE EDIÇÃO -->
+
+        <div class="botoes-edicao">
+
+            <button
+                type="button"
+                class="verde"
+                onclick="salvarDados()"
+            >
+                💾 Salvar
+            </button>
+
+
+            <button
+                type="button"
+                class="branco"
+                onclick="cancelarEdicao()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= BIOGRAFIA ================= -->
+
+    <div class="card">
+
+        <h3>
+            ▣ Biografia
+        </h3>
+
+
+        <div class="dado">
+
+            <label>
+                Sobre você
+            </label>
+
+
+            <textarea
+                id="biografia"
+                maxlength="300"
+                readonly
+            >{{ usuario.biografia|default:'' }}</textarea>
+
+
+            <div class="contador">
+
+                <span id="contador">0</span>/300 caracteres
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="verde"
+            id="botaoBio"
+            onclick="editarBiografia()"
+        >
+            ✎ Editar biografia
         </button>
-    </a>
 
-    <a href="{% url 'cadastro_doacao' %}" style="text-decoration:none;">
-        <button class="verde">
-    Cadastrar Doação
+
+        <button
+            type="button"
+            class="branco"
+            id="botaoSalvarBio"
+            onclick="salvarBiografia()"
+            style="display:none;"
+        >
+            💾 Salvar biografia
         </button>
-    </a>
 
-    <a href="{% url 'solicitacoes' %}" style="text-decoration:none;">
-        <button class="branco">
-    Solicitações
-        </button>
-    </a>
-
-</div>
-
-
-
-
-<div class="card">
-
-
-<h3>
-▣ Foto de perfil
-</h3>
-
-
-<div class="perfil">
-
-
-<div class="foto">
-
-{% load static %}
-
-<img src="{% static 'img/foto.png' %}" alt="Foto do usuário">
-
-</div>
-
-
-<div class="info">
-
-<h4>
-Maria da Silva
-</h4>
-
-
-<p>
-Formatos aceitos: JPG, PNG ou GIF. Tamanho máximo de 5 MB.
-</p>
-
-
-<div class="botoes">
-
-<button class="verde">
-Alterar foto
-</button>
-
-<button class="branco">
-Remover
-</button>
-
-
-</div>
-
-</div>
-
-
-</div>
+    </div>
 
 
 </div>
 
 
 
+<script>
+
+/* =====================================================
+   FOTO
+===================================================== */
+
+function abrirSeletorFoto(){
+
+    document.getElementById("inputFoto").click();
+
+}
 
 
+function alterarFoto(event){
+
+    const arquivo = event.target.files[0];
+
+    if(!arquivo){
+        return;
+    }
 
 
-<div class="card">
+    if(!arquivo.type.startsWith("image/")){
+
+        alert("Escolha uma imagem válida.");
+
+        return;
+
+    }
 
 
-<div class="top">
-
-<h3>
-♙ Dados pessoais
-</h3>
+    const leitor = new FileReader();
 
 
-<button class="editar">
-✎ Editar
-</button>
+    leitor.onload = function(e){
+
+        const imagem = document.getElementById("fotoPerfil");
+
+        const fotoVazia = document.getElementById("fotoVazia");
 
 
-</div>
+        imagem.src = e.target.result;
+
+        imagem.style.display = "block";
 
 
+        if(fotoVazia){
+
+            fotoVazia.style.display = "none";
+
+        }
 
 
-<label>
-Nome completo
-</label>
+        document.getElementById("textoFoto").textContent =
+            "Nova foto selecionada.";
 
-<div class="input">
-♙ Maria da Silva
-</div>
+    };
 
 
+    leitor.readAsDataURL(arquivo);
 
-<label>
-E-mail
-</label>
-
-<div class="input">
-✉ maria.silva@email.com
-</div>
+}
 
 
+function removerFoto(){
 
-<label>
-Telefone
-</label>
+    const imagem = document.getElementById("fotoPerfil");
 
-<div class="input">
-☎ (35) 99812-3456
-</div>
+    const fotoVazia = document.getElementById("fotoVazia");
 
 
+    imagem.src = "";
 
-<label>
-Cidade
-</label>
-
-<div class="input">
-⌾ Muzambinho, MG
-</div>
+    imagem.style.display = "none";
 
 
+    if(fotoVazia){
 
-</div>
+        fotoVazia.style.display = "flex";
 
+    }
+    
 
+    document.getElementById("textoFoto").textContent =
+        "Nenhuma foto de perfil cadastrada.";
 
-
-
-
-
-<div class="card">
-
-
-<h3>
-▣ Biografia
-</h3>
+}
 
 
+/* =====================================================
+   DADOS PESSOAIS
+===================================================== */
 
-<label>
-Conte um pouco sobre você
-</label>
+function editarDados(){
 
+    const card = document.getElementById("cardDados");
 
-<textarea>
-Moro em Muzambinho há 12 anos e sempre busco formas de consumir com mais consciência. Entrei na Mesa Compartilhada para ajudar a reduzir o desperdício e aproveitar alimentos de qualidade por um preço justo.
-</textarea>
+    card.classList.add("editando");
 
-
-<div class="contador">
-Máximo de 300 caracteres
-</div>
+}
 
 
+function salvarDados(){
 
-<button class="salvar">
-Salvar biografia
-</button>
+    const nome =
+        document.getElementById("nomeEdit").value;
+
+    const email =
+        document.getElementById("emailEdit").value;
+
+    const telefone =
+        document.getElementById("telefoneEdit").value;
+
+    const cidade =
+        document.getElementById("cidadeEdit").value;
 
 
+    document.getElementById("nomeNormal").textContent =
+        nome;
 
-</div>
+    document.getElementById("emailNormal").textContent =
+        email;
+
+    document.getElementById("telefoneNormal").textContent =
+        telefone;
+
+    document.getElementById("cidadeNormal").textContent =
+        cidade || "Não informado";
 
 
+    document.getElementById("nomeNavbar").textContent =
+        nome;
+
+    document.getElementById("nomeFoto").textContent =
+        nome;
 
 
+    document
+        .getElementById("cardDados")
+        .classList.remove("editando");
 
-</div>
+
+    mostrarMensagem();
+
+}
+
+
+function cancelarEdicao(){
+
+    const card =
+        document.getElementById("cardDados");
+
+
+    card.classList.remove("editando");
+
+}
+
+
+/* =====================================================
+   BIOGRAFIA
+===================================================== */
+
+const biografia =
+    document.getElementById("biografia");
+
+
+function atualizarContador(){
+
+    document.getElementById("contador").textContent =
+        biografia.value.length;
+
+}
+
+
+biografia.addEventListener(
+    "input",
+    atualizarContador
+);
+
+
+function editarBiografia(){
+
+    biografia.removeAttribute("readonly");
+
+    biografia.focus();
+
+
+    document.getElementById("botaoBio").style.display =
+        "none";
+
+
+    document.getElementById("botaoSalvarBio").style.display =
+        "inline-block";
+
+}
+
+
+function salvarBiografia(){
+
+    biografia.setAttribute("readonly", true);
+
+
+    document.getElementById("botaoBio").style.display =
+        "inline-block";
+
+
+    document.getElementById("botaoSalvarBio").style.display =
+        "none";
+
+
+    mostrarMensagem();
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(){
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+
+    mensagem.style.display = "block";
+
+
+    setTimeout(function(){
+
+        mensagem.style.display = "none";
+
+    },3000);
+
+}
+
+
+/* =====================================================
+   CONTADOR INICIAL
+===================================================== */
+
+atualizarContador();
+
+</script>
 
 
 </body>
+
 </html>
