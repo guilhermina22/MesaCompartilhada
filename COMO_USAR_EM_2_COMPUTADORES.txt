@@ -1,0 +1,138 @@
+MESA COMPARTILHADA - CADASTRO DE PRODUTOS E ACESSO EM 2 COMPUTADORES
+========================================================================
+
+O projeto foi organizado para que o cadastro de produtos seja feito pela
+pagina do proprio site, sem usar o Django Admin.
+
+IMPORTANTE SOBRE OS 2 COMPUTADORES
+----------------------------------
+Nao rode uma copia independente do Django em cada computador.
+
+Para a apresentacao em uma rede Wi-Fi, um computador sera o SERVIDOR:
+- ele roda o Django;
+- ele possui o PostgreSQL com o banco "mesacompartilhada";
+- ele armazena os produtos e reservas.
+
+O outro computador sera o CLIENTE:
+- nao precisa ter o PostgreSQL do projeto;
+- nao precisa iniciar outro Django;
+- apenas abre no navegador o endereco IP do computador servidor.
+
+Assim, os dois acessam exatamente os mesmos dados.
+
+1. NO COMPUTADOR SERVIDOR
+-------------------------
+Abra o terminal na pasta do projeto.
+
+Se ainda nao tiver o ambiente virtual:
+    python -m venv .venv
+
+Ative no Windows:
+    .venv\Scripts\activate
+
+Instale as dependencias:
+    pip install -r requirements.txt
+
+Confirme que o PostgreSQL esta funcionando e que o banco configurado
+em config/settings.py existe.
+
+Depois rode:
+    python manage.py migrate
+
+Isso cria tambem a tabela de Reservas e as categorias iniciais:
+- Padaria
+- Frutas
+- Verduras
+- Laticinios
+- Confeitaria
+
+Inicie o servidor para a rede:
+    python manage.py runserver 0.0.0.0:8000
+
+2. DESCOBRIR O IP DO SERVIDOR
+-----------------------------
+No mesmo computador, abra o Prompt de Comando e digite:
+    ipconfig
+
+Procure o IPv4 da mesma rede Wi-Fi dos dois computadores.
+Exemplo:
+    192.168.1.15
+
+3. NO COMPUTADOR CLIENTE
+------------------------
+Abra o navegador e digite:
+    http://192.168.1.15:8000
+
+Troque 192.168.1.15 pelo IPv4 real do computador servidor.
+
+NAO use:
+    http://localhost:8000
+
+no computador cliente, pois localhost aponta para o proprio computador
+cliente.
+
+4. FLUXO DO SISTEMA
+-------------------
+COMERCIANTE:
+Login
+  -> Painel Comércio
+  -> Cadastrar produto
+  -> Preenche o formulário
+  -> Produto é salvo no PostgreSQL
+  -> Produto aparece na página inicial
+
+CONSUMIDOR:
+Login
+  -> Página inicial
+  -> Visualiza os produtos
+  -> Abre os detalhes
+  -> Escolhe a quantidade
+  -> Reserva
+  -> A reserva é salva no mesmo PostgreSQL
+
+COMERCIANTE:
+  -> Reservas
+  -> Confirma ou cancela a reserva
+
+5. PERMISSÕES
+-------------
+- Comerciante: pode cadastrar produtos e administrar reservas dos seus
+  próprios produtos.
+- Consumidor: pode visualizar produtos e fazer reservas.
+- Consumidor não recebe o link de cadastro de produto na navbar.
+- Comerciante não recebe a opção de reservar como consumidor.
+
+6. ENDEREÇOS PRINCIPAIS
+-----------------------
+/                       Página inicial e produtos
+/login/                 Login
+/cadastro/consumidor/  Cadastro de consumidor
+/cadastro/comerciante/ Cadastro de comerciante
+/cadastro-produto/     Cadastro de produto (com formulário Django)
+/produto/ID/            Detalhes de um produto
+/produto/ID/reservar/   Reserva de produto
+/minhas-reservas/      Reservas do consumidor
+/comercio/             Painel do comerciante
+/solicitacoes/         Reservas recebidas pelo comerciante
+/perfil/               Perfil
+/sair/                 Encerrar sessão
+
+7. SE O WINDOWS BLOQUEAR O ACESSO
+----------------------------------
+Quando o Windows Firewall perguntar sobre o Python, permita o acesso
+em Rede Privada.
+
+Se ainda nao abrir no segundo computador, verifique:
+- os dois computadores estao na mesma rede Wi-Fi;
+- o Django continua rodando no computador servidor;
+- o endereco usado no cliente e o IPv4 correto;
+- a porta 8000 nao esta bloqueada pelo Firewall.
+
+8. ATENCAO
+----------
+Se o computador servidor for desligado ou o comando runserver for
+encerrado, o segundo computador deixara de acessar o sistema.
+
+Esta configuracao e adequada para uma apresentacao em rede local.
+Para deixar o sistema acessivel pela internet de qualquer lugar, seria
+necessario hospedar o Django e o banco em um servidor.

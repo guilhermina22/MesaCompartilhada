@@ -1,174 +1,55 @@
 from django.contrib import admin
-from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
 
 from app.views import (
+    admin_dashboard,
+    atualizar_reserva,
+    cadastro_comerciante,
+    cadastro_consumidor,
+    cadastro_produto,
+    conscientizacao,
+    detalhes_produto,
     index,
     login,
-    cadastro_consumidor,
-    cadastro_comerciante,
-    perfil,
-    conscientizacao,
+    logout_view,
     mapa,
-    explorar_doacoes,
-    detalhes_doacao,
-    cadastro_doacao,
-    comercio,
+    minhas_reservas,
+    minhas_solicitacoes,
+    perfil,
+    reservar_produto,
     solicitacoes,
-    admin_dashboard,
+    comercio,
 )
 
-
 urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", index, name="index"),
 
-    # =========================
-    # ADMIN DO DJANGO
-    # =========================
+    path("login/", login, name="login"),
+    path("sair/", logout_view, name="logout"),
 
-    path(
-        "admin/",
-        admin.site.urls
-    ),
+    path("cadastro/consumidor/", cadastro_consumidor, name="cadastro_consumidor"),
+    path("cadastro/comerciante/", cadastro_comerciante, name="cadastro_comerciante"),
 
+    path("perfil/", perfil, name="perfil"),
+    path("conscientizacao/", conscientizacao, name="conscientizacao"),
+    path("mapa/", mapa, name="mapa"),
 
-    # =========================
-    # PÁGINA INICIAL
-    # =========================
+    path("produtos/", index, name="produtos"),
+    path("produto/<int:produto_id>/", detalhes_produto, name="detalhes_produto"),
+    path("produto/<int:produto_id>/reservar/", reservar_produto, name="reservar_produto"),
 
-    path(
-        "",
-        index,
-        name="index"
-    ),
+    path("cadastro-produto/", cadastro_produto, name="cadastro_produto"),
 
+    path("comercio/", comercio, name="comercio"),
+    path("solicitacoes/", minhas_solicitacoes, name="solicitacoes"),
+    path("reserva/<int:reserva_id>/<str:status>/", atualizar_reserva, name="atualizar_reserva"),
+    path("minhas-reservas/", minhas_reservas, name="minhas_reservas"),
 
-    # =========================
-    # LOGIN
-    # =========================
-
-    path(
-        "login/",
-        login,
-        name="login"
-    ),
-
-
-    # =========================
-    # CADASTROS
-    # =========================
-
-    path(
-        "cadastro/consumidor/",
-        cadastro_consumidor,
-        name="cadastro_consumidor"
-    ),
-
-    path(
-        "cadastro/comerciante/",
-        cadastro_comerciante,
-        name="cadastro_comerciante"
-    ),
-
-
-    # =========================
-    # PERFIL
-    # =========================
-
-    path(
-        "perfil/",
-        perfil,
-        name="perfil"
-    ),
-
-
-    # =========================
-    # CONSCIENTIZAÇÃO
-    # =========================
-
-    path(
-        "conscientizacao/",
-        conscientizacao,
-        name="conscientizacao"
-    ),
-
-
-    # =========================
-    # MAPA
-    # =========================
-
-    path(
-        "mapa/",
-        mapa,
-        name="mapa"
-    ),
-
-
-    # =========================
-    # DOAÇÕES
-    # =========================
-
-    path(
-        "explorar_doacoes/",
-        explorar_doacoes,
-        name="explorar_doacoes"
-    ),
-
-    path(
-        "detalhes_doacao/",
-        detalhes_doacao,
-        name="detalhes_doacao"
-    ),
-
-    path(
-        "cadastro_doacao/",
-        cadastro_doacao,
-        name="cadastro_doacao"
-    ),
-
-
-    # =========================
-    # COMÉRCIO
-    # =========================
-
-    path(
-        "comercio/",
-        comercio,
-        name="comercio"
-    ),
-
-
-    # =========================
-    # SOLICITAÇÕES
-    # =========================
-
-    path(
-        "solicitacoes/",
-        solicitacoes,
-        name="solicitacoes"
-    ),
-
-
-    # =========================
-    # ADMINISTRADOR
-    # =========================
-
-    path(
-        "administrador/",
-        admin_dashboard,
-        name="administrador"
-    ),
-
+    path("administrador/", admin_dashboard, name="administrador"),
 ]
 
-
-# =========================
-# ARQUIVOS DE MÍDIA
-# =========================
-
 if settings.DEBUG:
-
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

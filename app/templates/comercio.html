@@ -1,339 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Painel Comércio - Mesa Compartilhada</title>
-
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Painel Comércio - Mesa Compartilhada</title>
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f4f8f3;
-    color:#333;
-}
-
-/* cabeçalho */
-
-header{
-    background:#2e7d32;
-    color:white;
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:bold;
-    color:white;
-    text-decoration:none;
-}
-
-.usuario{
-    background:white;
-    color:#2e7d32;
-    padding:10px 18px;
-    border-radius:25px;
-    font-weight:bold;
-    text-decoration:none;
-}
-
-/* conteúdo */
-
-.container{
-    padding:30px;
-}
-
-h1{
-    color:#27652b;
-    margin-bottom:8px;
-}
-
-.subtitulo{
-    color:#666;
-    margin-bottom:25px;
-}
-
-/* resumo */
-
-.resumo{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-    margin-bottom:30px;
-}
-
-.box{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 15px #0002;
-}
-
-.box h2{
-    color:#2e7d32;
-    font-size:30px;
-}
-
-.box p{
-    color:#666;
-    margin-top:8px;
-}
-
-/* botão */
-
-.nova{
-    background:#43a047;
-    color:white;
-    border:none;
-    padding:15px 25px;
-    border-radius:15px;
-    font-size:16px;
-    cursor:pointer;
-    margin-bottom:30px;
-}
-
-.nova:hover{
-    background:#2e7d32;
-}
-
-/* cards */
-
-.titulo{
-    color:#27652b;
-    margin-bottom:15px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 5px 15px #0002;
-}
-
-.imagem{
-    height:120px;
-    background:#d9ead3;
-    border-radius:15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:55px;
-}
-
-.card h3{
-    color:#27652b;
-    margin-top:15px;
-}
-
-.info{
-    margin-top:10px;
-    color:#666;
-    line-height:1.7;
-}
-
-.status{
-    display:inline-block;
-    margin-top:15px;
-    padding:8px 15px;
-    border-radius:20px;
-    background:#e8f5e9;
-    color:#2e7d32;
-    font-weight:bold;
-}
-
-.card button{
-    width:100%;
-    margin-top:15px;
-    padding:12px;
-    border:none;
-    background:#43a047;
-    color:white;
-    border-radius:12px;
-    cursor:pointer;
-}
-
-.menu{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:white;
-    display:flex;
-    justify-content:space-around;
-    padding:15px;
-    box-shadow:0 -3px 10px #0002;
-}
-
-.menu a{
-    color:#2e7d32;
-    text-decoration:none;
-    font-weight:bold;
-}
-
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
+header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
+.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
+nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
+.usuario{font-size:13px;color:#777;white-space:nowrap}
+.container{max-width:850px;margin:35px auto;padding:0 20px}
+.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
+h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
+h2{color:#355e4e}
+label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
+textarea{resize:vertical}
+button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
+button:hover,.btn:hover{background:#30664f}
+.erros{color:#b42318;font-size:12px;margin:8px 0}
+.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
 
-</head>
-
+<style>.acoes-top{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap}.status{display:inline-block;padding:6px 10px;border-radius:20px;background:#e8f5e9;color:#2e7d32;font-size:12px}</style></head>
 <body>
-
 <header>
-
-<a href="{% url 'index' %}" class="logo">
-🍃 Mesa Compartilhada
-</a>
-
-<a href="{% url 'comercio' %}" class="usuario">
-🏪 Comércio
-</a>
-
+  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+  <nav>
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'conscientizacao' %}">Conscientização</a>
+    {% if tipo_usuario == 'comerciante' %}
+      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
+      <a href="{% url 'solicitacoes' %}">Reservas</a>
+    {% elif tipo_usuario == 'consumidor' %}
+      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
+    {% endif %}
+    <a href="{% url 'perfil' %}">Perfil</a>
+  </nav>
+  <div class="usuario">
+    {% if usuario_logado %}
+      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
+    {% else %}
+      <a href="{% url 'login' %}">Entrar</a>
+    {% endif %}
+  </div>
 </header>
-
 <div class="container">
-
-<h1>
-Olá, Padaria Sabor da Vida! 👋
-</h1>
-
-<p class="subtitulo">
-Gerencie suas doações e ajude a reduzir o desperdício.
-</p>
-
-<div class="resumo">
-
-<div class="box">
-<h2>12</h2>
-<p>Doações realizadas</p>
-</div>
-
-<div class="box">
-<h2>35</h2>
-<p>Alimentos compartilhados</p>
-</div>
-
-<div class="box">
-<h2>5</h2>
-<p>Solicitações pendentes</p>
-</div>
-
-</div>
-
-<a href="{% url 'cadastro_doacao' %}">
-<button type="button" class="nova">
-➕ Nova doação
-</button>
-</a>
-
-<h2 class="titulo">
-Minhas doações
-</h2>
-
-<div class="cards">
-
-<div class="card">
-
-<div class="imagem">
-🥖
-</div>
-
-<h3>
-Pães frescos
-</h3>
-
-<div class="info">
-
-Quantidade: 30 unidades<br>
-
-Retirada até: 18h<br>
-
-Disponível hoje
-
-</div>
-
-<span class="status">
-Ativa
-</span>
-
-<a href="{% url 'solicitacoes' %}">
-<button type="button">
-Ver solicitações
-</button>
-</a>
-
-</div>
-
-<div class="card">
-
-<div class="imagem">
-🥗
-</div>
-
-<h3>
-Marmitas
-</h3>
-
-<div class="info">
-
-Quantidade: 10 unidades<br>
-
-Retirada até: 20h<br>
-
-Disponível hoje
-
-</div>
-
-<span class="status">
-Ativa
-</span>
-
-<a href="{% url 'solicitacoes' %}">
-<button type="button">
-Ver solicitações
-</button>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="menu">
-
-<a href="{% url 'index' %}">
-🏠 Início
-</a>
-
-<a href="{% url 'cadastro_doacao' %}">
-➕ Doar
-</a>
-
-<a href="{% url 'explorar_doacoes' %}">
-📦 Doações
-</a>
-
-<a href="{% url 'perfil' %}">
-👤 Perfil
-</a>
-
-</div>
-
-</body>
-
-</html>
+{% if messages %}{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}{% endif %}
+<h1>{{ estabelecimento.usuario.nome }}</h1><p style="color:#888">Painel do comerciante</p>
+<div class="grid"><div class="card"><h2>{{ total_produtos }}</h2>Produtos cadastrados</div><div class="card"><h2>{{ total_estoque }}</h2>Unidades disponíveis</div><div class="card"><h2>{{ total_reservas }}</h2>Reservas pendentes</div></div>
+<div class="acoes-top"><a class="btn" href="{% url 'cadastro_produto' %}">+ Cadastrar produto</a><a class="btn" href="{% url 'solicitacoes' %}" style="background:#fff;color:#39785e;border:1px solid #ddd">Ver reservas</a></div>
+<h2>Meus produtos</h2><div class="grid">
+{% for produto in produtos %}<div class="card"><h3>{{ produto.nome }}</h3><p>{{ produto.categoria.nomeCategoria }}</p><p>Preço: R$ {{ produto.precoOriginal }}</p><p>Estoque: {{ produto.qtdEstoque }}</p><span class="status">{{ produto.status }}</span></div>
+{% empty %}<div class="card">Você ainda não cadastrou produtos.</div>{% endfor %}</div>
+</div></body></html>

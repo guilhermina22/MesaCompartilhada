@@ -1,299 +1,70 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Cadastro - Comerciante</title>
-
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cadastro de comerciante - Mesa Compartilhada</title>
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    height:100vh;
-}
-
-.container{
-    display:flex;
-    height:100vh;
-}
-
-/* LADO ESQUERDO */
-
-.left{
-    width:50%;
-
-    background:
-    linear-gradient(
-        rgba(37,112,82,0.70),
-        rgba(37,112,82,0.70)
-    ),
-    url("{% static 'images/login.png' %}");
-
-    background-size:cover;
-    background-position:center;
-
-    color:white;
-    padding:35px;
-    position:relative;
-}
-
-.logo{
-    text-decoration:none;
-    color:white;
-}
-
-.logo h2{
-    font-family:Georgia,serif;
-    font-size:18px;
-}
-
-.logo p{
-    font-size:12px;
-}
-
-.frase{
-
-    position:absolute;
-
-    bottom:45px;
-    left:35px;
-
-    width:390px;
-
-}
-
-.frase h3{
-
-    font-family:Georgia,serif;
-
-    font-style:italic;
-
-    font-size:20px;
-
-}
-
-/* LADO DIREITO */
-
-.right{
-
-    width:50%;
-
-    background:#faf7f2;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.form{
-
-    width:320px;
-
-}
-
-.voltar{
-
-    text-decoration:none;
-
-    color:#287653;
-
-    font-size:13px;
-
-}
-
-.form h1{
-
-    font-family:Georgia,serif;
-
-    font-size:24px;
-
-    margin-top:15px;
-
-}
-
-.sub{
-
-    font-size:12px;
-
-    color:#888;
-
-    margin:8px 0 20px;
-
-}
-
-label{
-
-    font-size:11px;
-
-    display:block;
-
-    margin-top:15px;
-
-}
-
-input{
-
-    width:100%;
-
-    height:35px;
-
-    border-radius:7px;
-
-    border:1px solid #ddd;
-
-    background:#eee9e2;
-
-    padding:10px;
-
-}
-
-button{
-
-    width:100%;
-
-    height:38px;
-
-    margin-top:25px;
-
-    background:#287653;
-
-    color:white;
-
-    border:none;
-
-    border-radius:7px;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-}
-
-.login{
-
-    text-align:center;
-
-    font-size:12px;
-
-    margin-top:20px;
-
-}
-
-.login a{
-
-    color:#287653;
-
-    text-decoration:none;
-
-    font-weight:bold;
-
-}
-
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
+header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
+.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
+nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
+.usuario{font-size:13px;color:#777;white-space:nowrap}
+.container{max-width:850px;margin:35px auto;padding:0 20px}
+.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
+h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
+h2{color:#355e4e}
+label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
+textarea{resize:vertical}
+button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
+button:hover,.btn:hover{background:#30664f}
+.erros{color:#b42318;font-size:12px;margin:8px 0}
+.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
+</head><body>
 
-</head>
+<header>
+  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+  <nav>
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'conscientizacao' %}">Conscientização</a>
+    {% if tipo_usuario == 'comerciante' %}
+      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
+      <a href="{% url 'solicitacoes' %}">Reservas</a>
+    {% elif tipo_usuario == 'consumidor' %}
+      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
+    {% endif %}
+    <a href="{% url 'perfil' %}">Perfil</a>
+  </nav>
+  <div class="usuario">
+    {% if usuario_logado %}
+      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
+    {% else %}
+      <a href="{% url 'login' %}">Entrar</a>
+    {% endif %}
+  </div>
+</header>
 
-<body>
+<div class="container"><div class="card" style="max-width:600px;margin-left:auto;margin-right:auto">
+<h1>Cadastro de comerciante</h1><p>Cadastre seu estabelecimento para publicar produtos.</p>
+<form method="POST">{% csrf_token %}
+{{ form.non_field_errors }}
+<label>Nome</label>{{ form.nome }}{% if form.nome.errors %}<div class="erros">{{ form.nome.errors }}</div>{% endif %}
+<label>E-mail</label>{{ form.email }}{% if form.email.errors %}<div class="erros">{{ form.email.errors }}</div>{% endif %}
+<label>Telefone</label>{{ form.telefone }}{% if form.telefone.errors %}<div class="erros">{{ form.telefone.errors }}</div>{% endif %}
+<label>Senha</label>{{ form.senha }}{% if form.senha.errors %}<div class="erros">{{ form.senha.errors }}</div>{% endif %}
+<label>Confirmar senha</label>{{ form.confirmar_senha }}{% if form.confirmar_senha.errors %}<div class="erros">{{ form.confirmar_senha.errors }}</div>{% endif %}
 
-<div class="container">
+<h3>Dados do estabelecimento</h3>
+<label>{{ estabelecimento_form.descricao.label }}</label>{{ estabelecimento_form.descricao }}
+{% if estabelecimento_form.descricao.errors %}<div class="erros">{{ estabelecimento_form.descricao.errors }}</div>{% endif %}
+<label>{{ estabelecimento_form.endereco.label }}</label>{{ estabelecimento_form.endereco }}
+{% if estabelecimento_form.endereco.errors %}<div class="erros">{{ estabelecimento_form.endereco.errors }}</div>{% endif %}
 
-<div class="left">
-
-<a href="{% url 'index' %}" class="logo">
-
-<h2>🍴 Mesa Compartilhada</h2>
-
-<p>
-Reduzindo o desperdício, ampliando o acesso.
-</p>
-
-</a>
-
-<div class="frase">
-
-<h3>
-"Transforme alimentos próximos ao vencimento em oportunidades para quem precisa."
-</h3>
-
-<small>
-Mesa Compartilhada
-</small>
-
-</div>
-
-</div>
-
-<div class="right">
-
-<div class="form">
-
-<a href="{% url 'login' %}" class="voltar">
-← Voltar
-</a>
-
-<h1>
-Cadastrar comércio
-</h1>
-
-<p class="sub">
-Cadastre seu estabelecimento e anuncie alimentos próximos ao vencimento.
-</p>
-
-<form>
-
-<label>Nome do estabelecimento</label>
-<input type="text" placeholder="Ex.: Padaria Central">
-
-<label>CNPJ</label>
-<input type="text" placeholder="00.000.000/0000-00">
-
-<label>E-mail</label>
-<input type="email" placeholder="contato@empresa.com">
-
-<label>Telefone</label>
-<input type="tel" placeholder="(35) 99999-9999">
-
-<label>Endereço</label>
-<input type="text" placeholder="Rua, número e bairro">
-
-<label>Senha</label>
-<input type="password" placeholder="••••••••">
-
-<label>Confirmar senha</label>
-<input type="password" placeholder="••••••••">
-
-<button type="submit">
-Cadastrar estabelecimento
-</button>
-
+<button type="submit" style="margin-top:20px">Criar conta</button>
 </form>
-
-<p class="login">
-Já possui uma conta?
-<a href="{% url 'login' %}">
-Entrar
-</a>
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
-
-</html>
+<p style="margin-top:15px;font-size:13px">Já possui conta? <a href="{% url 'login' %}">Entrar</a></p>
+</div></div></body></html>

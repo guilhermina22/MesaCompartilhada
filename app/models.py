@@ -52,12 +52,7 @@ class Usuario(models.Model):
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
     
-    foto_perfil = models.ImageField(
-    upload_to="perfis/",
-    blank=True,
-    null=True,
-    verbose_name="Foto de perfil"
-)
+
 
 
 # =========================================================
@@ -356,3 +351,46 @@ class AvaliacaoEstabelecimento(models.Model):
     class Meta:
         verbose_name = "Avaliação de Estabelecimento"
         verbose_name_plural = "Avaliações de Estabelecimentos"
+
+# =========================================================
+# RESERVA DE PRODUTO
+# =========================================================
+
+class Reserva(models.Model):
+
+    consumidor = models.ForeignKey(
+        Consumidor,
+        on_delete=models.CASCADE,
+        related_name="reservas",
+        verbose_name="Consumidor"
+    )
+
+    produto = models.ForeignKey(
+        Produto,
+        on_delete=models.CASCADE,
+        related_name="reservas",
+        verbose_name="Produto"
+    )
+
+    quantidade = models.PositiveIntegerField(
+        default=1,
+        verbose_name="Quantidade"
+    )
+
+    dataReserva = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Data da reserva"
+    )
+
+    status = models.CharField(
+        max_length=30,
+        default="Pendente",
+        verbose_name="Status"
+    )
+
+    def __str__(self):
+        return f"Reserva {self.id} - {self.produto.nome}"
+
+    class Meta:
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"

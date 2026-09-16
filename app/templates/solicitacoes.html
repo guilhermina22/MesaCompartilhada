@@ -1,425 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Solicitações - Mesa Compartilhada</title>
-
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Reservas - Mesa Compartilhada</title>
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f4f8f3;
-    color:#333;
-}
-
-/* topo */
-
-header{
-    height:55px;
-    background:white;
-    border-bottom:1px solid #eee;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 30px;
-}
-
-.logo{
-    font-size:16px;
-    font-weight:bold;
-    color:#607d68;
-}
-
-nav{
-    display:flex;
-    align-items:center;
-}
-
-nav a{
-    text-decoration:none;
-    color:#777;
-    margin:0 15px;
-    font-size:13px;
-    transition:.2s;
-}
-
-nav a:hover{
-    color:#4d7758;
-}
-
-nav a.active{
-    background:#e8f3ea;
-    padding:8px 14px;
-    border-radius:8px;
-    color:#4d7758;
-}
-
-.usuario{
-    font-size:13px;
-    color:#777;
-}
-
-@media(max-width:768px){
-
-header{
-    padding:0 15px;
-}
-
-.logo{
-    font-size:14px;
-}
-
-nav a{
-    margin:0 8px;
-    font-size:12px;
-}
-
-.usuario{
-    font-size:12px;
-}
-
-}
-
-/* conteúdo */
-
-.container{
-    padding:30px;
-}
-
-h1{
-    color:#27652b;
-    margin-bottom:10px;
-}
-
-.subtitulo{
-    color:#666;
-    margin-bottom:30px;
-}
-
-/* filtros */
-
-.filtros{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-}
-
-.filtro{
-    background:white;
-    padding:12px 20px;
-    border-radius:20px;
-    color:#2e7d32;
-    font-weight:bold;
-    box-shadow:0 3px 10px #0002;
-}
-
-/* cards */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 15px #0002;
-}
-
-.topo-card{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.icone{
-    width:60px;
-    height:60px;
-    background:#d9ead3;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:30px;
-}
-
-.card h2{
-    color:#27652b;
-    margin-top:15px;
-}
-
-.info{
-    margin-top:15px;
-    color:#666;
-    line-height:1.8;
-}
-
-.status{
-    display:inline-block;
-    margin-top:15px;
-    padding:8px 15px;
-    border-radius:20px;
-    font-weight:bold;
-}
-
-.pendente{
-    background:#fff3cd;
-    color:#856404;
-}
-
-.aceito{
-    background:#d4edda;
-    color:#155724;
-}
-
-.recusado{
-    background:#f8d7da;
-    color:#721c24;
-}
-
-.botoes{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-button{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.aceitar{
-    background:#43a047;
-    color:white;
-}
-
-.recusar{
-    background:#eeeeee;
-    color:#555;
-}
-
-/* menu */
-
-.menu{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:white;
-    display:flex;
-    justify-content:space-around;
-    padding:15px;
-    box-shadow:0 -3px 10px #0002;
-}
-
-.menu a{
-    color:#2e7d32;
-    text-decoration:none;
-    font-weight:bold;
-}
-
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
+header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
+.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
+nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
+.usuario{font-size:13px;color:#777;white-space:nowrap}
+.container{max-width:850px;margin:35px auto;padding:0 20px}
+.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
+h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
+h2{color:#355e4e}
+label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
+textarea{resize:vertical}
+button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
+button:hover,.btn:hover{background:#30664f}
+.erros{color:#b42318;font-size:12px;margin:8px 0}
+.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
-<a href="{% url 'index' %}" class="active">⌂ Início</a>
-<a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
-<a href="{% url 'perfil' %}">♙ Perfil</a>
-
+  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+  <nav>
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'conscientizacao' %}">Conscientização</a>
+    {% if tipo_usuario == 'comerciante' %}
+      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
+      <a href="{% url 'solicitacoes' %}">Reservas</a>
+    {% elif tipo_usuario == 'consumidor' %}
+      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
+    {% endif %}
+    <a href="{% url 'perfil' %}">Perfil</a>
+  </nav>
+  <div class="usuario">
+    {% if usuario_logado %}
+      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
+    {% else %}
+      <a href="{% url 'login' %}">Entrar</a>
+    {% endif %}
+  </div>
 </header>
-
-<div class="container">
-
-<h1>
-Minhas solicitações
-</h1>
-
-<p class="subtitulo">
-Acompanhe pedidos de alimentos e suas atualizações.
-</p>
-
-<div class="filtros">
-
-<div class="filtro">
-Todas
-</div>
-
-<div class="filtro">
-Pendentes
-</div>
-
-<div class="filtro">
-Aceitas
-</div>
-
-</div>
-
-<div class="cards">
-
-<div class="card">
-
-<div class="topo-card">
-
-<div class="icone">
-🥖
-</div>
-
-</div>
-
-<h2>
-Pães frescos
-</h2>
-
-<div class="info">
-
-🏪 Padaria Sabor da Vida<br>
-
-📦 Quantidade: 10 unidades<br>
-
-📅 Solicitação: Hoje<br>
-
-👤 Solicitado por: Maria
-
-</div>
-
-<span class="status pendente">
-Aguardando resposta
-</span>
-
-<div class="botoes">
-
-<a href="{% url 'solicitacoes' %}" style="flex:1;text-decoration:none;">
-
-<button type="button" class="aceitar">
-Aceitar
-</button>
-
-</a>
-
-<a href="{% url 'solicitacoes' %}" style="flex:1;text-decoration:none;">
-
-<button type="button" class="recusar">
-Recusar
-</button>
-
-</a>
-
-</div>
-
-</div>
-<div class="card">
-
-<div class="topo-card">
-
-<div class="icone">
-🥗
-</div>
-
-</div>
-
-<h2>
-Marmitas
-</h2>
-
-<div class="info">
-
-🏪 Restaurante Verde<br>
-
-📦 Quantidade: 2 unidades<br>
-
-📅 Solicitação: Ontem<br>
-
-👤 Solicitado por: João
-
-</div>
-
-<span class="status aceito">
-Solicitação aceita
-</span>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<div class="topo-card">
-
-<div class="icone">
-🍎
-</div>
-
-</div>
-
-<h2>
-Frutas
-</h2>
-
-<div class="info">
-
-🏪 Mercado Bom Preço<br>
-
-📦 Quantidade: 5 unidades<br>
-
-📅 Solicitação: 25/07<br>
-
-👤 Solicitado por: Ana
-
-</div>
-
-<span class="status recusado">
-Finalizada
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="menu">
-
-<a href="{% url 'index' %}">
-🏠 Início
-</a>
-
-<a href="{% url 'explorar_doacoes' %}">
-🔎 Doações
-</a>
-
-<a href="{% url 'solicitacoes' %}">
-📦 Solicitações
-</a>
-
-<a href="{% url 'perfil' %}">
-👤 Perfil
-</a>
-
-</div>
-
-</body>
-
-</html>
+<div class="container"><h1>Reservas dos meus produtos</h1>
+{% for reserva in reservas %}<div class="card"><h2>{{ reserva.produto.nome }}</h2><p>Consumidor: {{ reserva.consumidor.usuario.nome }}</p><p>Quantidade: {{ reserva.quantidade }}</p><p>Status: {{ reserva.status }}</p>
+{% if reserva.status == "Pendente" %}<a class="btn" href="{% url 'atualizar_reserva' reserva.id 'confirmar' %}">Confirmar</a> <a class="btn" href="{% url 'atualizar_reserva' reserva.id 'cancelar' %}" style="background:#fff;color:#b42318;border:1px solid #ddd">Cancelar</a>{% endif %}</div>
+{% empty %}<div class="card">Nenhuma reserva encontrada.</div>{% endfor %}</div></body></html>

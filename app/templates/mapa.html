@@ -196,11 +196,21 @@ button:hover{
 <body>
 
 <header>
-
+<a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+<nav>
 <a href="{% url 'index' %}" class="active">⌂ Início</a>
-<a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
+<a href="{% url 'conscientizacao' %}" class="">☁ Conscientização</a>
+{% if tipo_usuario == 'comerciante' %}
+<a href="{% url 'cadastro_produto' %}">＋ Cadastrar produto</a>
+<a href="{% url 'solicitacoes' %}">▣ Reservas</a>
+{% elif tipo_usuario == 'consumidor' %}
+<a href="{% url 'minhas_reservas' %}">▣ Minhas reservas</a>
+{% endif %}
 <a href="{% url 'perfil' %}">♙ Perfil</a>
-
+</nav>
+<div class="usuario">
+{% if usuario_logado %}👤 {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>{% else %}<a href="{% url 'login' %}">Entrar</a>{% endif %}
+</div>
 </header>
 
 <div class="container">
@@ -259,7 +269,7 @@ Comércios próximos
 
 </div>
 
-<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<a href="{% url 'index' %}" style="text-decoration:none;">
 <button type="button">
 Ver detalhes
 </button>
@@ -285,7 +295,7 @@ Ver detalhes
 
 </div>
 
-<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<a href="{% url 'index' %}" style="text-decoration:none;">
 <button type="button">
 Ver detalhes
 </button>
@@ -311,7 +321,7 @@ Ver detalhes
 
 </div>
 
-<a href="{% url 'detalhes_doacao' %}" style="text-decoration:none;">
+<a href="{% url 'index' %}" style="text-decoration:none;">
 <button type="button">
 Ver detalhes
 </button>
@@ -329,7 +339,7 @@ Ver detalhes
 🏠 Início
 </a>
 
-<a href="{% url 'explorar_doacoes' %}">
+<a href="{% url 'index' %}">
 🔎 Doações
 </a>
 

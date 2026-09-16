@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cadastro de consumidor - Mesa Compartilhada</title>
+<title>{{ produto.nome }} - Mesa Compartilhada</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}
 body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
@@ -24,8 +24,9 @@ button:hover,.btn:hover{background:#30664f}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 @media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
-</head><body>
 
+<style>.foto{height:260px;border-radius:12px;background:#eee;overflow:hidden}.foto img{width:100%;height:100%;object-fit:cover}.info{background:#f1f8e9;border-radius:10px;padding:16px;margin:18px 0;line-height:1.9}.acoes{display:flex;gap:10px;align-items:end}.acoes input{max-width:100px}</style>
+</head><body>
 <header>
   <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
   <nav>
@@ -48,17 +49,16 @@ button:hover,.btn:hover{background:#30664f}
   </div>
 </header>
 
-<div class="container"><div class="card" style="max-width:600px;margin-left:auto;margin-right:auto">
-<h1>Cadastro de consumidor</h1><p>Crie sua conta para encontrar e reservar produtos.</p>
-<form method="POST">{% csrf_token %}
-{{ form.non_field_errors }}
-<label>Nome</label>{{ form.nome }}{% if form.nome.errors %}<div class="erros">{{ form.nome.errors }}</div>{% endif %}
-<label>E-mail</label>{{ form.email }}{% if form.email.errors %}<div class="erros">{{ form.email.errors }}</div>{% endif %}
-<label>Telefone</label>{{ form.telefone }}{% if form.telefone.errors %}<div class="erros">{{ form.telefone.errors }}</div>{% endif %}
-<label>Senha</label>{{ form.senha }}{% if form.senha.errors %}<div class="erros">{{ form.senha.errors }}</div>{% endif %}
-<label>Confirmar senha</label>{{ form.confirmar_senha }}{% if form.confirmar_senha.errors %}<div class="erros">{{ form.confirmar_senha.errors }}</div>{% endif %}
-
-<button type="submit" style="margin-top:20px">Criar conta</button>
-</form>
-<p style="margin-top:15px;font-size:13px">Já possui conta? <a href="{% url 'login' %}">Entrar</a></p>
+<div class="container"><div class="card">
+<div class="foto">{% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% else %}Sem imagem{% endif %}</div>
+<h1>{{ produto.nome }}</h1><p>{{ produto.descricao }}</p>
+<div class="info"><b>Categoria:</b> {{ produto.categoria.nomeCategoria }}<br><b>Comércio:</b> {{ produto.estabelecimento.usuario.nome }}<br>
+<b>Preço:</b> R$ {{ produto.precoOriginal }}<br><b>Validade:</b> {{ produto.dataValidade|date:"d/m/Y" }}<br><b>Disponíveis:</b> {{ produto.qtdEstoque }}</div>
+{% if tipo_usuario == 'consumidor' and produto.qtdEstoque > 0 %}
+<form method="POST" action="{% url 'reservar_produto' produto.id %}" class="acoes">{% csrf_token %}
+<div><label>Quantidade</label><input type="number" name="quantidade" min="1" max="{{ produto.qtdEstoque }}" value="1"></div>
+<button type="submit">Reservar produto</button></form>
+{% elif not usuario_logado %}<a class="btn" href="{% url 'login' %}">Entre para reservar</a>
+{% elif tipo_usuario == 'comerciante' %}<p style="color:#777">Comerciantes cadastram produtos; a reserva é feita por consumidores.</p>
+{% else %}<p>Produto sem estoque.</p>{% endif %}
 </div></div></body></html>

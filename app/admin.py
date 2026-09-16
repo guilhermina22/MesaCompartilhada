@@ -132,3 +132,9 @@ class AvaliacaoEstabelecimentoAdmin(admin.ModelAdmin):
         "estabelecimento__usuario__nome",
         "consumidor__usuario__nome",
     )
+
+@admin.register(Reserva)
+class ReservaAdmin(admin.ModelAdmin):
+    list_display = ("id", "produto", "consumidor", "quantidade", "status", "dataReserva")
+    list_filter = ("status", "dataReserva")
+    search_fields = ("produto__nome", "consumidor__usuario__nome")

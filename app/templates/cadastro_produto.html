@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cadastro de consumidor - Mesa Compartilhada</title>
+<title>Cadastrar produto - Mesa Compartilhada</title>
 <style>
 *{box-sizing:border-box;font-family:Arial,sans-serif}
 body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
@@ -48,17 +48,18 @@ button:hover,.btn:hover{background:#30664f}
   </div>
 </header>
 
-<div class="container"><div class="card" style="max-width:600px;margin-left:auto;margin-right:auto">
-<h1>Cadastro de consumidor</h1><p>Crie sua conta para encontrar e reservar produtos.</p>
-<form method="POST">{% csrf_token %}
+<div class="container"><div class="card">
+<h1>Cadastrar produto</h1>
+<p>Publique um alimento com preço reduzido para os consumidores encontrarem e reservarem.</p>
+{% if messages %}{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}{% endif %}
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
 {{ form.non_field_errors }}
-<label>Nome</label>{{ form.nome }}{% if form.nome.errors %}<div class="erros">{{ form.nome.errors }}</div>{% endif %}
-<label>E-mail</label>{{ form.email }}{% if form.email.errors %}<div class="erros">{{ form.email.errors }}</div>{% endif %}
-<label>Telefone</label>{{ form.telefone }}{% if form.telefone.errors %}<div class="erros">{{ form.telefone.errors }}</div>{% endif %}
-<label>Senha</label>{{ form.senha }}{% if form.senha.errors %}<div class="erros">{{ form.senha.errors }}</div>{% endif %}
-<label>Confirmar senha</label>{{ form.confirmar_senha }}{% if form.confirmar_senha.errors %}<div class="erros">{{ form.confirmar_senha.errors }}</div>{% endif %}
-
-<button type="submit" style="margin-top:20px">Criar conta</button>
-</form>
-<p style="margin-top:15px;font-size:13px">Já possui conta? <a href="{% url 'login' %}">Entrar</a></p>
-</div></div></body></html>
+{% for field in form %}
+<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+{{ field }}
+{% if field.errors %}<div class="erros">{{ field.errors }}</div>{% endif %}
+{% endfor %}
+<button type="submit" style="margin-top:20px">Cadastrar produto</button>
+<a class="btn" href="{% url 'comercio' %}" style="background:#fff;color:#39785e;border:1px solid #ddd;margin-left:6px">Cancelar</a>
+</form></div></div></body></html>

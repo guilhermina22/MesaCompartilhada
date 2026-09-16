@@ -1,619 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Mesa Compartilhada</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #faf8f3;
-            color: #333;
-        }
-
-        /* ================= HEADER ================= */
-
-        header {
-            height: 55px;
-            background: white;
-            border-bottom: 1px solid #eee;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 30px;
-        }
-
-        .logo {
-            font-size: 16px;
-            font-weight: bold;
-            color: #607d68;
-            text-decoration: none;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #777;
-            margin: 0 15px;
-            font-size: 13px;
-        }
-
-        nav a:hover {
-            color: #4d7758;
-        }
-
-        nav a.active {
-            background: #e8f3ea;
-            padding: 8px 14px;
-            border-radius: 8px;
-            color: #4d7758;
-        }
-
-        .usuario {
-            font-size: 13px;
-            color: #777;
-        }
-
-        .usuario a {
-            text-decoration: none;
-            color: #777;
-        }
-
-
-        /* ================= CONTEÚDO ================= */
-
-        main {
-            width: 800px;
-            max-width: calc(100% - 40px);
-            margin: 35px auto;
-        }
-
-        h1 {
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .subtitulo {
-            color: #999;
-            font-size: 13px;
-            margin-bottom: 35px;
-        }
-
-
-        /* ================= PESQUISA ================= */
-
-        .pesquisa {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .pesquisa input {
-            flex: 1;
-            padding: 12px;
-
-            border: 1px solid #ddd;
-            border-radius: 8px;
-
-            font-size: 14px;
-            outline: none;
-        }
-
-        .pesquisa input:focus {
-            border-color: #477d5b;
-        }
-
-        .filtro {
-            width: 130px;
-
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-
-            padding: 12px;
-
-            font-size: 14px;
-        }
-
-        button.filtro {
-            cursor: pointer;
-        }
-
-        button.filtro:hover {
-            background: #477d5b;
-            color: white;
-        }
-
-
-        /* ================= CATEGORIAS ================= */
-
-        .categorias {
-            display: flex;
-            gap: 8px;
-
-            margin-bottom: 25px;
-
-            flex-wrap: wrap;
-        }
-
-        .categoria {
-            background: white;
-
-            border: 1px solid #ddd;
-
-            padding: 7px 15px;
-
-            border-radius: 20px;
-
-            font-size: 12px;
-
-            text-decoration: none;
-
-            color: #333;
-
-            display: inline-block;
-
-            transition: 0.2s;
-        }
-
-        .categoria:hover {
-            background: #477d5b;
-            color: white;
-        }
-
-        .categoria.ativa {
-            background: #477d5b;
-            color: white;
-        }
-
-
-        /* ================= PRODUTOS ================= */
-
-        .produtos {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 18px;
-        }
-
-
-        /* ================= CARD ================= */
-
-        .card {
-            background: white;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            border: 1px solid #eee;
-
-            transition: 0.2s;
-
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-
-        /* ================= IMAGEM ================= */
-
-        .imagem {
-            width: 100%;
-            height: 160px;
-
-            background: #eee;
-
-            overflow: hidden;
-        }
-
-        .imagem img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-        }
-
-        .sem-imagem {
-            width: 100%;
-            height: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            color: #999;
-
-            font-size: 12px;
-        }
-
-
-        /* ================= CONTEÚDO ================= */
-
-        .conteudo {
-            padding: 12px;
-        }
-
-        .nome {
-            font-size: 14px;
-
-            font-weight: bold;
-
-            color: #333;
-
-            margin-bottom: 5px;
-        }
-
-        .descricao {
-            color: #777;
-
-            font-size: 11px;
-
-            line-height: 1.4;
-
-            margin: 6px 0;
-        }
-
-        .local {
-            color: #888;
-
-            font-size: 11px;
-
-            margin: 6px 0;
-        }
-
-        .preco {
-            color: #4d8961;
-
-            font-weight: bold;
-
-            font-size: 15px;
-
-            margin-top: 8px;
-        }
-
-
-        /* ================= SEM PRODUTOS ================= */
-
-        .nenhum-produto {
-            grid-column: 1 / -1;
-
-            color: #555;
-
-            font-size: 17px;
-
-            padding: 30px 0;
-        }
-
-
-        /* ================= RESPONSIVO ================= */
-
-        @media (max-width: 700px) {
-
-            main {
-                width: 100%;
-            }
-
-            .produtos {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .pesquisa {
-                flex-wrap: wrap;
-            }
-
-            .pesquisa input {
-                width: 100%;
-                flex: none;
-            }
-
-        }
-
-        @media (max-width: 450px) {
-
-            .produtos {
-                grid-template-columns: 1fr;
-            }
-
-            header {
-                padding: 0 15px;
-            }
-
-            nav a {
-                margin: 0 5px;
-            }
-
-            .usuario {
-                display: none;
-            }
-
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-<!-- ================= HEADER ================= -->
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mesa Compartilhada</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
+header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
+.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
+nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
+.usuario{font-size:13px;color:#777;white-space:nowrap}
+.container{max-width:850px;margin:35px auto;padding:0 20px}
+.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
+h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
+h2{color:#355e4e}
+label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
+textarea{resize:vertical}
+button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
+button:hover,.btn:hover{background:#30664f}
+.erros{color:#b42318;font-size:12px;margin:8px 0}
+.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
+</style>
+
+<style>
+main{max-width:1000px;margin:35px auto;padding:0 20px}.pesquisa{display:flex;gap:8px;margin:22px 0}
+.categorias{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.categoria{padding:8px 13px;border:1px solid #ddd;border-radius:20px;text-decoration:none;color:#555;background:#fff;font-size:12px}.categoria.ativa,.categoria:hover{background:#39785e;color:#fff}
+.produtos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden}
+.imagem{height:170px;background:#eee;display:flex;align-items:center;justify-content:center;color:#999}.imagem img{width:100%;height:100%;object-fit:cover}
+.conteudo{padding:14px}.nome{font-weight:bold;margin-bottom:6px}.descricao,.local{font-size:12px;color:#777;margin:6px 0}.preco{font-weight:bold;color:#39785e;font-size:16px;margin:10px 0}
+@media(max-width:800px){.produtos{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.produtos{grid-template-columns:1fr}.pesquisa{flex-wrap:wrap}}
+</style></head><body>
 
 <header>
-
-    <a href="{% url 'index' %}" class="logo">
-        🍴 Mesa Compartilhada
-    </a>
-
-    <nav>
-
-        <a
-            class="active"
-            href="{% url 'index' %}"
-        >
-            ⌂ Início
-        </a>
-
-        <a href="{% url 'conscientizacao' %}">
-            ☁ Conscientização
-        </a>
-
-        <a href="{% url 'perfil' %}">
-            ♙ Perfil
-        </a>
-
-    </nav>
-
-    <div class="usuario">
-
-        🔔
-
-        <a href="{% url 'login' %}">
-            👤 Entrar
-        </a>
-
-    </div>
-
+  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+  <nav>
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'conscientizacao' %}">Conscientização</a>
+    {% if tipo_usuario == 'comerciante' %}
+      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
+      <a href="{% url 'solicitacoes' %}">Reservas</a>
+    {% elif tipo_usuario == 'consumidor' %}
+      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
+    {% endif %}
+    <a href="{% url 'perfil' %}">Perfil</a>
+  </nav>
+  <div class="usuario">
+    {% if usuario_logado %}
+      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
+    {% else %}
+      <a href="{% url 'login' %}">Entrar</a>
+    {% endif %}
+  </div>
 </header>
 
-
-<!-- ================= CONTEÚDO ================= -->
-
 <main>
-
-    <h1>
-        Alimentos disponíveis
-    </h1>
-
-    <p class="subtitulo">
-        Produtos próximos ao vencimento com preços reduzidos perto de você.
-    </p>
-
-
-    <!-- ================= PESQUISA ================= -->
-
-    <form
-        class="pesquisa"
-        method="GET"
-        action="{% url 'index' %}"
-    >
-
-        <input
-            type="text"
-            name="busca"
-            value="{{ busca }}"
-            placeholder="🔍 Buscar produto ou estabelecimento..."
-        >
-
-
-        <select
-            name="preco"
-            class="filtro"
-        >
-
-            <option value="">
-                Todos os preços
-            </option>
-
-            <option
-                value="10"
-                {% if preco == "10" %}selected{% endif %}
-            >
-                Até R$ 10
-            </option>
-
-            <option
-                value="20"
-                {% if preco == "20" %}selected{% endif %}
-            >
-                Até R$ 20
-            </option>
-
-            <option
-                value="30"
-                {% if preco == "30" %}selected{% endif %}
-            >
-                Até R$ 30
-            </option>
-
-            <option
-                value="50"
-                {% if preco == "50" %}selected{% endif %}
-            >
-                Até R$ 50
-            </option>
-
-        </select>
-
-
-        <button
-            class="filtro"
-            type="submit"
-        >
-            Buscar
-        </button>
-
-    </form>
-
-
-    <!-- ================= CATEGORIAS ================= -->
-
-    <div class="categorias">
-
-        <a
-            href="{% url 'index' %}"
-            class="categoria {% if not categoria %}ativa{% endif %}"
-        >
-            Todos
-        </a>
-
-
-        <a
-            href="{% url 'index' %}?categoria=Padaria"
-            class="categoria {% if categoria == 'Padaria' %}ativa{% endif %}"
-        >
-            Padaria
-        </a>
-
-
-        <a
-            href="{% url 'index' %}?categoria=Frutas"
-            class="categoria {% if categoria == 'Frutas' %}ativa{% endif %}"
-        >
-            Frutas
-        </a>
-
-
-        <a
-            href="{% url 'index' %}?categoria=Verduras"
-            class="categoria {% if categoria == 'Verduras' %}ativa{% endif %}"
-        >
-            Verduras
-        </a>
-
-
-        <a
-            href="{% url 'index' %}?categoria=Laticínios"
-            class="categoria {% if categoria == 'Laticínios' %}ativa{% endif %}"
-        >
-            Laticínios
-        </a>
-
-
-        <a
-            href="{% url 'index' %}?categoria=Confeitaria"
-            class="categoria {% if categoria == 'Confeitaria' %}ativa{% endif %}"
-        >
-            Confeitaria
-        </a>
-
-    </div>
-
-
-    <!-- ================= PRODUTOS ================= -->
-
-    <div class="produtos">
-
-        {% for produto in produtos %}
-
-            <a
-                href="{% url 'detalhes_doacao' %}"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="card">
-
-
-                    <!-- IMAGEM -->
-
-                    <div class="imagem">
-
-                        {% if produto.imagem %}
-
-                            <img
-                                src="{{ produto.imagem.url }}"
-                                alt="{{ produto.nome }}"
-                            >
-
-                        {% else %}
-
-                            <div class="sem-imagem">
-                                📷 Sem imagem
-                            </div>
-
-                        {% endif %}
-
-                    </div>
-
-
-                    <!-- INFORMAÇÕES -->
-
-                    <div class="conteudo">
-
-                        <div class="nome">
-                            {{ produto.nome }}
-                        </div>
-
-
-                        {% if produto.descricao %}
-
-                            <div class="descricao">
-                                {{ produto.descricao }}
-                            </div>
-
-                        {% endif %}
-
-
-                        {% if produto.estabelecimento %}
-
-                            <div class="local">
-                                ◉ {{ produto.estabelecimento.usuario.nome }}
-                            </div>
-
-                        {% endif %}
-
-
-                        <div class="preco">
-                            R$ {{ produto.precoOriginal }}
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        {% empty %}
-
-            <p class="nenhum-produto">
-                Nenhum produto encontrado.
-            </p>
-
-        {% endfor %}
-
-    </div>
-
-</main>
-
-</body>
-</html>
+<h1>Alimentos disponíveis</h1><p style="color:#888;font-size:13px">Produtos próximos ao vencimento com preços reduzidos perto de você.</p>
+<form class="pesquisa" method="GET" action="{% url 'index' %}">
+<input name="busca" value="{{ busca }}" placeholder="Buscar produto ou estabelecimento...">
+<select name="preco" style="max-width:150px"><option value="">Todos os preços</option>
+<option value="10" {% if preco == "10" %}selected{% endif %}>Até R$ 10</option>
+<option value="20" {% if preco == "20" %}selected{% endif %}>Até R$ 20</option>
+<option value="30" {% if preco == "30" %}selected{% endif %}>Até R$ 30</option>
+<option value="50" {% if preco == "50" %}selected{% endif %}>Até R$ 50</option></select>
+<button type="submit">Buscar</button></form>
+<div class="categorias">
+<a class="categoria {% if not categoria %}ativa{% endif %}" href="{% url 'index' %}">Todos</a>
+{% for cat in categorias %}<a class="categoria {% if categoria == cat.nomeCategoria %}ativa{% endif %}" href="?categoria={{ cat.nomeCategoria|urlencode }}">{{ cat.nomeCategoria }}</a>{% endfor %}
+</div>
+<div class="produtos">
+{% for produto in produtos %}
+<a href="{% url 'detalhes_produto' produto.id %}" style="text-decoration:none;color:inherit"><div class="card">
+<div class="imagem">{% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% else %}Sem imagem{% endif %}</div>
+<div class="conteudo"><div class="nome">{{ produto.nome }}</div><div class="descricao">{{ produto.descricao }}</div>
+<div class="local">{{ produto.estabelecimento.usuario.nome }}</div><div class="preco">R$ {{ produto.precoOriginal }}</div>
+<div style="font-size:11px;color:#888">Disponíveis: {{ produto.qtdEstoque }}</div></div></div></a>
+{% empty %}<p>Nenhum produto encontrado.</p>{% endfor %}
+</div></main></body></html>

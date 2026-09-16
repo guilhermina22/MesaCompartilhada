@@ -275,31 +275,21 @@ nav a{
 
 
 <header>
-
-    <div class="logo">
-        🍴 Mesa Compartilhada
-    </div>
-
-    <nav>
-
-        <a href="{% url 'index' %}" >
-            ⌂ Início
-        </a>
-
-        <a href="{% url 'conscientizacao' %}" class="active" >
-            ☁ Conscientização
-        </a>
-
-        <a href="{% url 'perfil' %}">
-            ♙ Perfil
-        </a>
-
-    </nav>
-
-    <div class="usuario">
-        🔔 👤 Maria S.
-    </div>
-
+<a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+<nav>
+<a href="{% url 'index' %}" class="">⌂ Início</a>
+<a href="{% url 'conscientizacao' %}" class="active">☁ Conscientização</a>
+{% if tipo_usuario == 'comerciante' %}
+<a href="{% url 'cadastro_produto' %}">＋ Cadastrar produto</a>
+<a href="{% url 'solicitacoes' %}">▣ Reservas</a>
+{% elif tipo_usuario == 'consumidor' %}
+<a href="{% url 'minhas_reservas' %}">▣ Minhas reservas</a>
+{% endif %}
+<a href="{% url 'perfil' %}">♙ Perfil</a>
+</nav>
+<div class="usuario">
+{% if usuario_logado %}👤 {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>{% else %}<a href="{% url 'login' %}">Entrar</a>{% endif %}
+</div>
 </header>
 
 

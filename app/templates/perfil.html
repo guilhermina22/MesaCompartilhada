@@ -365,39 +365,22 @@ textarea:focus{
 <!-- ================= NAVBAR ================= -->
 
 <header>
-
-    <a href="{% url 'index' %}" class="logo">
-        🍴 Mesa Compartilhada
-    </a>
-
-
+    <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
     <nav>
-
-        <a href="{% url 'index' %}">
-            ⌂ Início
-        </a>
-
-        <a href="{% url 'conscientizacao' %}">
-            ☁ Conscientização
-        </a>
-
-        <a href="{% url 'perfil' %}" class="active">
-            ♙ Perfil
-        </a>
-
+        <a href="{% url 'index' %}">⌂ Início</a>
+        <a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
+        {% if tipo_usuario == 'comerciante' %}
+            <a href="{% url 'cadastro_produto' %}">＋ Cadastrar produto</a>
+            <a href="{% url 'solicitacoes' %}">▣ Reservas</a>
+        {% elif tipo_usuario == 'consumidor' %}
+            <a href="{% url 'minhas_reservas' %}">▣ Minhas reservas</a>
+        {% endif %}
+        <a href="{% url 'perfil' %}" class="active">♙ Perfil</a>
     </nav>
-
-
     <div class="usuario">
-
-        🔔
-
-        👤 <span id="nomeNavbar">
-            {{ usuario.nome }}
-        </span>
-
+        👤 <span id="nomeNavbar">{{ usuario.nome }}</span>
+        · <a href="{% url 'logout' %}">Sair</a>
     </div>
-
 </header>
 
 
