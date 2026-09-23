@@ -24,7 +24,6 @@ body{
     color:#333;
 }
 
-
 /* ================= NAVBAR ================= */
 
 header{
@@ -75,6 +74,14 @@ nav a.active{
     color:#777;
 }
 
+.usuario a{
+    color:#777;
+    text-decoration:none;
+}
+
+.usuario a:hover{
+    color:#4d7758;
+}
 
 /* ================= CONTAINER ================= */
 
@@ -83,7 +90,6 @@ nav a.active{
     max-width:calc(100% - 30px);
     margin:35px auto;
 }
-
 
 /* ================= TITULO ================= */
 
@@ -103,7 +109,6 @@ nav a.active{
     color:#888;
 }
 
-
 /* ================= CARDS ================= */
 
 .card{
@@ -119,7 +124,6 @@ nav a.active{
     color:#355e4e;
     margin-bottom:18px;
 }
-
 
 /* ================= FOTO ================= */
 
@@ -154,8 +158,7 @@ nav a.active{
     font-size:25px;
 }
 
-
-/* ================= INFORMAÇÕES DA FOTO ================= */
+/* ================= INFORMACOES DA FOTO ================= */
 
 .info{
     flex:1;
@@ -172,8 +175,7 @@ nav a.active{
     margin-top:5px;
 }
 
-
-/* ================= BOTÕES ================= */
+/* ================= BOTOES ================= */
 
 .botoes{
     display:flex;
@@ -209,13 +211,11 @@ button{
     background:#f5f5f5;
 }
 
-
 /* ================= INPUT DE FOTO ================= */
 
 #inputFoto{
     display:none;
 }
-
 
 /* ================= DADOS ================= */
 
@@ -251,8 +251,7 @@ button{
     background:white;
 }
 
-
-/* ================= MODO EDIÇÃO ================= */
+/* ================= MODO EDICAO ================= */
 
 .campo-editavel{
     display:none;
@@ -275,7 +274,6 @@ button{
     gap:8px;
     margin-top:10px;
 }
-
 
 /* ================= BIOGRAFIA ================= */
 
@@ -311,12 +309,9 @@ textarea:focus{
     margin-top:5px;
 }
 
-
 /* ================= MENSAGEM ================= */
 
 .mensagem{
-    display:none;
-
     background:#e8f3ea;
     color:#39785e;
 
@@ -331,6 +326,21 @@ textarea:focus{
     text-align:center;
 }
 
+/* ================= ERROS ================= */
+
+.erros{
+    background:#fce8e8;
+    color:#a94442;
+    border:1px solid #f0caca;
+    border-radius:7px;
+    padding:10px;
+    margin-bottom:15px;
+    font-size:12px;
+}
+
+.erros ul{
+    margin-left:18px;
+}
 
 /* ================= RESPONSIVO ================= */
 
@@ -365,30 +375,76 @@ textarea:focus{
 <!-- ================= NAVBAR ================= -->
 
 <header>
-    <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
+
+    <a href="{% url 'index' %}" class="logo">
+        🍴 Mesa Compartilhada
+    </a>
+
     <nav>
-        <a href="{% url 'index' %}">⌂ Início</a>
-        <a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
-        {% if tipo_usuario == 'comerciante' %}
-            <a href="{% url 'cadastro_produto' %}">＋ Cadastrar produto</a>
-            <a href="{% url 'solicitacoes' %}">▣ Reservas</a>
-        {% elif tipo_usuario == 'consumidor' %}
-            <a href="{% url 'minhas_reservas' %}">▣ Minhas reservas</a>
+
+        <a href="{% url 'index' %}">
+            ⌂ Início
+        </a>
+
+        <a href="{% url 'conscientizacao' %}">
+            ☁ Conscientização
+        </a>
+
+        {% if usuario.estabelecimento %}
+
+            <a href="{% url 'cadastro_produto' %}">
+                ＋ Cadastrar produto
+            </a>
+
+            <a href="{% url 'solicitacoes' %}">
+                ▣ Reservas
+            </a>
+
+        {% elif usuario.consumidor %}
+
+            <a href="{% url 'minhas_reservas' %}">
+                ▣ Minhas reservas
+            </a>
+
         {% endif %}
-        <a href="{% url 'perfil' %}" class="active">♙ Perfil</a>
+
+        <a href="{% url 'perfil' %}" class="active">
+            ♙ Perfil
+        </a>
+
     </nav>
+
     <div class="usuario">
+
         👤 <span id="nomeNavbar">{{ usuario.nome }}</span>
-        · <a href="{% url 'logout' %}">Sair</a>
+
+        ·
+
+        <a href="{% url 'logout' %}">
+            Sair
+        </a>
+
     </div>
+
 </header>
 
 
+<!-- ================= FORMULARIO PRINCIPAL ================= -->
 
-<!-- ================= PERFIL ================= -->
+<form
+    method="POST"
+    action="{% url 'perfil' %}"
+    enctype="multipart/form-data"
+    id="formPerfil"
+>
+
+{% csrf_token %}
+
 
 <div class="container">
 
+
+    <!-- ================= TITULO ================= -->
 
     <div class="titulo">
 
@@ -403,12 +459,30 @@ textarea:focus{
     </div>
 
 
-    <!-- MENSAGEM -->
+    <!-- ================= MENSAGENS DJANGO ================= -->
 
-    <div class="mensagem" id="mensagem">
-        Alterações salvas com sucesso!
-    </div>
+    {% if messages %}
 
+        {% for message in messages %}
+
+            <div class="mensagem" style="display:block;">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- ================= ERROS ================= -->
+
+    {% if erro %}
+
+        <div class="erros">
+            {{ erro }}
+        </div>
+
+    {% endif %}
 
 
     <!-- ================= FOTO ================= -->
@@ -456,11 +530,8 @@ textarea:focus{
             <div class="info">
 
                 <h4 id="nomeFoto">
-
                     {{ usuario.nome }}
-
                 </h4>
-
 
                 <p id="textoFoto">
 
@@ -498,22 +569,22 @@ textarea:focus{
                 <input
                     type="file"
                     id="inputFoto"
+                    name="foto_perfil"
                     accept="image/png,image/jpeg,image/gif"
                     onchange="alterarFoto(event)"
                 >
 
             </div>
 
-
         </div>
 
     </div>
 
 
-
     <!-- ================= DADOS PESSOAIS ================= -->
 
     <div class="card" id="cardDados">
+
 
         <div style="
             display:flex;
@@ -548,10 +619,11 @@ textarea:focus{
             </label>
 
 
-            <div class="input campo-normal" id="nomeNormal">
-
+            <div
+                class="input campo-normal"
+                id="nomeNormal"
+            >
                 {{ usuario.nome }}
-
             </div>
 
 
@@ -559,11 +631,12 @@ textarea:focus{
                 class="input campo-editavel"
                 type="text"
                 id="nomeEdit"
+                name="nome"
                 value="{{ usuario.nome }}"
+                required
             >
 
         </div>
-
 
 
         <!-- EMAIL -->
@@ -575,10 +648,11 @@ textarea:focus{
             </label>
 
 
-            <div class="input campo-normal" id="emailNormal">
-
+            <div
+                class="input campo-normal"
+                id="emailNormal"
+            >
                 {{ usuario.email }}
-
             </div>
 
 
@@ -586,11 +660,12 @@ textarea:focus{
                 class="input campo-editavel"
                 type="email"
                 id="emailEdit"
+                name="email"
                 value="{{ usuario.email }}"
+                required
             >
 
         </div>
-
 
 
         <!-- TELEFONE -->
@@ -602,10 +677,11 @@ textarea:focus{
             </label>
 
 
-            <div class="input campo-normal" id="telefoneNormal">
-
+            <div
+                class="input campo-normal"
+                id="telefoneNormal"
+            >
                 {{ usuario.telefone }}
-
             </div>
 
 
@@ -613,11 +689,12 @@ textarea:focus{
                 class="input campo-editavel"
                 type="text"
                 id="telefoneEdit"
+                name="telefone"
                 value="{{ usuario.telefone }}"
+                required
             >
 
         </div>
-
 
 
         <!-- CIDADE -->
@@ -629,7 +706,10 @@ textarea:focus{
             </label>
 
 
-            <div class="input campo-normal" id="cidadeNormal">
+            <div
+                class="input campo-normal"
+                id="cidadeNormal"
+            >
 
                 {% if usuario.cidade %}
                     {{ usuario.cidade }}
@@ -644,6 +724,7 @@ textarea:focus{
                 class="input campo-editavel"
                 type="text"
                 id="cidadeEdit"
+                name="cidade"
                 value="{{ usuario.cidade|default:'' }}"
                 placeholder="Digite sua cidade"
             >
@@ -651,15 +732,13 @@ textarea:focus{
         </div>
 
 
-
-        <!-- BOTÕES DE EDIÇÃO -->
+        <!-- BOTÕES -->
 
         <div class="botoes-edicao">
 
             <button
-                type="button"
+                type="submit"
                 class="verde"
-                onclick="salvarDados()"
             >
                 💾 Salvar
             </button>
@@ -677,7 +756,6 @@ textarea:focus{
 
 
     </div>
-
 
 
     <!-- ================= BIOGRAFIA ================= -->
@@ -698,6 +776,7 @@ textarea:focus{
 
             <textarea
                 id="biografia"
+                name="biografia"
                 maxlength="300"
                 readonly
             >{{ usuario.biografia|default:'' }}</textarea>
@@ -723,10 +802,9 @@ textarea:focus{
 
 
         <button
-            type="button"
+            type="submit"
             class="branco"
             id="botaoSalvarBio"
-            onclick="salvarBiografia()"
             style="display:none;"
         >
             💾 Salvar biografia
@@ -737,6 +815,7 @@ textarea:focus{
 
 </div>
 
+</form>
 
 
 <script>
@@ -765,6 +844,8 @@ function alterarFoto(event){
 
         alert("Escolha uma imagem válida.");
 
+        event.target.value = "";
+
         return;
 
     }
@@ -775,9 +856,11 @@ function alterarFoto(event){
 
     leitor.onload = function(e){
 
-        const imagem = document.getElementById("fotoPerfil");
+        const imagem =
+            document.getElementById("fotoPerfil");
 
-        const fotoVazia = document.getElementById("fotoVazia");
+        const fotoVazia =
+            document.getElementById("fotoVazia");
 
 
         imagem.src = e.target.result;
@@ -793,7 +876,7 @@ function alterarFoto(event){
 
 
         document.getElementById("textoFoto").textContent =
-            "Nova foto selecionada.";
+            "Nova foto selecionada. Clique em Salvar para confirmar.";
 
     };
 
@@ -805,9 +888,18 @@ function alterarFoto(event){
 
 function removerFoto(){
 
-    const imagem = document.getElementById("fotoPerfil");
+    const imagem =
+        document.getElementById("fotoPerfil");
 
-    const fotoVazia = document.getElementById("fotoVazia");
+    const fotoVazia =
+        document.getElementById("fotoVazia");
+
+
+    /*
+       Limpa o arquivo selecionado.
+    */
+
+    document.getElementById("inputFoto").value = "";
 
 
     imagem.src = "";
@@ -820,10 +912,10 @@ function removerFoto(){
         fotoVazia.style.display = "flex";
 
     }
-    
+
 
     document.getElementById("textoFoto").textContent =
-        "Nenhuma foto de perfil cadastrada.";
+        "Nenhuma foto selecionada.";
 
 }
 
@@ -834,54 +926,10 @@ function removerFoto(){
 
 function editarDados(){
 
-    const card = document.getElementById("cardDados");
+    const card =
+        document.getElementById("cardDados");
 
     card.classList.add("editando");
-
-}
-
-
-function salvarDados(){
-
-    const nome =
-        document.getElementById("nomeEdit").value;
-
-    const email =
-        document.getElementById("emailEdit").value;
-
-    const telefone =
-        document.getElementById("telefoneEdit").value;
-
-    const cidade =
-        document.getElementById("cidadeEdit").value;
-
-
-    document.getElementById("nomeNormal").textContent =
-        nome;
-
-    document.getElementById("emailNormal").textContent =
-        email;
-
-    document.getElementById("telefoneNormal").textContent =
-        telefone;
-
-    document.getElementById("cidadeNormal").textContent =
-        cidade || "Não informado";
-
-
-    document.getElementById("nomeNavbar").textContent =
-        nome;
-
-    document.getElementById("nomeFoto").textContent =
-        nome;
-
-
-    document
-        .getElementById("cardDados")
-        .classList.remove("editando");
-
-
-    mostrarMensagem();
 
 }
 
@@ -891,8 +939,28 @@ function cancelarEdicao(){
     const card =
         document.getElementById("cardDados");
 
-
     card.classList.remove("editando");
+
+
+    /*
+       Recarrega os valores originais do banco.
+    */
+
+    document.getElementById("nomeEdit").value =
+        document.getElementById("nomeNormal").textContent.trim();
+
+    document.getElementById("emailEdit").value =
+        document.getElementById("emailNormal").textContent.trim();
+
+    document.getElementById("telefoneEdit").value =
+        document.getElementById("telefoneNormal").textContent.trim();
+
+
+    const cidade =
+        document.getElementById("cidadeNormal").textContent.trim();
+
+    document.getElementById("cidadeEdit").value =
+        cidade === "Não informado" ? "" : cidade;
 
 }
 
@@ -936,51 +1004,27 @@ function editarBiografia(){
 }
 
 
-function salvarBiografia(){
-
-    biografia.setAttribute("readonly", true);
-
-
-    document.getElementById("botaoBio").style.display =
-        "inline-block";
-
-
-    document.getElementById("botaoSalvarBio").style.display =
-        "none";
-
-
-    mostrarMensagem();
-
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-function mostrarMensagem(){
-
-    const mensagem =
-        document.getElementById("mensagem");
-
-
-    mensagem.style.display = "block";
-
-
-    setTimeout(function(){
-
-        mensagem.style.display = "none";
-
-    },3000);
-
-}
-
-
-/* =====================================================
-   CONTADOR INICIAL
-===================================================== */
-
 atualizarContador();
+
+
+/* =====================================================
+   ENVIO
+===================================================== */
+
+document.getElementById("formPerfil").addEventListener(
+    "submit",
+    function(){
+
+        /*
+           O formulário será enviado normalmente para o Django.
+           Os campos name="nome", name="email",
+           name="telefone", name="cidade",
+           name="biografia" e name="foto_perfil"
+           serão recebidos pela view perfil().
+        */
+
+    }
+);
 
 </script>
 

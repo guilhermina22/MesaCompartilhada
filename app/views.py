@@ -147,9 +147,28 @@ def cadastro_comerciante(request):
 
 def perfil(request):
     usuario = exigir_login(request)
+
     if not isinstance(usuario, Usuario):
         return usuario
-    return render(request, "perfil.html", {"usuario": usuario})
+
+    if request.method == "POST":
+        usuario.nome = request.POST.get("nome", "").strip()
+        usuario.email = request.POST.get("email", "").strip()
+        usuario.telefone = request.POST.get("telefone", "").strip()
+        usuario.cidade = request.POST.get("cidade", "").strip()
+        usuario.biografia = request.POST.get("biografia", "").strip()
+
+        if request.FILES.get("foto_perfil"):
+            usuario.foto_perfil = request.FILES["foto_perfil"]
+
+        usuario.save()
+
+        messages.success(request, "Alterações salvas com sucesso!")
+        return redirect("perfil")
+
+    return render(request, "perfil.html", {
+        "usuario": usuario
+    })
 
 
 def conscientizacao(request):

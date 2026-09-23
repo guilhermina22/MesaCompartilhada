@@ -86,3 +86,16 @@ class ProdutoForm(forms.ModelForm):
         if commit:
             produto.save()
         return produto
+
+
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = [
+            "nome",
+            "email",
+            "telefone",
+            "cidade",
+            "biografia",
+            "foto_perfil",
+        ]
