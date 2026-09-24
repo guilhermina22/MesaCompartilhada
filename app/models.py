@@ -144,7 +144,15 @@ class Produto(models.Model):
     precoOriginal = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        verbose_name="Preço"
+        verbose_name="Preço original"
+    )
+
+    precoPromocional = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True,
+        verbose_name="Preço promocional"
     )
 
     quantidade = models.IntegerField(
@@ -184,6 +192,16 @@ class Produto(models.Model):
         related_name="produtos",
         verbose_name="Estabelecimento"
     )
+
+    @property
+    def preco_venda(self):
+        return self.precoPromocional if self.precoPromocional is not None else self.precoOriginal
+
+    @property
+    def desconto_percentual(self):
+        if self.precoPromocional is None or not self.precoOriginal or self.precoPromocional >= self.precoOriginal:
+            return 0
+        return round((1 - (self.precoPromocional / self.precoOriginal)) * 100)
 
     def __str__(self):
         return self.nome
@@ -394,3 +412,64 @@ class Reserva(models.Model):
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
+
+# =========================================================
+# NOTIFICAÇÃO DE NOVA PROMOÇÃO
+# =========================================================
+
+class NotificacaoPromocao(models.Model):
+    consumidor = models.ForeignKey(
+        Consumidor,
+        on_delete=models.CASCADE,
+        related_name="notificacoes_promocao",
+        verbose_name="Consumidor",
+    )
+    produto = models.ForeignKey(
+        Produto,
+        on_delete=models.CASCADE,
+        related_name="notificacoes_promocao",
+        verbose_name="Produto",
+    )
+    lida = models.BooleanField(default=False, verbose_name="Lida")
+    criadaEm = models.DateTimeField(auto_now_add=True, verbose_name="Criada em")
+
+    def __str__(self):
+        return f"Nova promoção: {self.produto.nome}"
+
+    class Meta:
+        verbose_name = "Notificação de promoção"
+        verbose_name_plural = "Notificações de promoções"
+        ordering = ["-criadaEm"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["consumidor", "produto"],
+                name="notificacao_unica_consumidor_produto",
+            )
+        ]
+
+# =========================================================
+# NOTIFICAÇÃO DE NOVA AVALIAÇÃO PARA O COMERCIANTE
+# =========================================================
+class NotificacaoAvaliacao(models.Model):
+    estabelecimento = models.ForeignKey(
+        Estabelecimento, on_delete=models.CASCADE,
+        related_name="notificacoes_avaliacao", verbose_name="Estabelecimento"
+    )
+    avaliacao_produto = models.ForeignKey(
+        AvaliacaoProduto, on_delete=models.CASCADE, null=True, blank=True,
+        related_name="notificacoes_comerciante", verbose_name="Avaliação de produto"
+    )
+    avaliacao_estabelecimento = models.ForeignKey(
+        AvaliacaoEstabelecimento, on_delete=models.CASCADE, null=True, blank=True,
+        related_name="notificacoes_comerciante", verbose_name="Avaliação do estabelecimento"
+    )
+    lida = models.BooleanField(default=False, verbose_name="Lida")
+    criadaEm = models.DateTimeField(auto_now_add=True, verbose_name="Criada em")
+
+    def __str__(self):
+        return f"Nova avaliação para {self.estabelecimento.usuario.nome}"
+
+    class Meta:
+        ordering = ["-criadaEm"]
+        verbose_name = "Notificação de avaliação"
+        verbose_name_plural = "Notificações de avaliações"

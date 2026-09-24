@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -163,6 +164,7 @@ button:hover{
 
 </style>
 
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 <body>
@@ -205,17 +207,7 @@ button:hover{
 
 <div class="conteudo">
 
-<header>
-
-<h1>
-Dashboard Administrativo
-</h1>
-
-<div class="admin">
-👑 Administrador
-</div>
-
-</header>
+{% include 'partials/navbar.html' %}
 
 <div class="cards">
 
