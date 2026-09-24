@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Mesa Compartilhada</title>
@@ -30,31 +31,12 @@ main{max-width:1000px;margin:35px auto;padding:0 20px}.pesquisa{display:flex;gap
 .categorias{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.categoria{padding:8px 13px;border:1px solid #ddd;border-radius:20px;text-decoration:none;color:#555;background:#fff;font-size:12px}.categoria.ativa,.categoria:hover{background:#39785e;color:#fff}
 .produtos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #eee;border-radius:12px;overflow:hidden}
 .imagem{height:170px;background:#eee;display:flex;align-items:center;justify-content:center;color:#999}.imagem img{width:100%;height:100%;object-fit:cover}
-.conteudo{padding:14px}.nome{font-weight:bold;margin-bottom:6px}.descricao,.local{font-size:12px;color:#777;margin:6px 0}.preco{font-weight:bold;color:#39785e;font-size:16px;margin:10px 0}
+.conteudo{padding:14px}.nome{font-weight:bold;margin-bottom:6px}.descricao,.local{font-size:12px;color:#777;margin:6px 0}.preco-antigo{font-size:11px;color:#999;text-decoration:line-through;margin-top:9px}.preco{font-weight:bold;color:#39785e;font-size:17px;margin:2px 0 8px}.oferta{display:inline-block;background:#e8f3ea;color:#39785e;font-size:10px;font-weight:bold;padding:4px 7px;border-radius:12px;margin-bottom:7px}
 @media(max-width:800px){.produtos{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.produtos{grid-template-columns:1fr}.pesquisa{flex-wrap:wrap}}
-</style></head><body>
+</style><link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head><body>
 
-<header>
-  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-  <nav>
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'conscientizacao' %}">Conscientização</a>
-    {% if tipo_usuario == 'comerciante' %}
-      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
-      <a href="{% url 'solicitacoes' %}">Reservas</a>
-    {% elif tipo_usuario == 'consumidor' %}
-      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
-    {% endif %}
-    <a href="{% url 'perfil' %}">Perfil</a>
-  </nav>
-  <div class="usuario">
-    {% if usuario_logado %}
-      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
-    {% else %}
-      <a href="{% url 'login' %}">Entrar</a>
-    {% endif %}
-  </div>
-</header>
+{% include 'partials/navbar.html' %}
 
 <main>
 <h1>Alimentos disponíveis</h1><p style="color:#888;font-size:13px">Produtos próximos ao vencimento com preços reduzidos perto de você.</p>
@@ -75,7 +57,7 @@ main{max-width:1000px;margin:35px auto;padding:0 20px}.pesquisa{display:flex;gap
 <a href="{% url 'detalhes_produto' produto.id %}" style="text-decoration:none;color:inherit"><div class="card">
 <div class="imagem">{% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% else %}Sem imagem{% endif %}</div>
 <div class="conteudo"><div class="nome">{{ produto.nome }}</div><div class="descricao">{{ produto.descricao }}</div>
-<div class="local">{{ produto.estabelecimento.usuario.nome }}</div><div class="preco">R$ {{ produto.precoOriginal }}</div>
+<div class="local">{{ produto.estabelecimento.usuario.nome }}</div>{% if produto.precoPromocional %}<span class="oferta">{% if produto.desconto_percentual %}{{ produto.desconto_percentual }}% OFF{% else %}OFERTA{% endif %}</span><div class="preco-antigo">De R$ {{ produto.precoOriginal }}</div><div class="preco">Por R$ {{ produto.precoPromocional }}</div>{% else %}<div class="preco">R$ {{ produto.precoOriginal }}</div>{% endif %}
 <div style="font-size:11px;color:#888">Disponíveis: {{ produto.qtdEstoque }}</div></div></div></a>
 {% empty %}<p>Nenhum produto encontrado.</p>{% endfor %}
 </div></main></body></html>

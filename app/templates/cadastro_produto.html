@@ -1,65 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Cadastrar produto - Mesa Compartilhada</title>
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
-header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
-.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
-nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
-nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
-.usuario{font-size:13px;color:#777;white-space:nowrap}
-.container{max-width:850px;margin:35px auto;padding:0 20px}
-.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
-h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
-h2{color:#355e4e}
-label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
-textarea{resize:vertical}
-button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
-button:hover,.btn:hover{background:#30664f}
-.erros{color:#b42318;font-size:12px;margin:8px 0}
-.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#faf8f3;color:#333;padding-bottom:45px}.container{max-width:900px;margin:35px auto;padding:0 20px}.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:26px;margin-bottom:18px}h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e;margin-bottom:7px}.sub{color:#7b817d;font-size:13px;margin:0 0 25px}.section-title{font-size:14px;color:#355e4e;margin:26px 0 4px;padding-top:20px;border-top:1px solid #eee}.section-help{font-size:12px;color:#888;margin:0 0 13px}label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa;transition:.15s}input:focus,select:focus,textarea:focus{outline:none;border-color:#7fa38d;box-shadow:0 0 0 3px rgba(57,120,94,.08);background:#fff}textarea{resize:vertical}button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}button:hover,.btn:hover{background:#30664f}.erros{color:#b42318;font-size:12px;margin:7px 0}.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.promo-preview{margin-top:15px;background:#f5f8f3;border:1px solid #dfe9df;border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:15px}.preview-label{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:#728077;font-weight:bold}.preview-price{display:flex;align-items:baseline;gap:10px;margin-top:6px}.preview-de{font-size:13px;color:#8b8f8c;text-decoration:line-through}.preview-por{font-size:22px;color:#39785e;font-weight:bold}.preview-badge{background:#39785e;color:#fff;border-radius:18px;padding:7px 10px;font-size:11px;font-weight:bold;white-space:nowrap}.actions{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap}.cancel{background:#fff;color:#39785e;border:1px solid #ddd}.cancel:hover{background:#f7f7f4}.field-help{font-size:11px;color:#929792;margin-top:5px}@media(max-width:600px){.price-grid{grid-template-columns:1fr}.promo-preview{align-items:flex-start;flex-direction:column}.container{margin-top:22px}.card{padding:20px}}
 </style>
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head><body>
-
-<header>
-  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-  <nav>
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'conscientizacao' %}">Conscientização</a>
-    {% if tipo_usuario == 'comerciante' %}
-      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
-      <a href="{% url 'solicitacoes' %}">Reservas</a>
-    {% elif tipo_usuario == 'consumidor' %}
-      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
-    {% endif %}
-    <a href="{% url 'perfil' %}">Perfil</a>
-  </nav>
-  <div class="usuario">
-    {% if usuario_logado %}
-      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
-    {% else %}
-      <a href="{% url 'login' %}">Entrar</a>
-    {% endif %}
-  </div>
-</header>
-
+{% include 'partials/navbar.html' %}
 <div class="container"><div class="card">
 <h1>Cadastrar produto</h1>
-<p>Publique um alimento com preço reduzido para os consumidores encontrarem e reservarem.</p>
+<p class="sub">Publique um alimento com preço reduzido. A oferta será exibida aos consumidores no formato de promoção.</p>
 {% if messages %}{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}{% endif %}
-<form method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-{{ form.non_field_errors }}
-{% for field in form %}
-<label for="{{ field.id_for_label }}">{{ field.label }}</label>
-{{ field }}
-{% if field.errors %}<div class="erros">{{ field.errors }}</div>{% endif %}
-{% endfor %}
-<button type="submit" style="margin-top:20px">Cadastrar produto</button>
-<a class="btn" href="{% url 'comercio' %}" style="background:#fff;color:#39785e;border:1px solid #ddd;margin-left:6px">Cancelar</a>
-</form></div></div></body></html>
+<form method="POST" enctype="multipart/form-data" id="produto-form">
+{% csrf_token %}{{ form.non_field_errors }}
+
+<label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>{{ form.nome }}{% if form.nome.errors %}<div class="erros">{{ form.nome.errors }}</div>{% endif %}
+<label for="{{ form.descricao.id_for_label }}">{{ form.descricao.label }}</label>{{ form.descricao }}{% if form.descricao.errors %}<div class="erros">{{ form.descricao.errors }}</div>{% endif %}
+<label for="{{ form.categoria.id_for_label }}">{{ form.categoria.label }}</label>{{ form.categoria }}{% if form.categoria.errors %}<div class="erros">{{ form.categoria.errors }}</div>{% endif %}
+
+<h2 class="section-title">Preço da promoção</h2>
+<p class="section-help">Informe quanto o produto custava e por quanto será oferecido. Exemplo: <strong>de R$ 12,90 por R$ 7,90</strong>.</p>
+<div class="price-grid">
+<div><label for="{{ form.precoOriginal.id_for_label }}">{{ form.precoOriginal.label }}</label>{{ form.precoOriginal }}<div class="field-help">Preço normal do produto.</div>{% if form.precoOriginal.errors %}<div class="erros">{{ form.precoOriginal.errors }}</div>{% endif %}</div>
+<div><label for="{{ form.precoPromocional.id_for_label }}">{{ form.precoPromocional.label }}</label>{{ form.precoPromocional }}<div class="field-help">Deve ser menor que o preço original.</div>{% if form.precoPromocional.errors %}<div class="erros">{{ form.precoPromocional.errors }}</div>{% endif %}</div>
+</div>
+<div class="promo-preview">
+<div><div class="preview-label">Prévia para o consumidor</div><div class="preview-price"><span class="preview-de" id="preview-de">De R$ --</span><span class="preview-por" id="preview-por">por R$ --</span></div></div>
+<span class="preview-badge" id="preview-badge">OFERTA</span>
+</div>
+
+<h2 class="section-title">Estoque e validade</h2>
+<label for="{{ form.quantidade.id_for_label }}">{{ form.quantidade.label }}</label>{{ form.quantidade }}{% if form.quantidade.errors %}<div class="erros">{{ form.quantidade.errors }}</div>{% endif %}
+<label for="{{ form.dataValidade.id_for_label }}">{{ form.dataValidade.label }}</label>{{ form.dataValidade }}{% if form.dataValidade.errors %}<div class="erros">{{ form.dataValidade.errors }}</div>{% endif %}
+<label for="{{ form.imagem.id_for_label }}">{{ form.imagem.label }}</label>{{ form.imagem }}{% if form.imagem.errors %}<div class="erros">{{ form.imagem.errors }}</div>{% endif %}
+<div class="actions"><button type="submit">Cadastrar promoção</button><a class="btn cancel" href="{% url 'comercio' %}">Cancelar</a></div>
+</form></div></div>
+<script>
+const original=document.getElementById('id_precoOriginal'),promo=document.getElementById('id_precoPromocional');
+const moeda=v=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+function preview(){const o=parseFloat(original.value),p=parseFloat(promo.value),de=document.getElementById('preview-de'),por=document.getElementById('preview-por'),badge=document.getElementById('preview-badge');de.textContent=Number.isFinite(o)?`De R$ ${moeda(o)}`:'De R$ --';por.textContent=Number.isFinite(p)?`por R$ ${moeda(p)}`:'por R$ --';if(Number.isFinite(o)&&Number.isFinite(p)&&o>p){badge.textContent=`${Math.round((1-p/o)*100)}% OFF`}else{badge.textContent='OFERTA'}}
+original.addEventListener('input',preview);promo.addEventListener('input',preview);preview();
+</script>
+</body></html>

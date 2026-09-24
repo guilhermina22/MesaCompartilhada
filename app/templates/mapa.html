@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -191,27 +192,12 @@ button:hover{
 
 </style>
 
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 <body>
 
-<header>
-<a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-<nav>
-<a href="{% url 'index' %}" class="active">⌂ Início</a>
-<a href="{% url 'conscientizacao' %}" class="">☁ Conscientização</a>
-{% if tipo_usuario == 'comerciante' %}
-<a href="{% url 'cadastro_produto' %}">＋ Cadastrar produto</a>
-<a href="{% url 'solicitacoes' %}">▣ Reservas</a>
-{% elif tipo_usuario == 'consumidor' %}
-<a href="{% url 'minhas_reservas' %}">▣ Minhas reservas</a>
-{% endif %}
-<a href="{% url 'perfil' %}">♙ Perfil</a>
-</nav>
-<div class="usuario">
-{% if usuario_logado %}👤 {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>{% else %}<a href="{% url 'login' %}">Entrar</a>{% endif %}
-</div>
-</header>
+{% include 'partials/navbar.html' %}
 
 <div class="container">
 

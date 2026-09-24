@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -233,6 +234,7 @@ button:hover{
 </style>
 
 
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 
@@ -241,13 +243,7 @@ button:hover{
 
 
 
-<header>
-
-<a href="{% url 'index' %}" class="active">⌂ Início</a>
-<a href="{% url 'conscientizacao' %}">☁ Conscientização</a>
-<a href="{% url 'perfil' %}">♙ Perfil</a>
-
-</header>
+{% include 'partials/navbar.html' %}
 
 
 

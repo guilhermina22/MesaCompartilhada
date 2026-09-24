@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Painel Comércio - Mesa Compartilhada</title>
 <style>
@@ -24,35 +25,21 @@ button:hover,.btn:hover{background:#30664f}
 @media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
 
-<style>.acoes-top{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap}.status{display:inline-block;padding:6px 10px;border-radius:20px;background:#e8f5e9;color:#2e7d32;font-size:12px}</style></head>
+<style>.acoes-top{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap}.status{display:inline-block;padding:6px 10px;border-radius:20px;background:#e8f5e9;color:#2e7d32;font-size:12px}.produto-acoes{display:flex;gap:8px;margin-top:16px;align-items:center}.btn-excluir{background:transparent;color:#a63d35;border:1px solid #e6c5c1;padding:9px 12px}.btn-excluir:hover{background:#fff1ef;color:#8c3029}.feedback-resumo{margin-top:28px}.nota-grande{font-family:Georgia,serif;font-size:28px;color:#355e4e}.feedback-item{border-top:1px solid #eee;padding:14px 0}.feedback-item:first-child{border-top:0}.estrelas{color:#8a6d3b;font-weight:bold}
+</style><link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
 <body>
-<header>
-  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-  <nav>
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'conscientizacao' %}">Conscientização</a>
-    {% if tipo_usuario == 'comerciante' %}
-      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
-      <a href="{% url 'solicitacoes' %}">Reservas</a>
-    {% elif tipo_usuario == 'consumidor' %}
-      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
-    {% endif %}
-    <a href="{% url 'perfil' %}">Perfil</a>
-  </nav>
-  <div class="usuario">
-    {% if usuario_logado %}
-      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
-    {% else %}
-      <a href="{% url 'login' %}">Entrar</a>
-    {% endif %}
-  </div>
-</header>
+{% include 'partials/navbar.html' %}
 <div class="container">
 {% if messages %}{% for message in messages %}<div class="msg">{{ message }}</div>{% endfor %}{% endif %}
 <h1>{{ estabelecimento.usuario.nome }}</h1><p style="color:#888">Painel do comerciante</p>
 <div class="grid"><div class="card"><h2>{{ total_produtos }}</h2>Produtos cadastrados</div><div class="card"><h2>{{ total_estoque }}</h2>Unidades disponíveis</div><div class="card"><h2>{{ total_reservas }}</h2>Reservas pendentes</div></div>
 <div class="acoes-top"><a class="btn" href="{% url 'cadastro_produto' %}">+ Cadastrar produto</a><a class="btn" href="{% url 'solicitacoes' %}" style="background:#fff;color:#39785e;border:1px solid #ddd">Ver reservas</a></div>
 <h2>Meus produtos</h2><div class="grid">
-{% for produto in produtos %}<div class="card"><h3>{{ produto.nome }}</h3><p>{{ produto.categoria.nomeCategoria }}</p><p>Preço: R$ {{ produto.precoOriginal }}</p><p>Estoque: {{ produto.qtdEstoque }}</p><span class="status">{{ produto.status }}</span></div>
+{% for produto in produtos %}<div class="card"><h3>{{ produto.nome }}</h3><p>{{ produto.categoria.nomeCategoria }}</p><p>{% if produto.precoPromocional %}<span style="color:#999;text-decoration:line-through">De R$ {{ produto.precoOriginal }}</span><br><strong style="color:#39785e">Por R$ {{ produto.precoPromocional }}</strong>{% else %}Preço: R$ {{ produto.precoOriginal }}{% endif %}</p><p>Estoque: {{ produto.qtdEstoque }}</p><span class="status">{{ produto.status }}</span>
+<div class="produto-acoes"><form method="POST" action="{% url 'excluir_produto' produto.id %}" onsubmit="return confirm('Tem certeza que deseja excluir {{ produto.nome|escapejs }}? Ele deixará de aparecer para os consumidores.');">{% csrf_token %}<button type="submit" class="btn-excluir">Excluir produto</button></form></div></div>
 {% empty %}<div class="card">Você ainda não cadastrou produtos.</div>{% endfor %}</div>
+<div class="card feedback-resumo"><h2>Feedbacks recentes</h2><p><span class="nota-grande">{% if media_estabelecimento %}{{ media_estabelecimento|floatformat:1 }}{% else %}—{% endif %}</span> / 5 para o estabelecimento &nbsp;·&nbsp; <strong>{% if media_produtos %}{{ media_produtos|floatformat:1 }}{% else %}—{% endif %}</strong> / 5 nos produtos</p>
+{% for avaliacao in avaliacoes_estabelecimento %}<div class="feedback-item"><span class="estrelas">{{ avaliacao.nota }}/5</span> <strong>{{ avaliacao.consumidor.usuario.nome }}</strong><p>{{ avaliacao.comentario }}</p></div>{% empty %}<p style="color:#888">Ainda não há avaliações do estabelecimento.</p>{% endfor %}
+<a class="btn" href="{% url 'feedbacks_comercio' %}">Ver todos os feedbacks</a></div>
 </div></body></html>

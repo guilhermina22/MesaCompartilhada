@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Entrar - Mesa Compartilhada</title>
@@ -24,28 +25,9 @@ button:hover,.btn:hover{background:#30664f}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 @media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head><body>
-<header>
-  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-  <nav>
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'conscientizacao' %}">Conscientização</a>
-    {% if tipo_usuario == 'comerciante' %}
-      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
-      <a href="{% url 'solicitacoes' %}">Reservas</a>
-    {% elif tipo_usuario == 'consumidor' %}
-      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
-    {% endif %}
-    <a href="{% url 'perfil' %}">Perfil</a>
-  </nav>
-  <div class="usuario">
-    {% if usuario_logado %}
-      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
-    {% else %}
-      <a href="{% url 'login' %}">Entrar</a>
-    {% endif %}
-  </div>
-</header>
+{% include 'partials/navbar.html' %}
 
 <div class="container"><div class="card" style="max-width:450px;margin:55px auto">
 <h1>Entrar</h1><p>Acesse sua conta para continuar.</p>

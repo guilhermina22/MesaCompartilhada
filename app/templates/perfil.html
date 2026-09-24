@@ -366,6 +366,7 @@ textarea:focus{
 
 </style>
 
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 
@@ -374,59 +375,7 @@ textarea:focus{
 
 <!-- ================= NAVBAR ================= -->
 
-<header>
-
-    <a href="{% url 'index' %}" class="logo">
-        🍴 Mesa Compartilhada
-    </a>
-
-    <nav>
-
-        <a href="{% url 'index' %}">
-            ⌂ Início
-        </a>
-
-        <a href="{% url 'conscientizacao' %}">
-            ☁ Conscientização
-        </a>
-
-        {% if usuario.estabelecimento %}
-
-            <a href="{% url 'cadastro_produto' %}">
-                ＋ Cadastrar produto
-            </a>
-
-            <a href="{% url 'solicitacoes' %}">
-                ▣ Reservas
-            </a>
-
-        {% elif usuario.consumidor %}
-
-            <a href="{% url 'minhas_reservas' %}">
-                ▣ Minhas reservas
-            </a>
-
-        {% endif %}
-
-        <a href="{% url 'perfil' %}" class="active">
-            ♙ Perfil
-        </a>
-
-    </nav>
-
-    <div class="usuario">
-
-        👤 <span id="nomeNavbar">{{ usuario.nome }}</span>
-
-        ·
-
-        <a href="{% url 'logout' %}">
-            Sair
-        </a>
-
-    </div>
-
-</header>
+{% include 'partials/navbar.html' %}
 
 
 <!-- ================= FORMULARIO PRINCIPAL ================= -->

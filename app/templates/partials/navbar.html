@@ -1,0 +1,50 @@
+{% load static %}
+<header class="mc-navbar" id="mc-navbar">
+  <div class="mc-navbar__inner">
+    <a href="{% url 'index' %}" class="mc-brand" aria-label="Mesa Compartilhada - início">
+      <span class="mc-brand__mark" aria-hidden="true">M</span>
+      <span class="mc-brand__text"><strong>Mesa</strong> Compartilhada</span>
+    </a>
+
+    <button class="mc-menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mc-main-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="mc-nav" id="mc-main-nav" aria-label="Navegação principal">
+      <a class="mc-nav__link {% if request.resolver_match.url_name == 'index' %}is-active{% endif %}" href="{% url 'index' %}">Início</a>
+      <a class="mc-nav__link {% if request.resolver_match.url_name == 'conscientizacao' %}is-active{% endif %}" href="{% url 'conscientizacao' %}">Conscientização</a>
+
+      {% if tipo_usuario == 'comerciante' %}
+        <a class="mc-nav__link {% if request.resolver_match.url_name == 'comercio' %}is-active{% endif %}" href="{% url 'comercio' %}">Painel</a>
+        <a class="mc-nav__link {% if request.resolver_match.url_name == 'cadastro_produto' %}is-active{% endif %}" href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
+        <a class="mc-nav__link {% if request.resolver_match.url_name == 'solicitacoes' %}is-active{% endif %}" href="{% url 'solicitacoes' %}">Reservas</a>
+        <a class="mc-nav__link mc-nav__promo {% if request.resolver_match.url_name == 'feedbacks_comercio' %}is-active{% endif %}" href="{% url 'feedbacks_comercio' %}">Feedbacks{% if avaliacoes_nao_lidas %}<span class="mc-notification-badge" aria-label="{{ avaliacoes_nao_lidas }} novas avaliações">{{ avaliacoes_nao_lidas }}</span>{% endif %}</a>
+      {% elif tipo_usuario == 'consumidor' %}
+        <a class="mc-nav__link mc-nav__promo {% if request.resolver_match.url_name == 'promocoes' %}is-active{% endif %}" href="{% url 'promocoes' %}">
+          Promoções
+          {% if notificacoes_nao_lidas %}<span class="mc-notification-badge" id="nav-badge" aria-label="{{ notificacoes_nao_lidas }} novas promoções">{{ notificacoes_nao_lidas }}</span>{% endif %}
+        </a>
+        <a class="mc-nav__link {% if request.resolver_match.url_name == 'minhas_reservas' %}is-active{% endif %}" href="{% url 'minhas_reservas' %}">Minhas reservas</a>
+        <a class="mc-nav__link {% if request.resolver_match.url_name == 'avaliacoes' %}is-active{% endif %}" href="{% url 'avaliacoes' %}">Avaliações</a>
+      {% endif %}
+    </nav>
+
+    <div class="mc-account">
+      {% if usuario_logado %}
+        <button class="mc-account__button" type="button" aria-expanded="false" aria-haspopup="true">
+          <span class="mc-avatar">{{ usuario_logado.nome|first|upper }}</span>
+          <span class="mc-account__info"><strong>{{ usuario_logado.nome }}</strong><small>{% if tipo_usuario == 'comerciante' %}Comerciante{% elif tipo_usuario == 'consumidor' %}Consumidor{% else %}Conta{% endif %}</small></span>
+          <span class="mc-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="mc-account__dropdown">
+          <a href="{% url 'perfil' %}" class="{% if request.resolver_match.url_name == 'perfil' %}is-active{% endif %}">Meu perfil</a>
+          <div class="mc-dropdown-divider"></div>
+          <a href="{% url 'logout' %}" class="mc-logout">Sair</a>
+        </div>
+      {% else %}
+        <a href="{% url 'login' %}" class="mc-login">Entrar</a>
+      {% endif %}
+    </div>
+  </div>
+</header>
+<script src="{% static 'js/navbar.js' %}" defer></script>

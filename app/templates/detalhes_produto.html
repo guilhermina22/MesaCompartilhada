@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>{{ produto.nome }} - Mesa Compartilhada</title>
@@ -25,35 +26,17 @@ button:hover,.btn:hover{background:#30664f}
 @media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
 </style>
 
-<style>.foto{height:260px;border-radius:12px;background:#eee;overflow:hidden}.foto img{width:100%;height:100%;object-fit:cover}.info{background:#f1f8e9;border-radius:10px;padding:16px;margin:18px 0;line-height:1.9}.acoes{display:flex;gap:10px;align-items:end}.acoes input{max-width:100px}</style>
+<style>.foto{height:260px;border-radius:12px;background:#eee;overflow:hidden}.foto img{width:100%;height:100%;object-fit:cover}.info{background:#f1f8e9;border-radius:10px;padding:16px;margin:18px 0;line-height:1.9}.acoes{display:flex;gap:10px;align-items:end}.acoes input{max-width:100px}.avaliacoes{margin-top:18px}.avaliacao{border-top:1px solid #eee;padding:12px 0}.avaliacao:first-child{border-top:0}.nota-chip{background:#edf5ef;color:#39785e;border-radius:20px;padding:4px 8px;font-size:12px;font-weight:bold}
+</style>
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head><body>
-<header>
-  <a href="{% url 'index' %}" class="logo">🍴 Mesa Compartilhada</a>
-  <nav>
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'conscientizacao' %}">Conscientização</a>
-    {% if tipo_usuario == 'comerciante' %}
-      <a href="{% url 'cadastro_produto' %}">Cadastrar produto</a>
-      <a href="{% url 'solicitacoes' %}">Reservas</a>
-    {% elif tipo_usuario == 'consumidor' %}
-      <a href="{% url 'minhas_reservas' %}">Minhas reservas</a>
-    {% endif %}
-    <a href="{% url 'perfil' %}">Perfil</a>
-  </nav>
-  <div class="usuario">
-    {% if usuario_logado %}
-      {{ usuario_logado.nome }} · <a href="{% url 'logout' %}">Sair</a>
-    {% else %}
-      <a href="{% url 'login' %}">Entrar</a>
-    {% endif %}
-  </div>
-</header>
+{% include 'partials/navbar.html' %}
 
 <div class="container"><div class="card">
 <div class="foto">{% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% else %}Sem imagem{% endif %}</div>
 <h1>{{ produto.nome }}</h1><p>{{ produto.descricao }}</p>
 <div class="info"><b>Categoria:</b> {{ produto.categoria.nomeCategoria }}<br><b>Comércio:</b> {{ produto.estabelecimento.usuario.nome }}<br>
-<b>Preço:</b> R$ {{ produto.precoOriginal }}<br><b>Validade:</b> {{ produto.dataValidade|date:"d/m/Y" }}<br><b>Disponíveis:</b> {{ produto.qtdEstoque }}</div>
+{% if produto.precoPromocional %}<b>Preço original:</b> <span style="text-decoration:line-through;color:#888">R$ {{ produto.precoOriginal }}</span><br><b>Preço promocional:</b> <strong style="color:#39785e;font-size:19px">R$ {{ produto.precoPromocional }}</strong>{% if produto.desconto_percentual %} <span style="font-size:11px;background:#39785e;color:white;padding:4px 7px;border-radius:12px">{{ produto.desconto_percentual }}% OFF</span>{% endif %}<br>{% else %}<b>Preço:</b> R$ {{ produto.precoOriginal }}<br>{% endif %}<b>Validade:</b> {{ produto.dataValidade|date:"d/m/Y" }}<br><b>Disponíveis:</b> {{ produto.qtdEstoque }}</div>
 {% if tipo_usuario == 'consumidor' and produto.qtdEstoque > 0 %}
 <form method="POST" action="{% url 'reservar_produto' produto.id %}" class="acoes">{% csrf_token %}
 <div><label>Quantidade</label><input type="number" name="quantidade" min="1" max="{{ produto.qtdEstoque }}" value="1"></div>
@@ -61,4 +44,5 @@ button:hover,.btn:hover{background:#30664f}
 {% elif not usuario_logado %}<a class="btn" href="{% url 'login' %}">Entre para reservar</a>
 {% elif tipo_usuario == 'comerciante' %}<p style="color:#777">Comerciantes cadastram produtos; a reserva é feita por consumidores.</p>
 {% else %}<p>Produto sem estoque.</p>{% endif %}
+<div class="avaliacoes"><h2>Avaliações</h2><p><strong>Produto:</strong> {% if media_produto %}{{ media_produto|floatformat:1 }}/5{% else %}Ainda sem avaliações{% endif %} &nbsp;·&nbsp; <strong>Estabelecimento:</strong> {% if media_estabelecimento %}{{ media_estabelecimento|floatformat:1 }}/5{% else %}Ainda sem avaliações{% endif %}</p>{% for avaliacao in avaliacoes %}<div class="avaliacao"><span class="nota-chip">{{ avaliacao.nota }}/5</span> <strong>{{ avaliacao.consumidor.usuario.nome }}</strong><p>{{ avaliacao.comentario }}</p></div>{% empty %}<p style="color:#888">Este produto ainda não recebeu avaliações.</p>{% endfor %}{% if tipo_usuario == 'consumidor' %}<a class="btn" href="{% url 'avaliacoes' %}">Deixar uma avaliação</a>{% endif %}</div>
 </div></div></body></html>
