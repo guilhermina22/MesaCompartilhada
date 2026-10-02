@@ -1,52 +1,280 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cadastro de comerciante - Mesa Compartilhada</title>
-<style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
-header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
-.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
-nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
-nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
-.usuario{font-size:13px;color:#777;white-space:nowrap}
-.container{max-width:850px;margin:35px auto;padding:0 20px}
-.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
-h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
-h2{color:#355e4e}
-label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
-textarea{resize:vertical}
-button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
-button:hover,.btn:hover{background:#30664f}
-.erros{color:#b42318;font-size:12px;margin:8px 0}
-.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
-</style>
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-</head><body>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Cadastro de comerciante - Mesa Compartilhada</title>
 
-{% include 'partials/navbar.html' %}
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif
+        }
 
-<div class="container"><div class="card" style="max-width:600px;margin-left:auto;margin-right:auto">
-<h1>Cadastro de comerciante</h1><p>Cadastre seu estabelecimento para publicar produtos.</p>
-<form method="POST">{% csrf_token %}
-{{ form.non_field_errors }}
-<label>Nome</label>{{ form.nome }}{% if form.nome.errors %}<div class="erros">{{ form.nome.errors }}</div>{% endif %}
-<label>E-mail</label>{{ form.email }}{% if form.email.errors %}<div class="erros">{{ form.email.errors }}</div>{% endif %}
-<label>Telefone</label>{{ form.telefone }}{% if form.telefone.errors %}<div class="erros">{{ form.telefone.errors }}</div>{% endif %}
-<label>Senha</label>{{ form.senha }}{% if form.senha.errors %}<div class="erros">{{ form.senha.errors }}</div>{% endif %}
-<label>Confirmar senha</label>{{ form.confirmar_senha }}{% if form.confirmar_senha.errors %}<div class="erros">{{ form.confirmar_senha.errors }}</div>{% endif %}
+        body {
+            margin: 0;
+            background: #faf8f3;
+            color: #333;
+            padding-bottom: 35px
+        }
 
-<h3>Dados do estabelecimento</h3>
-<label>{{ estabelecimento_form.descricao.label }}</label>{{ estabelecimento_form.descricao }}
-{% if estabelecimento_form.descricao.errors %}<div class="erros">{{ estabelecimento_form.descricao.errors }}</div>{% endif %}
-<label>{{ estabelecimento_form.endereco.label }}</label>{{ estabelecimento_form.endereco }}
-{% if estabelecimento_form.endereco.errors %}<div class="erros">{{ estabelecimento_form.endereco.errors }}</div>{% endif %}
+        header {
+            min-height: 58px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10
+        }
 
-<button type="submit" style="margin-top:20px">Criar conta</button>
-</form>
-<p style="margin-top:15px;font-size:13px">Já possui conta? <a href="{% url 'login' %}">Entrar</a></p>
-</div></div></body></html>
+        .logo {
+            font-weight: bold;
+            color: #607d68;
+            text-decoration: none;
+            white-space: nowrap
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        nav a,
+        .usuario a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 7px
+        }
+
+        nav a:hover,
+        .usuario a:hover {
+            background: #e8f3ea;
+            color: #39785e
+        }
+
+        .usuario {
+            font-size: 13px;
+            color: #777;
+            white-space: nowrap
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 0 20px
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 18px
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+            color: #355e4e
+        }
+
+        h2 {
+            color: #355e4e
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: #555;
+            font-weight: bold;
+            margin: 14px 0 6px
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        button,
+        .btn {
+            display: inline-block;
+            border: 0;
+            border-radius: 8px;
+            padding: 11px 16px;
+            background: #39785e;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        button:hover,
+        .btn:hover {
+            background: #30664f
+        }
+
+        .erros {
+            color: #b42318;
+            font-size: 12px;
+            margin: 8px 0
+        }
+
+        .msg {
+            padding: 11px;
+            border-radius: 8px;
+            background: #e8f3ea;
+            color: #286044;
+            margin-bottom: 15px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px
+        }
+
+        @media(max-width:800px) {
+            header {
+                flex-wrap: wrap;
+                padding: 12px 15px
+            }
+
+            nav {
+                order: 3;
+                width: 100%
+            }
+
+            .usuario {
+                margin-left: auto
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+
+<body>
+
+    {% include 'partials/navbar.html' %}
+
+    <div class="container">
+        <div
+            class="card"
+            style="max-width:600px;margin-left:auto;margin-right:auto"
+        >
+            <h1>Cadastro de comerciante</h1>
+
+            <p>
+                Cadastre seu estabelecimento para publicar produtos.
+            </p>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {{ form.non_field_errors }}
+
+                <label>Nome</label>
+                {{ form.nome }}
+
+                {% if form.nome.errors %}
+                    <div class="erros">
+                        {{ form.nome.errors }}
+                    </div>
+                {% endif %}
+
+                <label>E-mail</label>
+                {{ form.email }}
+
+                {% if form.email.errors %}
+                    <div class="erros">
+                        {{ form.email.errors }}
+                    </div>
+                {% endif %}
+
+                <label>Telefone</label>
+                {{ form.telefone }}
+
+                {% if form.telefone.errors %}
+                    <div class="erros">
+                        {{ form.telefone.errors }}
+                    </div>
+                {% endif %}
+
+                <label>Senha</label>
+                {{ form.senha }}
+
+                {% if form.senha.errors %}
+                    <div class="erros">
+                        {{ form.senha.errors }}
+                    </div>
+                {% endif %}
+
+                <label>Confirmar senha</label>
+                {{ form.confirmar_senha }}
+
+                {% if form.confirmar_senha.errors %}
+                    <div class="erros">
+                        {{ form.confirmar_senha.errors }}
+                    </div>
+                {% endif %}
+
+                <h3>Dados do estabelecimento</h3>
+
+                <label>
+                    {{ estabelecimento_form.descricao.label }}
+                </label>
+
+                {{ estabelecimento_form.descricao }}
+
+                {% if estabelecimento_form.descricao.errors %}
+                    <div class="erros">
+                        {{ estabelecimento_form.descricao.errors }}
+                    </div>
+                {% endif %}
+
+                <label>
+                    {{ estabelecimento_form.endereco.label }}
+                </label>
+
+                {{ estabelecimento_form.endereco }}
+
+                {% if estabelecimento_form.endereco.errors %}
+                    <div class="erros">
+                        {{ estabelecimento_form.endereco.errors }}
+                    </div>
+                {% endif %}
+
+                <button type="submit" style="margin-top:20px">
+                    Criar conta
+                </button>
+            </form>
+
+            <p style="margin-top:15px;font-size:13px">
+                Já possui conta?
+                <a href="{% url 'login' %}">Entrar</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
+

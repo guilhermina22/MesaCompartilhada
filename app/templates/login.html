@@ -1,43 +1,174 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Entrar - Mesa Compartilhada</title>
-<style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#faf8f3;color:#333;padding-bottom:35px}
-header{min-height:58px;background:#fff;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:20px;position:sticky;top:0;z-index:10}
-.logo{font-weight:bold;color:#607d68;text-decoration:none;white-space:nowrap}
-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
-nav a,.usuario a{color:#666;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:7px}
-nav a:hover,.usuario a:hover{background:#e8f3ea;color:#39785e}
-.usuario{font-size:13px;color:#777;white-space:nowrap}
-.container{max-width:850px;margin:35px auto;padding:0 20px}
-.card{background:#fff;border:1px solid #e6e6e6;border-radius:14px;padding:24px;margin-bottom:18px}
-h1{font-family:Georgia,serif;font-weight:normal;color:#355e4e}
-h2{color:#355e4e}
-label{display:block;font-size:12px;color:#555;font-weight:bold;margin:14px 0 6px}
-input,select,textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;background:#fafafa}
-textarea{resize:vertical}
-button,.btn{display:inline-block;border:0;border-radius:8px;padding:11px 16px;background:#39785e;color:#fff;text-decoration:none;cursor:pointer}
-button:hover,.btn:hover{background:#30664f}
-.erros{color:#b42318;font-size:12px;margin:8px 0}
-.msg{padding:11px;border-radius:8px;background:#e8f3ea;color:#286044;margin-bottom:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-@media(max-width:800px){header{flex-wrap:wrap;padding:12px 15px}nav{order:3;width:100%}.usuario{margin-left:auto}}
-</style>
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-</head><body>
-{% include 'partials/navbar.html' %}
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Entrar - Mesa Compartilhada</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        margin: 0;
+        background: #faf8f3;
+        color: #333;
+        padding-bottom: 35px;
+      }
+      header {
+        min-height: 58px;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        gap: 20px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .logo {
+        font-weight: bold;
+        color: #607d68;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      nav {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a,
+      .usuario a {
+        color: #666;
+        text-decoration: none;
+        font-size: 13px;
+        padding: 8px 10px;
+        border-radius: 7px;
+      }
+      nav a:hover,
+      .usuario a:hover {
+        background: #e8f3ea;
+        color: #39785e;
+      }
+      .usuario {
+        font-size: 13px;
+        color: #777;
+        white-space: nowrap;
+      }
+      .container {
+        max-width: 850px;
+        margin: 35px auto;
+        padding: 0 20px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #e6e6e6;
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-family: Georgia, serif;
+        font-weight: normal;
+        color: #355e4e;
+      }
+      h2 {
+        color: #355e4e;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: #555;
+        font-weight: bold;
+        margin: 14px 0 6px;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+      textarea {
+        resize: vertical;
+      }
+      button,
+      .btn {
+        display: inline-block;
+        border: 0;
+        border-radius: 8px;
+        padding: 11px 16px;
+        background: #39785e;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      button:hover,
+      .btn:hover {
+        background: #30664f;
+      }
+      .erros {
+        color: #b42318;
+        font-size: 12px;
+        margin: 8px 0;
+      }
+      .msg {
+        padding: 11px;
+        border-radius: 8px;
+        background: #e8f3ea;
+        color: #286044;
+        margin-bottom: 15px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+      }
+      @media (max-width: 800px) {
+        header {
+          flex-wrap: wrap;
+          padding: 12px 15px;
+        }
+        nav {
+          order: 3;
+          width: 100%;
+        }
+        .usuario {
+          margin-left: auto;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  </head>
+  <body>
+    {% include 'partials/navbar.html' %}
 
-<div class="container"><div class="card" style="max-width:450px;margin:55px auto">
-<h1>Entrar</h1><p>Acesse sua conta para continuar.</p>
-{% if form.non_field_errors %}<div class="erros">{{ form.non_field_errors }}</div>{% endif %}
-<form method="POST">{% csrf_token %}
-<label>E-mail</label>{{ form.email }}
-<label>Senha</label>{{ form.senha }}
-<button type="submit" style="margin-top:20px">Entrar</button>
-</form>
-<p style="margin-top:18px;font-size:13px">Não possui conta?</p>
-<a class="btn" href="{% url 'cadastro_consumidor' %}">Cadastrar consumidor</a>
-<a class="btn" href="{% url 'cadastro_comerciante' %}" style="background:#fff;color:#39785e;border:1px solid #ddd">Cadastrar comerciante</a>
-</div></div></body></html>
+    <div class="container">
+      <div class="card" style="max-width:450px;margin:55px auto">
+        <h1>Entrar</h1>
+        <p>Acesse sua conta para continuar.</p>
+        {% if form.non_field_errors %}
+          <div class="erros">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <form method="POST">
+          {% csrf_token %}
+          <label>E-mail</label>
+          {{ form.email }}
+          <label>Senha</label>
+          {{ form.senha }}
+          <button type="submit" style="margin-top:20px">Entrar</button>
+        </form>
+        <p style="margin-top:18px;font-size:13px">Não possui conta?</p>
+        <a class="btn" href="{% url 'cadastro_consumidor' %}">Cadastrar consumidor</a>
+        <a class="btn" href="{% url 'cadastro_comerciante' %}" style="background:#fff;color:#39785e;border:1px solid #ddd">Cadastrar comerciante</a>
+      </div>
+    </div>
+  </body>
+</html>
