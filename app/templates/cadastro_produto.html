@@ -245,9 +245,10 @@
             <form method="POST" enctype="multipart/form-data" id="produto-form">
                 {% csrf_token %}
                 {{ form.non_field_errors }}
+                <p class="field-help">* Campos obrigatórios</p>
 
                 <label for="{{ form.nome.id_for_label }}">
-                    {{ form.nome.label }}
+                    {{ form.nome.label }} {% if form.nome.field.required %}*{% endif %}
                 </label>
 
                 {{ form.nome }}
@@ -259,7 +260,7 @@
                 {% endif %}
 
                 <label for="{{ form.descricao.id_for_label }}">
-                    {{ form.descricao.label }}
+                    {{ form.descricao.label }} {% if form.descricao.field.required %}*{% endif %}
                 </label>
 
                 {{ form.descricao }}
@@ -271,7 +272,7 @@
                 {% endif %}
 
                 <label for="{{ form.categoria.id_for_label }}">
-                    {{ form.categoria.label }}
+                    {{ form.categoria.label }} {% if form.categoria.field.required %}*{% endif %}
                 </label>
 
                 {{ form.categoria }}
@@ -292,7 +293,7 @@
                 <div class="price-grid">
                     <div>
                         <label for="{{ form.precoOriginal.id_for_label }}">
-                            {{ form.precoOriginal.label }}
+                            {{ form.precoOriginal.label }} {% if form.precoOriginal.field.required %}*{% endif %}
                         </label>
 
                         {{ form.precoOriginal }}
@@ -310,7 +311,7 @@
 
                     <div>
                         <label for="{{ form.precoPromocional.id_for_label }}">
-                            {{ form.precoPromocional.label }}
+                            {{ form.precoPromocional.label }} {% if form.precoPromocional.field.required %}*{% endif %}
                         </label>
 
                         {{ form.precoPromocional }}
@@ -352,7 +353,7 @@
                 <h2 class="section-title">Estoque e validade</h2>
 
                 <label for="{{ form.quantidade.id_for_label }}">
-                    {{ form.quantidade.label }}
+                    {{ form.quantidade.label }} {% if form.quantidade.field.required %}*{% endif %}
                 </label>
 
                 {{ form.quantidade }}
@@ -364,7 +365,7 @@
                 {% endif %}
 
                 <label for="{{ form.dataValidade.id_for_label }}">
-                    {{ form.dataValidade.label }}
+                    {{ form.dataValidade.label }} {% if form.dataValidade.field.required %}*{% endif %}
                 </label>
 
                 {{ form.dataValidade }}
@@ -376,7 +377,7 @@
                 {% endif %}
 
                 <label for="{{ form.imagem.id_for_label }}">
-                    {{ form.imagem.label }}
+                    {{ form.imagem.label }} {% if form.imagem.field.required %}*{% endif %}
                 </label>
 
                 {{ form.imagem }}
@@ -387,6 +388,12 @@
                     </div>
                 {% endif %}
 
+                <label for="{{ form.permite_reserva.id_for_label }}">Modalidade da promoção *</label>
+                <select name="permite_reserva" id="{{ form.permite_reserva.id_for_label }}">
+                    <option value="on" {% if form.permite_reserva.value != False %}selected{% endif %}>Permitir reservas pelo site</option>
+                    <option value="" {% if form.permite_reserva.value == False %}selected{% endif %}>Apenas divulgar promoção (sem reservas)</option>
+                </select>
+                <p class="field-help">O estabelecimento escolhe se aceita reservas ou apenas divulga a oferta.</p>
                 <div class="actions">
                     <button type="submit">
                         Cadastrar promoção

@@ -193,6 +193,9 @@ class Produto(models.Model):
         verbose_name="Estabelecimento"
     )
 
+    permite_reserva = models.BooleanField(default=True, verbose_name="Permite reserva pelo site")
+    cadastrado_em = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Data e hora do cadastro")
+
     @property
     def preco_venda(self):
         return self.precoPromocional if self.precoPromocional is not None else self.precoOriginal

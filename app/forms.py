@@ -58,6 +58,7 @@ class ProdutoForm(forms.ModelForm):
             "dataValidade",
             "imagem",
             "categoria",
+            "permite_reserva",
         ]
         labels = {
             "nome": "Nome do produto",
@@ -68,6 +69,7 @@ class ProdutoForm(forms.ModelForm):
             "dataValidade": "Data de validade",
             "imagem": "Imagem do produto",
             "categoria": "Categoria",
+            "permite_reserva": "Permitir reservas pelo site",
         }
         widgets = {
             "descricao": forms.Textarea(attrs={"rows": 4}),
@@ -80,6 +82,10 @@ class ProdutoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["precoPromocional"].required = True
+        for campo in self.fields.values():
+            if campo.required:
+                campo.widget.attrs["required"] = "required"
         self.fields["categoria"].queryset = Categoria.objects.all().order_by("nomeCategoria")
         self.fields["categoria"].empty_label = "Selecione uma categoria"
 

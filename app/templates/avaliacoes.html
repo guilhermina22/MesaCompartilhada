@@ -213,7 +213,7 @@
                         <form method="post" action="{% url 'avaliar_produto' produto.id %}">
                             {% csrf_token %}
 
-                            <label>Nota</label>
+                            <label>Nota <span aria-label="obrigatório">*</span></label>
 
                             <div class="stars" aria-label="Nota de 1 a 5 estrelas">
                                 {% for n in "54321" %}
@@ -233,7 +233,7 @@
                                 {% endfor %}
                             </div>
 
-                            <label>Comentário</label>
+                            <label>Comentário <span aria-label="obrigatório">*</span></label>
 
                             <textarea
                                 name="comentario"
@@ -271,7 +271,7 @@
                         >
                             {% csrf_token %}
 
-                            <label>Nota</label>
+                            <label>Nota <span aria-label="obrigatório">*</span></label>
 
                             <div class="stars" aria-label="Nota de 1 a 5 estrelas">
                                 {% for n in "54321" %}
@@ -291,7 +291,7 @@
                                 {% endfor %}
                             </div>
 
-                            <label>Comentário</label>
+                            <label>Comentário <span aria-label="obrigatório">*</span></label>
 
                             <textarea
                                 name="comentario"

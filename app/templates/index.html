@@ -432,7 +432,7 @@
                             {% endif %}
 
                             <div style="font-size:11px;color:#888">
-                                Disponíveis: {{ produto.qtdEstoque }}
+                                Disponíveis: {{ produto.qtdEstoque }}<span style="font-size:11px;color:#777"> · Cadastro: {{ produto.cadastrado_em|date:"d/m/Y H:i"|default:"Não informado" }} · {% if produto.permite_reserva %}Aceita reservas{% else %}Apenas divulgação{% endif %}</span>
                             </div>
                         </div>
 

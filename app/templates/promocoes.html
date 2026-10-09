@@ -409,7 +409,7 @@
                       <div class="preco">R$ {{ produto.precoOriginal }}</div>
                     {% endif %}
                     <div class="estoque">
-                      {{ produto.qtdEstoque }} unidade{{ produto.qtdEstoque|pluralize }} disponível{{ produto.qtdEstoque|pluralize:"is" }}
+                      {{ produto.qtdEstoque }}<span style="font-size:11px;color:#777"> · Cadastro: {{ produto.cadastrado_em|date:"d/m/Y H:i"|default:"Não informado" }} · {% if produto.permite_reserva %}Aceita reservas{% else %}Apenas divulgação{% endif %}</span> unidade{{ produto.qtdEstoque|pluralize }} disponível{{ produto.qtdEstoque|pluralize:"is" }}
                     </div>
                   </div>
                 </a>

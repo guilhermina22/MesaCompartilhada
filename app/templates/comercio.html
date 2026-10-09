@@ -309,7 +309,7 @@
                     </p>
 
                     <p>
-                        Estoque: {{ produto.qtdEstoque }}
+                        Estoque: {{ produto.qtdEstoque }}<span style="font-size:11px;color:#777"> · Cadastro: {{ produto.cadastrado_em|date:"d/m/Y H:i"|default:"Não informado" }} · {% if produto.permite_reserva %}Aceita reservas{% else %}Apenas divulgação{% endif %}</span>
                     </p>
 
                     <span class="status">

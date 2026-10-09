@@ -60,10 +60,6 @@ def exigir_login(request):
 # =========================================================
 
 def index(request):
-    # Se ninguém estiver logado, mostra a landing page.
-    if usuario_atual(request) is None:
-        return render(request, "landing.html")
-
     busca = request.GET.get("busca", "").strip()
     categoria = request.GET.get("categoria", "").strip()
     preco = request.GET.get("preco", "").strip()
@@ -107,6 +103,7 @@ def index(request):
         "busca": busca,
         "categoria": categoria,
         "preco": preco,
+        "visitante": usuario_atual(request) is None,
     })
 
 
@@ -475,6 +472,10 @@ def reservar_produto(request, produto_id):
         produto = Produto.objects.select_for_update().get(
             id=produto_id
         )
+
+        if not produto.permite_reserva:
+            messages.error(request, "Este estabelecimento divulga promoções, mas não aceita reservas pelo site.")
+            return redirect("detalhes_produto", produto_id=produto.id)
 
         try:
             quantidade = int(
